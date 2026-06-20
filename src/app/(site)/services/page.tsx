@@ -1,6 +1,9 @@
 import { ServicesLandingPage, type ServicesLandingService } from "@/components/services-landing-page";
 import { serviceCategories } from "@/lib/content";
-import { getProjects } from "@/lib/repositories";
+import { getProjects, getSitePage } from "@/lib/repositories";
+
+export const dynamic = "force-dynamic";
+
 
 export const metadata = {
   title: "Services",

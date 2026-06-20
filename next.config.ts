@@ -13,21 +13,34 @@ const nextConfig: NextConfig = {
         destination: "/services/civil-construction",
         statusCode: 301,
       },
+      // Old pages now folded into homepage sections
+      {
+        source: "/about",
+        destination: "/#about",
+        permanent: true,
+      },
+      {
+        source: "/clients",
+        destination: "/#clients",
+        permanent: true,
+      },
+      // Old hash-based service links → dedicated page
+      {
+        source: "/services",
+        destination: "/#services",
+        permanent: false,
+      },
     ];
   },
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "images.unsplash.com",
+        hostname: "**",
       },
       {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
-      },
-      {
-        protocol: "https",
-        hostname: "images.pexels.com",
+        protocol: "http",
+        hostname: "**",
       },
     ],
   },

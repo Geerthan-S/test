@@ -357,3 +357,258 @@ export async function syncDefaultSitePages() {
   revalidatePath("/admin/site-content");
   redirect("/admin/site-content?synced=1");
 }
+
+const jobOpeningSchema = z.object({
+  title: z.string().trim().min(3, "Enter at least 3 characters for the title"),
+  department: z.string().trim().min(2, "Enter at least 2 characters for the department"),
+  experience: z.string().trim().min(2, "Enter at least 2 characters for the experience required"),
+  location: z.string().trim().min(2, "Enter at least 2 characters for the location"),
+  type: z.string().trim().min(2, "Enter at least 2 characters for type"),
+  skills: z.array(z.string().trim()).min(1, "Add at least one competency/skill"),
+  published: z.boolean(),
+});
+
+const careerSettingSchema = z.object({
+  internshipButtonText: z.string().trim().min(2, "Enter at least 2 characters for button text"),
+  internshipActionType: z.enum(["modal", "url"]),
+  internshipActionUrl: z.string().trim().optional(),
+});
+
+function jobOpeningDataFromForm(formData: FormData, failurePath: string) {
+  return parseOrRedirect(
+    jobOpeningSchema,
+    {
+      title: String(formData.get("title") ?? ""),
+      department: String(formData.get("department") ?? ""),
+      experience: String(formData.get("experience") ?? ""),
+      location: String(formData.get("location") ?? ""),
+      type: String(formData.get("type") ?? "Full-Time"),
+      skills: listFromField(formData.get("skills")),
+      published: formData.get("published") === "on",
+    },
+    failurePath
+  );
+}
+
+export async function createJobOpening(formData: FormData) {
+  await requireAdmin();
+  if (!canUseDatabase()) redirect("/admin/careers?database=missing");
+
+  const data = jobOpeningDataFromForm(formData, "/admin/careers/new");
+  await getPrisma().jobOpening.create({ data });
+
+  revalidatePath("/careers");
+  redirect("/admin/careers?saved=1");
+}
+
+export async function updateJobOpening(id: string, formData: FormData) {
+  await requireAdmin();
+  if (!canUseDatabase()) redirect(`/admin/careers/${id}/edit?database=missing`);
+
+  const data = jobOpeningDataFromForm(formData, `/admin/careers/${id}/edit`);
+  await getPrisma().jobOpening.update({
+    where: { id },
+    data,
+  });
+
+  revalidatePath("/careers");
+  redirect("/admin/careers?saved=1");
+}
+
+export async function deleteJobOpening(id: string) {
+  await requireAdmin();
+  if (!canUseDatabase()) redirect("/admin/careers?database=missing");
+
+  await getPrisma().jobOpening.delete({ where: { id } });
+
+  revalidatePath("/careers");
+  redirect("/admin/careers?saved=1");
+}
+
+export async function updateCareerSetting(formData: FormData) {
+  await requireAdmin();
+  if (!canUseDatabase()) redirect("/admin/careers?database=missing");
+
+  const rawData = {
+    internshipButtonText: String(formData.get("internshipButtonText") ?? "Apply for Internship"),
+    internshipActionType: String(formData.get("internshipActionType") ?? "modal"),
+    internshipActionUrl: String(formData.get("internshipActionUrl") ?? ""),
+  };
+
+  const data = parseOrRedirect(careerSettingSchema, rawData, "/admin/careers");
+
+  const first = await getPrisma().careerSetting.findFirst();
+  if (first) {
+    await getPrisma().careerSetting.update({
+      where: { id: first.id },
+      data,
+    });
+  } else {
+    await getPrisma().careerSetting.create({
+      data,
+    });
+  }
+
+  revalidatePath("/careers");
+  redirect("/admin/careers?saved=1");
+}
+
+// ─── Equipment ────────────────────────────────────────────────────────────────
+
+const equipmentSchema = z.object({
+  name: z.string().trim().min(2, "Enter at least 2 characters for the name"),
+  slug: z.string().trim().min(2, "Enter at least 2 characters for the slug"),
+  imageUrl: optionalAssetPathSchema,
+  quantity: z.coerce.number().int().min(1, "Quantity must be at least 1"),
+  capacity: z.string().trim().optional(),
+  manufacturer: z.string().trim().optional(),
+  year: z.coerce.number().int().min(1900).max(new Date().getFullYear() + 1).optional().or(z.literal(0)).transform((v) => (v === 0 ? undefined : v)),
+  status: z.string().trim().min(2, "Enter a status"),
+  sortOrder: z.coerce.number().int().min(0).default(0),
+  published: z.boolean(),
+});
+
+function equipmentDataFromForm(formData: FormData, failurePath: string) {
+  const name = String(formData.get("name") ?? "");
+  return parseOrRedirect(equipmentSchema, {
+    name,
+    slug: String(formData.get("slug") || slugify(name)),
+    imageUrl: String(formData.get("imageUrl") ?? "") || undefined,
+    quantity: String(formData.get("quantity") ?? "1"),
+    capacity: String(formData.get("capacity") ?? "") || undefined,
+    manufacturer: String(formData.get("manufacturer") ?? "") || undefined,
+    year: Number(formData.get("year") ?? 0) || 0,
+    status: String(formData.get("status") ?? "Active"),
+    sortOrder: String(formData.get("sortOrder") ?? "0"),
+    published: formData.get("published") === "on",
+  }, failurePath);
+}
+
+export async function createEquipment(formData: FormData) {
+  await requireAdmin();
+  if (!canUseDatabase()) redirect("/admin/equipment?database=missing");
+
+  const data = equipmentDataFromForm(formData, "/admin/equipment/new");
+  try {
+    await getPrisma().equipment.create({ data });
+  } catch (error) {
+    if (isUniqueConstraintError(error)) {
+      redirectWithError("/admin/equipment/new", "An equipment item with this slug already exists.");
+    }
+    throw error;
+  }
+  revalidatePath("/");
+  redirect("/admin/equipment?saved=1");
+}
+
+export async function updateEquipment(id: string, formData: FormData) {
+  await requireAdmin();
+  if (!canUseDatabase()) redirect(`/admin/equipment/${id}/edit?database=missing`);
+
+  const failurePath = `/admin/equipment/${id}/edit`;
+  const data = equipmentDataFromForm(formData, failurePath);
+  try {
+    await getPrisma().equipment.update({ where: { id }, data });
+  } catch (error) {
+    if (isUniqueConstraintError(error)) {
+      redirectWithError(failurePath, "An equipment item with this slug already exists.");
+    }
+    throw error;
+  }
+  revalidatePath("/");
+  revalidatePath("/admin/equipment");
+  redirect("/admin/equipment?saved=1");
+}
+
+export async function deleteEquipment(id: string) {
+  await requireManager();
+  if (!canUseDatabase()) redirect("/admin/equipment?database=missing");
+
+  await getPrisma().equipment.delete({ where: { id } });
+  revalidatePath("/");
+  revalidatePath("/admin/equipment");
+}
+
+// ─── Downloads ────────────────────────────────────────────────────────────────
+
+const downloadSchema = z.object({
+  title: z.string().trim().min(2, "Enter at least 2 characters for the title"),
+  category: z.string().trim().min(2, "Select or enter a category"),
+  fileUrl: assetPathSchema,
+  fileType: z.string().trim().default("pdf"),
+  sortOrder: z.coerce.number().int().min(0).default(0),
+  published: z.boolean(),
+});
+
+function downloadDataFromForm(formData: FormData, failurePath: string) {
+  return parseOrRedirect(downloadSchema, {
+    title: String(formData.get("title") ?? ""),
+    category: String(formData.get("category") ?? ""),
+    fileUrl: String(formData.get("fileUrl") ?? ""),
+    fileType: String(formData.get("fileType") ?? "pdf"),
+    sortOrder: String(formData.get("sortOrder") ?? "0"),
+    published: formData.get("published") === "on",
+  }, failurePath);
+}
+
+export async function createDownload(formData: FormData) {
+  await requireAdmin();
+  if (!canUseDatabase()) redirect("/admin/downloads?database=missing");
+
+  const data = downloadDataFromForm(formData, "/admin/downloads/new");
+  await getPrisma().download.create({ data });
+  revalidatePath("/");
+  revalidatePath("/admin/downloads");
+  redirect("/admin/downloads?saved=1");
+}
+
+export async function updateDownload(id: string, formData: FormData) {
+  await requireAdmin();
+  if (!canUseDatabase()) redirect(`/admin/downloads/${id}/edit?database=missing`);
+
+  const failurePath = `/admin/downloads/${id}/edit`;
+  const data = downloadDataFromForm(formData, failurePath);
+  await getPrisma().download.update({ where: { id }, data });
+  revalidatePath("/");
+  revalidatePath("/admin/downloads");
+  redirect("/admin/downloads?saved=1");
+}
+
+export async function deleteDownload(id: string) {
+  await requireManager();
+  if (!canUseDatabase()) redirect("/admin/downloads?database=missing");
+
+  await getPrisma().download.delete({ where: { id } });
+  revalidatePath("/");
+  revalidatePath("/admin/downloads");
+}
+
+// ─── Site Settings ────────────────────────────────────────────────────────────
+
+export async function updateSiteSettings(formData: FormData) {
+  await requireAdmin();
+  if (!canUseDatabase()) redirect("/admin/site-settings?database=missing");
+
+  const keys = [
+    "company_name", "company_tagline", "phone_primary", "phone_alternate",
+    "email", "address", "maps_url", "working_hours", "gst_number", "pan_number",
+    "facebook_url", "instagram_url", "linkedin_url", "youtube_url",
+    "seo_meta_title", "seo_meta_description", "seo_og_image",
+  ];
+
+  const db = getPrisma();
+  await Promise.all(
+    keys.map((key) => {
+      const value = String(formData.get(key) ?? "").trim();
+      return db.siteSetting.upsert({
+        where: { key },
+        update: { value },
+        create: { key, value },
+      });
+    }),
+  );
+
+  revalidatePath("/");
+  revalidatePath("/admin/site-settings");
+  redirect("/admin/site-settings?saved=1");
+}

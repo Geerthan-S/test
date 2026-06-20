@@ -4,22 +4,20 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
-  ArrowRight,
   Mail,
   MapPin,
-  Menu,
   Phone,
-  X,
 } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 
 const navItems = [
   ["Home", "/"],
-  ["About Us", "/about"],
-  ["Services", "/services"],
+  ["About Us", "/#about"],
+  ["Services", "/#services"],
+  ["Equipment Fleet", "/equipment-fleet"],
+  ["Quality & Safety", "/quality-safety"],
   ["Projects", "/projects"],
-  ["Careers", "/careers"],
-  ["Clients", "/clients"],
+  ["Downloads", "/downloads"],
   ["Contact", "/contact"],
 ] as const;
 
@@ -61,23 +59,35 @@ export function SiteHeader() {
     return () => desktopQuery.removeEventListener("change", closeOnDesktop);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   const isActive = (href: string) =>
-    href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+    href === "/" ? pathname === href : !href.startsWith("/#") && (pathname === href || pathname.startsWith(`${href}/`));
 
   return (
     <header className={`industrial-nav ${scrolled ? "is-scrolled" : ""}`}>
       <div className="industrial-nav__utility" aria-label="Dockside contact details">
-        <a href="tel:+918825922737">
+        <a href="tel:+918925922737">
           <Phone aria-hidden="true" />
-          +91 88259 22737
+          +91 89259 22737
         </a>
-        <a href="mailto:admin@docksideconstructions.com">
+        <a href="mailto:admin@docksideconstructions.com" style={{ textTransform: 'none' }}>
           <Mail aria-hidden="true" />
           admin@docksideconstructions.com
         </a>
         <Link href="/contact">
           <MapPin aria-hidden="true" />
-          Villupuram, Tamil Nadu
+          Chennai, Tamil Nadu
         </Link>
       </div>
 
@@ -93,35 +103,61 @@ export function SiteHeader() {
               </Link>
             );
           })}
-          <Link href="/contact" className="industrial-quote">
-            Get Quote
-            <ArrowRight className="size-3.5" aria-hidden="true" />
-          </Link>
         </nav>
         <button
-          className="industrial-menu"
+          className={`industrial-menu ${open ? "is-open" : ""}`}
           type="button"
-          aria-label="Open menu"
-          onClick={() => setOpen(true)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          onClick={() => setOpen(!open)}
         >
-          <Menu className="size-4" aria-hidden="true" />
+          <span className="industrial-menu__inner">
+            <span className="hamburger-line line-1" />
+            <span className="hamburger-line line-2" />
+            <span className="hamburger-line line-3" />
+          </span>
         </button>
       </div>
 
       <div className={`industrial-overlay ${open ? "is-open" : ""}`} aria-hidden={!open}>
-        <button className="industrial-overlay__close" type="button" onClick={() => setOpen(false)}>
-          <X className="size-5" aria-hidden="true" />
-        </button>
-        <p>Navigation</p>
-        <div className="industrial-overlay__links">
-          {navItems.map(([label, href]) => (
-            <Link key={href} href={href} onClick={() => setOpen(false)}>
-              {label}
-            </Link>
-          ))}
-          <Link href="/contact" onClick={() => setOpen(false)}>
-            Get Quote
-          </Link>
+        <div className="industrial-overlay__content">
+          <div className="industrial-overlay__meta">
+            <span className="industrial-overlay__subtitle">Dockside Navigation</span>
+            <div className="industrial-overlay__line" />
+          </div>
+
+          <nav className="industrial-overlay__links" aria-label="Mobile navigation">
+            {navItems.map(([label, href], index) => {
+              const active = isActive(href);
+
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setOpen(false)}
+                  className={active ? "is-active" : ""}
+                  style={{ transitionDelay: `${(index + 1) * 60}ms` }}
+                >
+                  <span className="link-number">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="link-text">{label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="industrial-overlay__footer">
+            <div className="overlay-footer-col">
+              <h4>Direct Office</h4>
+              <a href="tel:+918825922737">+91 88259 22737</a>
+              <a href="mailto:admin@docksideconstructions.com">admin@docksideconstructions.com</a>
+            </div>
+            <div className="overlay-footer-col">
+              <h4>Headquarters</h4>
+              <address>
+                Villupuram,<br />
+                Tamil Nadu, India
+              </address>
+            </div>
+          </div>
         </div>
       </div>
     </header>

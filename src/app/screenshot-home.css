@@ -204,8 +204,8 @@ body::after {
 .premium-hero__copy {
   position: relative !important;
   z-index: 2 !important;
-  width: min(100%, 760px) !important;
-  max-width: 760px !important;
+  width: min(100%, 1200px) !important;
+  max-width: 1200px !important;
   margin: 0 !important;
   align-items: flex-start !important;
   text-align: left !important;
@@ -219,7 +219,7 @@ body::after {
 }
 
 .premium-hero h1 {
-  max-width: 760px !important;
+  max-width: 1200px !important;
   color: var(--shot-text) !important;
   font-size: clamp(48px, 5.5vw, 82px) !important;
   font-weight: 800 !important;
@@ -6127,25 +6127,69 @@ main.flex-1 > section::after {
 /* Dockside admin and login theme extension. */
 .admin-shell,
 .admin-login-page {
-  --admin-bg: #050505;
-  --admin-panel: #101010;
-  --admin-panel-strong: #151515;
-  --admin-line: rgba(255, 255, 255, 0.08);
-  --admin-line-strong: rgba(169, 68, 82, 0.34);
-  --admin-red: #7c2d38;
-  --admin-red-bright: #a94452;
-  --admin-text: #ffffff;
-  --admin-muted: #c7c7c7;
-  --admin-dim: #8a8a8a;
+  --admin-bg: #fdfaf7;
+  --admin-panel: #ffffff;
+  --admin-panel-strong: rgba(139, 63, 74, 0.06);
+  --admin-line: rgba(139, 63, 74, 0.15);
+  --admin-line-strong: rgba(139, 63, 74, 0.40);
+  --admin-red: #8b3f4a;
+  --admin-red-bright: #8b3f4a;
+  --admin-text: #101211;
+  --admin-muted: #5e645f;
+  --admin-dim: #8a908b;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Override inline styled icon colors */
+.admin-shell .text-\[\#923e4d\],
+.admin-content .text-\[\#923e4d\],
+.admin-login-page .text-\[\#923e4d\],
+.admin-shell .text-\[\#923e4d\] svg,
+.admin-content .text-\[\#923e4d\] svg,
+.admin-login-page .text-\[\#923e4d\] svg {
+  color: #8b3f4a !important;
+}
+
+/* Reset global dark-theme text overrides inside admin panels */
+.admin-shell :where(h1, h2, h3, h4, h5, h6),
+.admin-content :where(h1, h2, h3, h4, h5, h6),
+.admin-login-page :where(h1, h2, h3, h4, h5, h6) {
+  color: var(--admin-text) !important;
+  font-family: inherit !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.admin-shell :where(p, li, dd, address),
+.admin-content :where(p, li, dd, address),
+.admin-login-page :where(p, li, dd, address) {
+  color: var(--admin-text) !important;
+}
+
+.admin-shell :where(small, figcaption, dt),
+.admin-content :where(small, figcaption, dt),
+.admin-login-page :where(small, figcaption, dt) {
+  color: var(--admin-muted) !important;
+}
+
+.admin-shell :where(.text-muted-foreground, .text-muted, .text-dim),
+.admin-content :where(.text-muted-foreground, .text-muted, .text-dim),
+.admin-login-page :where(.text-muted-foreground, .text-muted, .text-dim) {
+  color: var(--admin-muted) !important;
+}
+
+.admin-shell,
+.admin-login-page {
   position: relative;
   isolation: isolate;
   min-height: 100dvh;
   overflow-x: clip;
   background:
-    radial-gradient(circle at 82% 8%, rgba(124, 45, 56, 0.22), transparent 34rem),
-    radial-gradient(circle at 12% 32%, rgba(169, 68, 82, 0.12), transparent 28rem),
-    linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 82% 8%, rgba(146, 62, 77, 0.05), transparent 34rem),
+    radial-gradient(circle at 12% 32%, rgba(146, 62, 77, 0.03), transparent 28rem),
+    linear-gradient(rgba(146, 62, 77, 0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(146, 62, 77, 0.018) 1px, transparent 1px),
     var(--admin-bg) !important;
   background-size: auto, auto, 68px 68px, 68px 68px, auto !important;
   color: var(--admin-text) !important;
@@ -6160,11 +6204,10 @@ main.flex-1 > section::after {
   z-index: -2 !important;
   pointer-events: none !important;
   background:
-    linear-gradient(90deg, rgba(5, 5, 5, 0.96), rgba(5, 5, 5, 0.76) 50%, rgba(5, 5, 5, 0.94)),
-    linear-gradient(180deg, rgba(5, 5, 5, 0.28), rgba(5, 5, 5, 0.94)),
-    var(--dockside-bg-photo-a) center / cover no-repeat !important;
-  opacity: 0.22;
-  filter: saturate(0.84) contrast(1.14) brightness(0.62);
+    radial-gradient(circle at 80% 0%, rgba(146, 62, 77, 0.04), transparent 32rem),
+    #fdfaf7 !important;
+  opacity: 1 !important;
+  filter: none !important;
 }
 
 .admin-shell::after,
@@ -6192,9 +6235,9 @@ main.flex-1 > section::after {
   gap: 18px !important;
   border-right: 1px solid var(--admin-line) !important;
   background:
-    linear-gradient(180deg, rgba(124, 45, 56, 0.11), transparent 34%),
-    rgba(8, 8, 8, 0.88) !important;
-  box-shadow: 18px 0 60px rgba(0, 0, 0, 0.28) !important;
+    linear-gradient(180deg, rgba(146, 62, 77, 0.04), transparent 34%),
+    rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 18px 0 60px rgba(146, 62, 77, 0.03) !important;
 }
 
 .admin-brand,
@@ -6446,7 +6489,7 @@ main.flex-1 > section::after {
 
 .admin-table-shell th,
 .admin-table-shell td {
-  border-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(146, 62, 77, 0.12) !important;
   padding: 14px 16px !important;
   vertical-align: middle !important;
 }
@@ -6469,27 +6512,56 @@ main.flex-1 > section::after {
 .admin-content button[type="submit"],
 .admin-content a[data-slot="button"] {
   min-height: 44px !important;
-  border-radius: 8px !important;
-  font-weight: 800 !important;
+  border-radius: 7px !important;
+  font-family: var(--font-body), Inter, Arial, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.075em !important;
+  text-transform: uppercase !important;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease !important;
 }
 
 .admin-content [data-slot="button"][data-variant="default"],
-.admin-content button[type="submit"]:not(.admin-nav-link) {
-  border-color: var(--admin-red) !important;
-  background: var(--admin-red) !important;
-  color: var(--admin-text) !important;
+.admin-content button[type="submit"]:not(.admin-nav-link),
+.admin-content .bg-primary {
+  border: 1px solid rgba(139, 63, 74, 0.9) !important;
+  background: linear-gradient(145deg, #a94e5d, #8b3f4a 58%, #6f2f39) !important;
+  color: #ffffff !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.075em !important;
+  font-weight: 900 !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.22) inset,
+    0 12px 28px rgba(111, 47, 57, 0.18) !important;
+}
+
+.admin-content [data-slot="button"][data-variant="default"]:hover,
+.admin-content button[type="submit"]:not(.admin-nav-link):hover,
+.admin-content .bg-primary:hover {
+  border-color: #a94e5d !important;
+  background: linear-gradient(145deg, #b75b68, #a94e5d 58%, #8b3f4a) !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.24) inset,
+    0 16px 36px rgba(111, 47, 57, 0.24) !important;
+  transform: translateY(-1px) !important;
 }
 
 .admin-content [data-slot="button"][data-variant="outline"] {
-  border-color: rgba(169, 68, 82, 0.58) !important;
-  background: rgba(5, 5, 5, 0.36) !important;
-  color: var(--admin-text) !important;
+  border-color: rgba(139, 63, 74, 0.35) !important;
+  background: transparent !important;
+  color: #8b3f4a !important;
+}
+
+.admin-content [data-slot="button"][data-variant="outline"]:hover {
+  background: rgba(139, 63, 74, 0.06) !important;
+  color: #8b3f4a !important;
 }
 
 .admin-content [data-slot="button"][data-variant="destructive"] {
-  border-color: rgba(169, 68, 82, 0.58) !important;
-  background: rgba(124, 45, 56, 0.24) !important;
-  color: var(--admin-text) !important;
+  border-color: #6b1f2e !important;
+  background: #6b1f2e !important;
+  color: #ffffff !important;
 }
 
 .admin-form-shell {
@@ -6500,9 +6572,9 @@ main.flex-1 > section::after {
 .admin-form-shell textarea,
 .admin-form-shell [data-slot="select-trigger"],
 .admin-login-card input {
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(146, 62, 77, 0.2) !important;
   border-radius: 8px !important;
-  background: rgba(5, 5, 5, 0.58) !important;
+  background: #ffffff !important;
   color: var(--admin-text) !important;
 }
 
@@ -6518,7 +6590,7 @@ main.flex-1 > section::after {
 .admin-form-shell input::placeholder,
 .admin-form-shell textarea::placeholder,
 .admin-login-card input::placeholder {
-  color: rgba(199, 199, 199, 0.46) !important;
+  color: rgba(94, 100, 95, 0.5) !important;
 }
 
 .admin-form-shell input:focus,
@@ -12822,6 +12894,13 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
   color: #ffffff !important;
 }
 
+/* Email & location link — keep normal case */
+body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-nav__utility a[href^="mailto:"],
+body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-nav__utility a[href="/contact"] {
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+}
+
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-nav__utility svg {
   width: 14px !important;
   height: 14px !important;
@@ -15422,8 +15501,8 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) :is(.
   position: relative !important;
   z-index: 3 !important;
   display: grid !important;
-  width: min(100%, 760px) !important;
-  max-width: 760px !important;
+  width: min(100%, 1200px) !important;
+  max-width: 1200px !important;
   min-height: 0 !important;
   align-content: center !important;
   justify-items: start !important;
@@ -15434,8 +15513,8 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) :is(.
 }
 
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) :is(.premium-hero h1, .premium-page-hero__content h1, .shot-subhero h1, .about-premium-hero h1, .services-hero h1) {
-  width: min(100%, 760px) !important;
-  max-width: 760px !important;
+  width: min(100%, 1200px) !important;
+  max-width: 1200px !important;
   margin: 0 !important;
   color: #8f3f4d !important;
   font-size: clamp(48px, 5.5vw, 82px) !important;
@@ -15563,9 +15642,9 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot
 
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) main.flex-1 :is(.premium-hero__copy, .premium-page-hero__content, .shot-subhero__inner, .about-premium-hero__copy, .services-hero__copy),
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot-page--contact .shot-subhero__inner {
-  width: min(100%, 760px) !important;
-  max-width: 760px !important;
-  grid-template-columns: minmax(0, 570px) !important;
+  width: min(100%, 1200px) !important;
+  max-width: 1200px !important;
+  grid-template-columns: minmax(0, 1200px) !important;
   justify-content: center !important;
   justify-items: start !important;
   margin: 0 !important;
@@ -15574,8 +15653,8 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot
 
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) main.flex-1 :is(.premium-hero h1, .premium-page-hero__content h1, .shot-subhero h1, .about-premium-hero h1, .services-hero h1),
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot-page--contact .shot-subhero h1 {
-  width: min(100%, 570px) !important;
-  max-width: 570px !important;
+  width: min(100%, 1200px) !important;
+  max-width: 1200px !important;
   font-size: clamp(44px, 4.9vw, 74px) !important;
   line-height: 1.01 !important;
   text-align: left !important;
@@ -15863,9 +15942,9 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) main.
   position: relative !important;
   z-index: 3 !important;
   display: grid !important;
-  width: min(100%, 760px) !important;
-  max-width: 760px !important;
-  grid-template-columns: minmax(0, 570px) !important;
+  width: min(100%, 1200px) !important;
+  max-width: 1200px !important;
+  grid-template-columns: minmax(0, 1200px) !important;
   justify-content: center !important;
   justify-items: start !important;
   gap: 18px !important;
@@ -15897,8 +15976,8 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) main.
 }
 
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) main.services-conversion-page.flex-1 .services-hero h1 {
-  width: min(100%, 570px) !important;
-  max-width: 570px !important;
+  width: min(100%, 1200px) !important;
+  max-width: 1200px !important;
   color: #8f3f4d !important;
   font-size: clamp(44px, 4.9vw, 74px) !important;
   line-height: 1.01 !important;
@@ -16579,41 +16658,77 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) :is(.
 .admin-login-page [data-slot="button"] {
   min-height: 40px !important;
   gap: 8px !important;
-  border-radius: 8px !important;
+  border-radius: 7px !important;
   padding-inline: 16px !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.02em !important;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+  font-family: var(--font-body), Inter, Arial, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.075em !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 12px 28px rgba(111, 47, 57, 0.15) !important;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease !important;
 }
 
 .admin-shell [data-slot="button"][data-variant="default"],
 .admin-login-page [data-slot="button"][data-variant="default"],
+.admin-shell .bg-primary,
+.admin-login-page .bg-primary,
 .admin-login-submit {
-  border-color: rgba(169, 68, 82, 0.82) !important;
-  background: linear-gradient(145deg, #a94452, #7c2d38) !important;
+  border: 1px solid rgba(139, 63, 74, 0.9) !important;
+  background: linear-gradient(145deg, #a94e5d, #8b3f4a 58%, #6f2f39) !important;
   color: #ffffff !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.075em !important;
+  font-weight: 900 !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.22) inset,
+    0 12px 28px rgba(111, 47, 57, 0.18) !important;
+}
+
+.admin-shell [data-slot="button"][data-variant="default"]:hover,
+.admin-login-page [data-slot="button"][data-variant="default"]:hover,
+.admin-shell .bg-primary:hover,
+.admin-login-page .bg-primary:hover,
+.admin-login-submit:hover {
+  border-color: #a94e5d !important;
+  background: linear-gradient(145deg, #b75b68, #a94e5d 58%, #8b3f4a) !important;
+  color: #ffffff !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.24) inset,
+    0 16px 36px rgba(111, 47, 57, 0.24) !important;
+  transform: translateY(-1px) !important;
 }
 
 .admin-shell [data-slot="button"][data-variant="outline"],
 .admin-shell [data-slot="button"][data-variant="secondary"],
 .admin-login-page [data-slot="button"][data-variant="outline"],
 .admin-login-page [data-slot="button"][data-variant="secondary"] {
-  border-color: rgba(255, 255, 255, 0.16) !important;
-  background: rgba(255, 255, 255, 0.06) !important;
-  color: #ffffff !important;
+  border-color: rgba(139, 63, 74, 0.35) !important;
+  background: transparent !important;
+  color: #8b3f4a !important;
+}
+
+.admin-shell [data-slot="button"][data-variant="outline"]:hover,
+.admin-shell [data-slot="button"][data-variant="secondary"]:hover,
+.admin-login-page [data-slot="button"][data-variant="outline"]:hover,
+.admin-login-page [data-slot="button"][data-variant="secondary"]:hover {
+  background: rgba(139, 63, 74, 0.06) !important;
+  color: #8b3f4a !important;
 }
 
 .admin-shell [data-slot="button"]:hover,
+.admin-shell [data-slot="button"][data-variant="outline"]:hover,
+.admin-shell [data-slot="button"][data-variant="secondary"]:hover,
 .admin-login-page [data-slot="button"]:hover,
 .admin-login-submit:hover {
   transform: translateY(-1px) !important;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 16px 36px rgba(146, 62, 77, 0.08) !important;
 }
 
 .admin-shell .admin-nav-link--danger {
-  border-color: rgba(169, 68, 82, 0.32) !important;
-  background: rgba(169, 68, 82, 0.12) !important;
-  color: #ffccd3 !important;
+  border-color: #6b1f2e !important;
+  background: #6b1f2e !important;
+  color: #ffffff !important;
   font-weight: 800 !important;
 }
 
@@ -17222,3 +17337,406 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) :wher
     -webkit-backdrop-filter: none !important;
   }
 }
+
+/* Custom Light-Theme CMS Override Pack */
+.admin-shell,
+.admin-login-page,
+.admin-shell :where(
+  table,
+  [data-slot="table"],
+  thead,
+  [data-slot="table-header"],
+  tbody,
+  [data-slot="table-body"],
+  tfoot,
+  [data-slot="table-footer"],
+  tr,
+  [data-slot="table-row"],
+  th,
+  [data-slot="table-head"],
+  td,
+  [data-slot="table-cell"],
+  .bg-background,
+  .bg-secondary,
+  .bg-muted,
+  .bg-card,
+  .bg-popover,
+  .bg-white,
+  .bg-black,
+  .bg-slate-50,
+  .bg-slate-100,
+  .bg-neutral-50,
+  .bg-neutral-100
+),
+.admin-login-page :where(
+  .bg-background,
+  .bg-secondary,
+  .bg-muted,
+  .bg-card,
+  .bg-popover,
+  .bg-white,
+  .bg-black
+) {
+  background-color: var(--admin-panel) !important;
+  color: var(--admin-text) !important;
+}
+
+/* Explicit Table Resets */
+.admin-shell :where(table, [data-slot="table"]) {
+  background: var(--admin-panel) !important;
+  border-color: var(--admin-line) !important;
+  color: var(--admin-text) !important;
+}
+
+.admin-shell :where(thead, [data-slot="table-header"]) {
+  background: rgba(146, 62, 77, 0.08) !important;
+  color: #923e4d !important;
+}
+
+.admin-shell :where(thead th, [data-slot="table-header"] th) {
+  color: #923e4d !important;
+  font-weight: 700 !important;
+}
+
+.admin-shell :where(tr, [data-slot="table-row"]) {
+  border-bottom: 1px solid var(--admin-line) !important;
+  background: transparent !important;
+}
+
+.admin-shell :where(tr:hover, [data-slot="table-row"]:hover) {
+  background: rgba(146, 62, 77, 0.03) !important;
+}
+
+.admin-shell :where(th, td, [data-slot="table-head"], [data-slot="table-cell"]) {
+  border-color: var(--admin-line) !important;
+}
+
+.admin-shell :where(td, [data-slot="table-cell"]) {
+  color: var(--admin-muted) !important;
+}
+
+.admin-shell :where(td.font-medium, td a, tr td strong) {
+  color: var(--admin-text) !important;
+}
+
+/* Neutralize the global text-foreground and text-muted-foreground resets */
+.admin-shell :where(.text-foreground, .text-card-foreground, .text-popover-foreground),
+.admin-login-page :where(.text-foreground, .text-card-foreground, .text-popover-foreground, .text-white) {
+  color: var(--admin-text) !important;
+}
+
+.admin-shell :where(.text-muted-foreground),
+.admin-login-page :where(.text-muted-foreground) {
+  color: var(--admin-muted) !important;
+}
+
+.admin-shell :where(.text-primary) {
+  color: #923e4d !important;
+}
+
+.admin-shell :where(.border, .border-border, .border-input) {
+  border-color: var(--admin-line) !important;
+}
+
+/* Custom Light-Theme CMS Override Pack v2 */
+html:has(.admin-shell),
+html:has(.admin-login-page),
+html:has(.admin-shell) body,
+html:has(.admin-login-page) body {
+  background: #fdfaf7 !important;
+  color: #101211 !important;
+}
+
+/* Alternate row colors for admin tables */
+.admin-shell :where(tr:nth-child(even), [data-slot="table-row"]:nth-child(even)) {
+  background: rgba(146, 62, 77, 0.02) !important;
+}
+
+/* Premium Light-Themed Status Badges */
+.admin-shell :where([data-slot="badge"]) {
+  display: inline-flex !important;
+  height: 22px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgba(146, 62, 77, 0.22) !important;
+  border-radius: 9999px !important;
+  background-color: rgba(146, 62, 77, 0.08) !important;
+  padding: 0 10px !important;
+  color: #923e4d !important;
+  font-family: var(--font-mono), monospace !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* Radix Portal Components (Dropdowns, Select lists, Modals, Popovers) */
+html:has(.admin-shell) :where([data-slot="select-content"], [data-slot="popover"], [data-slot="dropdown-menu"], [data-slot="dialog-content"]) {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(146, 62, 77, 0.15) !important;
+  color: #101211 !important;
+  box-shadow: 0 10px 30px rgba(146, 62, 77, 0.08) !important;
+}
+
+html:has(.admin-shell) :where([data-slot="select-item"], [data-slot="dropdown-item"], [data-slot="select-trigger"]) {
+  color: #101211 !important;
+}
+
+html:has(.admin-shell) :where([data-slot="select-item"]:hover, [data-slot="dropdown-item"]:hover, [data-slot="select-item"][data-highlighted], [data-slot="dropdown-item"][data-highlighted]) {
+  background-color: rgba(146, 62, 77, 0.06) !important;
+  color: #923e4d !important;
+  outline: none !important;
+}
+
+/* ── Careers Page Hero Responsive Redesign ─────────────────────── */
+
+/* 1. TABLET ONLY (768px < width <= 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Maroon overlay covering 55% of the width */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero::before {
+    background: linear-gradient(90deg, 
+      #8b3f4a 0%, 
+      #8b3f4a 55%, 
+      rgba(139, 63, 74, 0.88) 65%, 
+      rgba(139, 63, 74, 0.0) 82%
+    ) !important;
+  }
+  
+  /* Retain original image aspect but show normal blend under overlay */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero__media img {
+    mix-blend-mode: normal !important;
+    opacity: 0.85 !important;
+  }
+
+  /* Transition all copy to high contrast white/light colors for readability */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero h1 {
+    color: #ffffff !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero__copy p {
+    color: rgba(255, 255, 255, 0.88) !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium__eyebrow {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium__eyebrow::before {
+    background: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  /* Fill Button Styling on Dark Background */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium-button--fill {
+    background: #ffffff !important;
+    color: #8b3f4a !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium-button--fill:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #6c2a33 !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  /* Outline Button Styling on Dark Background */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium-button--outline {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    color: #ffffff !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium-button--outline:hover {
+    background: #ffffff !important;
+    color: #8b3f4a !important;
+    border-color: #ffffff !important;
+  }
+}
+
+/* 2. MOBILE ONLY (width <= 768px) */
+@media (max-width: 768px) {
+  /* Stacking & centering hero alignment */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    padding: 130px 16px 48px !important;
+    min-height: 640px !important;
+  }
+
+  /* Bottom gradient overlay */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero::before {
+    background: linear-gradient(180deg, 
+      rgba(21, 5, 8, 0.15) 0%, 
+      rgba(139, 63, 74, 0.45) 40%, 
+      rgba(139, 63, 74, 0.92) 75%, 
+      #8b3f4a 100%
+    ) !important;
+  }
+
+  /* Image opacity & blending under vertical gradient */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero__media img {
+    mix-blend-mode: normal !important;
+    opacity: 0.65 !important;
+  }
+
+  /* Hide media caption to prevent collision with glass card */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero__media-caption {
+    display: none !important;
+  }
+
+  /* Glassmorphism content card */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero__copy {
+    width: 100% !important;
+    max-width: 480px !important;
+    background: rgba(255, 255, 255, 0.11) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    border-radius: 16px !important;
+    padding: 30px 24px !important;
+    box-shadow: 
+      0 20px 45px rgba(0, 0, 0, 0.35),
+      inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+    margin: 0 auto !important;
+    text-align: left !important;
+  }
+
+  /* Inside the glass card styles */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero h1 {
+    font-size: 32px !important;
+    line-height: 1.15 !important;
+    color: #ffffff !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero__copy p {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    margin-top: 14px !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium__eyebrow {
+    font-size: 11px !important;
+    margin-bottom: 12px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium__eyebrow::before {
+    width: 30px !important;
+    background: rgba(255, 255, 255, 0.7) !important;
+  }
+
+  /* Stack actions vertically on mobile */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero__actions {
+    margin-top: 22px !important;
+    gap: 12px !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium-button {
+    width: 100% !important;
+    min-height: 46px !important;
+    font-size: 11px !important;
+  }
+
+  /* Fill Button Styling in glass card */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium-button--fill {
+    background: #ffffff !important;
+    color: #8b3f4a !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium-button--fill:hover {
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #6c2a33 !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  /* Outline Button Styling in glass card */
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium-button--outline {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+  }
+
+  body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .about-premium-hero .about-premium-button--outline:hover {
+    background: #ffffff !important;
+    color: #8b3f4a !important;
+    border-color: #ffffff !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   DELIVERS SECTION — force white / light theme regardless of dark overrides
+   Must stay at the END of this file to win the cascade.
+═══════════════════════════════════════════════════════════════════════════ */
+
+body .delivers-section,
+body:has(main.flex-1) .delivers-section {
+  background: #ffffff !important;
+  border-top: 1px solid #ede8e4 !important;
+  border-bottom: 1px solid #ede8e4 !important;
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 4vw, 64px) !important;
+}
+
+body .delivers-card,
+body:has(main.flex-1) .delivers-card {
+  background: #ffffff !important;
+  border: 1px solid #e8dedd !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 14px rgba(109, 44, 54, 0.05) !important;
+}
+
+body .delivers-card:hover,
+body:has(main.flex-1) .delivers-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 36px rgba(109, 44, 54, 0.12) !important;
+  border-color: rgba(139, 63, 74, 0.35) !important;
+}
+
+body .delivers-card__body,
+body:has(main.flex-1) .delivers-card__body {
+  background: #ffffff !important;
+}
+
+body .delivers-card__title,
+body:has(main.flex-1) .delivers-card__title {
+  color: #7a1c24 !important;
+  text-shadow: none !important;
+}
+
+body .delivers-card__desc,
+body:has(main.flex-1) .delivers-card__desc {
+  color: #7a7270 !important;
+}
+
+body .delivers-card__num,
+body:has(main.flex-1) .delivers-card__num {
+  background: #f5e0e2 !important;
+  color: #7a1c24 !important;
+}
+
+body .delivers-section__title,
+body:has(main.flex-1) .delivers-section__title {
+  color: #7a1c24 !important;
+  text-shadow: none !important;
+}
+
+body .delivers-section__subtitle,
+body:has(main.flex-1) .delivers-section__subtitle {
+  color: #6b6360 !important;
+}
+
+body .delivers-card__illustration svg,
+body:has(main.flex-1) .delivers-card__illustration svg {
+  filter: none !important;
+}
+
+
+
+
+

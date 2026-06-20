@@ -3,7 +3,7 @@ import { updateClient } from "@/app/admin/actions";
 import { ClientForm } from "@/components/admin/client-form";
 import { requireAdmin } from "@/lib/admin";
 import { seedClients } from "@/lib/content";
-import { canUseDatabase, getPrisma } from "@/lib/prisma";
+import { canUseDatabase, getPrisma, runSafeQuery } from "@/lib/prisma";
 
 export const metadata = { title: "Edit Client" };
 
@@ -16,9 +16,10 @@ export default async function EditClientPage({
 }) {
   await requireAdmin();
   const [{ id }, flags] = await Promise.all([params, searchParams]);
-  const client = canUseDatabase()
-    ? await getPrisma().client.findUnique({ where: { id } })
-    : seedClients.find((item) => item.id === id);
+  const client = await runSafeQuery<any>(
+    () => getPrisma().client.findUnique({ where: { id } }),
+    seedClients.find((item) => item.id === id),
+  );
 
   if (!client) notFound();
 

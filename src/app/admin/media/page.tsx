@@ -3,15 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { requireAdmin } from "@/lib/admin";
-import { canUseDatabase, getPrisma } from "@/lib/prisma";
+import { canUseDatabase, getPrisma, runSafeQuery } from "@/lib/prisma";
 
 export const metadata = { title: "Media Uploads" };
 
 export default async function MediaPage() {
   await requireAdmin();
-  const assets = canUseDatabase()
-    ? await getPrisma().mediaAsset.findMany({ orderBy: { createdAt: "desc" }, take: 24 })
-    : [];
+  const assets = await runSafeQuery(
+    () => getPrisma().mediaAsset.findMany({ orderBy: { createdAt: "desc" }, take: 24 }),
+    [],
+  );
 
   return (
     <div>

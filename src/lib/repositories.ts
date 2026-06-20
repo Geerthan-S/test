@@ -15,6 +15,15 @@ import {
   type EditableSitePage,
   type SitePageSection,
 } from "@/lib/site-content";
+import { jobOpenings as seedJobOpenings, type JobOpening } from "@/lib/careers-data";
+
+export interface CareerSetting {
+  id: string;
+  internshipButtonText: string;
+  internshipActionType: string;
+  internshipActionUrl: string;
+}
+
 
 const PUBLIC_DATABASE_READ_TIMEOUT_MS = 6000;
 const PUBLIC_DATABASE_RETRY_COOLDOWN_MS = 60_000;
@@ -50,13 +59,24 @@ async function withDatabaseFallback<T>(operation: () => Promise<T>, fallback: T)
   }
 }
 
-function normalizeProject(project: ProjectView): ProjectView {
+export function normalizeProject(project: any): ProjectView {
+  const parseJsonArray = (val: any): string[] => {
+    if (Array.isArray(val)) return val.map(String);
+    if (typeof val === "string") {
+      try {
+        const parsed = JSON.parse(val);
+        if (Array.isArray(parsed)) return parsed.map(String);
+      } catch {}
+    }
+    return [];
+  };
+
   return {
     ...project,
     status: project.status as ProjectStatus,
-    gallery: project.gallery ?? [],
-    servicesUsed: project.servicesUsed ?? [],
-    keyAchievements: project.keyAchievements ?? [],
+    gallery: parseJsonArray(project.gallery),
+    servicesUsed: parseJsonArray(project.servicesUsed),
+    keyAchievements: parseJsonArray(project.keyAchievements),
   };
 }
 
@@ -247,15 +267,19 @@ export async function getAdminMetrics() {
       testimonials: seedProjects.filter((project) => project.testimonial).length,
       clients: seedClients.length,
       sitePages: defaultSitePages.length,
+      equipment: 0,
+      downloads: 0,
     };
   }
 
   const db = getPrisma();
-  const [projects, testimonials, clients, sitePages] = await Promise.all([
+  const [projects, testimonials, clients, sitePages, equipment, downloads] = await Promise.all([
     db.project.count(),
     db.testimonial.count(),
     db.client.count(),
     db.sitePage.count({ where: { slug: { notIn: retiredSitePageSlugs } } }),
+    db.equipment.count({ where: { published: true } }),
+    db.download.count({ where: { published: true } }),
   ]);
 
   return {
@@ -263,5 +287,179 @@ export async function getAdminMetrics() {
     testimonials,
     clients,
     sitePages: Math.max(sitePages, defaultSitePages.length),
+    equipment,
+    downloads,
   };
+}
+
+export const getJobOpenings = cache(async (): Promise<JobOpening[]> => {
+  if (!canUseDatabase()) return seedJobOpenings;
+
+  return withDatabaseFallback(async () => {
+    const jobs = await getPrisma().jobOpening.findMany({
+      where: { published: true },
+      orderBy: { createdAt: "desc" },
+    });
+    return jobs.map((job) => ({
+      id: job.id,
+      title: job.title,
+      department: job.department,
+      experience: job.experience,
+      location: job.location,
+      type: job.type,
+      skills: job.skills,
+    }));
+  }, seedJobOpenings);
+});
+
+export const getCareerSetting = cache(async (): Promise<CareerSetting> => {
+  const defaultSetting: CareerSetting = {
+    id: "default",
+    internshipButtonText: "Apply for Internship",
+    internshipActionType: "modal",
+    internshipActionUrl: "",
+  };
+  if (!canUseDatabase()) return defaultSetting;
+
+  return withDatabaseFallback(async () => {
+    const setting = await getPrisma().careerSetting.findFirst();
+    if (setting) {
+      return {
+        id: setting.id,
+        internshipButtonText: setting.internshipButtonText,
+        internshipActionType: setting.internshipActionType,
+        internshipActionUrl: setting.internshipActionUrl,
+      };
+    }
+    return defaultSetting;
+  }, defaultSetting);
+});
+
+// ─── Equipment ────────────────────────────────────────────────────────────────
+
+export interface EquipmentItem {
+  id: string;
+  name: string;
+  slug: string;
+  imageUrl: string | null;
+  quantity: number;
+  capacity: string | null;
+  manufacturer: string | null;
+  year: number | null;
+  status: string;
+  sortOrder: number;
+}
+
+const seedEquipmentFallback: EquipmentItem[] = [
+  { id: "equip-1", name: "Hydraulic Excavator", slug: "hydraulic-excavator", imageUrl: "https://images.pexels.com/photos/2101137/pexels-photo-2101137.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 4, capacity: "20T – 30T", manufacturer: "CAT / JCB", year: 2020, status: "Active", sortOrder: 1 },
+  { id: "equip-2", name: "Motor Grader", slug: "motor-grader", imageUrl: "https://images.pexels.com/photos/93398/pexels-photo-93398.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 2, capacity: "140 HP", manufacturer: "Volvo / CASE", year: 2021, status: "Active", sortOrder: 2 },
+  { id: "equip-3", name: "Vibratory Roller", slug: "vibratory-roller", imageUrl: "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 3, capacity: "10T – 12T", manufacturer: "HAMM / Dynapac", year: 2019, status: "Active", sortOrder: 3 },
+  { id: "equip-4", name: "Transit Mixer", slug: "transit-mixer", imageUrl: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 5, capacity: "6 m³", manufacturer: "Ajax / Schwing Stetter", year: 2020, status: "Active", sortOrder: 4 },
+  { id: "equip-5", name: "Bulldozer", slug: "bulldozer", imageUrl: "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 2, capacity: "D6 Series", manufacturer: "CAT", year: 2022, status: "Active", sortOrder: 5 },
+  { id: "equip-6", name: "Mobile Crane", slug: "mobile-crane", imageUrl: "https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?auto=format&fit=crop&w=800&q=80", quantity: 1, capacity: "50T", manufacturer: "Liebherr", year: 2021, status: "Active", sortOrder: 6 },
+];
+
+export const getEquipment = cache(async (): Promise<EquipmentItem[]> => {
+  if (!canUseDatabase()) return seedEquipmentFallback;
+
+  return withDatabaseFallback(async () => {
+    const items = await getPrisma().equipment.findMany({
+      where: { published: true },
+      orderBy: { sortOrder: "asc" },
+    });
+    return items.map((item) => ({
+      id: item.id,
+      name: item.name,
+      slug: item.slug,
+      imageUrl: item.imageUrl,
+      quantity: item.quantity,
+      capacity: item.capacity,
+      manufacturer: item.manufacturer,
+      year: item.year,
+      status: item.status,
+      sortOrder: item.sortOrder,
+    }));
+  }, seedEquipmentFallback);
+});
+
+// ─── Downloads ────────────────────────────────────────────────────────────────
+
+export interface DownloadItem {
+  id: string;
+  title: string;
+  category: string;
+  fileUrl: string;
+  fileType: string;
+  sortOrder: number;
+}
+
+export interface DownloadGroup {
+  category: string;
+  items: DownloadItem[];
+}
+
+export const getDownloads = cache(async (): Promise<DownloadGroup[]> => {
+  if (!canUseDatabase()) return [];
+
+  return withDatabaseFallback(async () => {
+    const rows = await getPrisma().download.findMany({
+      where: { published: true },
+      orderBy: [{ category: "asc" }, { sortOrder: "asc" }],
+    });
+    const grouped: Record<string, DownloadItem[]> = {};
+    for (const row of rows) {
+      if (!grouped[row.category]) grouped[row.category] = [];
+      grouped[row.category].push({
+        id: row.id,
+        title: row.title,
+        category: row.category,
+        fileUrl: row.fileUrl,
+        fileType: row.fileType,
+        sortOrder: row.sortOrder,
+      });
+    }
+    return Object.entries(grouped).map(([category, items]) => ({ category, items }));
+  }, []);
+});
+
+// ─── Site Settings ────────────────────────────────────────────────────────────
+
+export type SiteSettingsMap = Record<string, string>;
+
+const defaultSiteSettingsMap: SiteSettingsMap = {
+  company_name: "Dockside Constructions Private Limited",
+  company_tagline: "Engineering-Led Construction. Trusted Since 2015.",
+  phone_primary: "+91 88259 22737",
+  phone_alternate: "",
+  email: "admin@docksideconstructions.com",
+  address: "Villupuram, Tamil Nadu, India",
+  maps_url: "",
+  working_hours: "Mon – Sat: 9:00 AM – 6:00 PM",
+  gst_number: "",
+  pan_number: "",
+  facebook_url: "",
+  instagram_url: "",
+  linkedin_url: "",
+  youtube_url: "",
+  seo_meta_title: "Dockside Constructions – Industrial & Infrastructure Projects",
+  seo_meta_description: "Delivering industrial facilities, logistics parks, commercial developments and infrastructure projects through disciplined execution and engineering excellence.",
+  seo_og_image: "",
+};
+
+export const getSiteSettings = cache(async (): Promise<SiteSettingsMap> => {
+  if (!canUseDatabase()) return defaultSiteSettingsMap;
+
+  return withDatabaseFallback(async () => {
+    const rows = await getPrisma().siteSetting.findMany();
+    const map: SiteSettingsMap = { ...defaultSiteSettingsMap };
+    for (const row of rows) {
+      map[row.key] = row.value;
+    }
+    return map;
+  }, defaultSiteSettingsMap);
+});
+
+export async function getSiteSetting(key: string): Promise<string> {
+  const settings = await getSiteSettings();
+  return settings[key] ?? "";
 }

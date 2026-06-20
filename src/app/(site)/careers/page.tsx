@@ -14,6 +14,11 @@ import { CareersFilterGrid } from "@/components/careers-filter-grid";
 import { Reveal, RevealText } from "@/components/motion/reveal";
 import { industrialImages } from "@/lib/content";
 import { valueProps, timelineSteps } from "@/lib/careers-data";
+import { getJobOpenings, getCareerSetting } from "@/lib/repositories";
+import { InternshipButton } from "@/components/internship-button";
+
+export const dynamic = "force-dynamic";
+
 
 export const metadata = {
   title: "Careers | Dockside Constructions",
@@ -35,7 +40,10 @@ export const metadata = {
   },
 };
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const jobOpenings = await getJobOpenings();
+  const careerSetting = await getCareerSetting();
+
   const jsonLdSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
@@ -250,7 +258,7 @@ export default function CareersPage() {
           <span className="cv2-eyebrow">OPEN OPPORTUNITIES</span>
           <h2 className="cv2-section__title cv2-section__title--large">AVAILABLE POSITIONS</h2>
         </Reveal>
-        <CareersFilterGrid />
+        <CareersFilterGrid jobOpenings={jobOpenings} />
       </section>
 
       {/* ── 5. INTERNSHIP BANNER ── */}
@@ -282,9 +290,7 @@ export default function CareersPage() {
                 certification.
               </li>
             </ul>
-            <Link href="#open-positions" className="cv2-btn cv2-btn--fill">
-              Apply for Internship <ArrowRight aria-hidden="true" />
-            </Link>
+            <InternshipButton settings={careerSetting} jobOpenings={jobOpenings} />
           </div>
           <div className="cv2-internship__image">
             <Image

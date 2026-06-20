@@ -3,14 +3,20 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MapPin, Briefcase, CalendarClock, BookOpen, AlertCircle, Sparkles } from "lucide-react";
-import { jobOpenings, type JobOpening } from "@/lib/careers-data";
+import { jobOpenings as staticJobOpenings, type JobOpening } from "@/lib/careers-data";
 import { CareerApplicationModal } from "@/components/career-application-modal";
 
 const departments = ["All Departments", "Project Management", "Engineering", "QA/QC", "Safety"];
 const locations = ["All Locations", "Chennai", "Bengaluru", "Site-based"];
 const experiences = ["All Experience", "0-2 Years", "3-5 Years", "5+ Years"];
 
-export function CareersFilterGrid() {
+export function CareersFilterGrid({
+  jobOpenings = [],
+}: {
+  jobOpenings?: JobOpening[];
+}) {
+  const activeJobOpenings = jobOpenings.length > 0 ? jobOpenings : staticJobOpenings;
+
   const [selectedDept, setSelectedDept] = useState("All Departments");
   const [selectedLoc, setSelectedLoc] = useState("All Locations");
   const [selectedExp, setSelectedExp] = useState("All Experience");
@@ -18,7 +24,7 @@ export function CareersFilterGrid() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Apply filters
-  const filteredJobs = jobOpenings.filter((job) => {
+  const filteredJobs = activeJobOpenings.filter((job) => {
     const deptMatch =
       selectedDept === "All Departments" ||
       job.department.toLowerCase() === selectedDept.toLowerCase();
@@ -196,6 +202,7 @@ export function CareersFilterGrid() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         selectedJobId={selectedJobId}
+        jobOpenings={activeJobOpenings}
       />
     </>
   );

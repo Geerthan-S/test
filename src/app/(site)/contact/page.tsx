@@ -18,6 +18,9 @@ import { canUseDatabase, getPrisma } from "@/lib/prisma";
 import { getClients } from "@/lib/repositories";
 import { ClientLogoMarquee } from "@/components/client-logo-marquee";
 
+export const dynamic = "force-dynamic";
+
+
 export const metadata = { title: "Contact" };
 
 const OFFICE_LAT = "12.886303218652689";
@@ -52,6 +55,7 @@ async function submitContact(formData: FormData) {
 
     await getPrisma().contactMessage.create({
       data: {
+        id: crypto.randomUUID(),
         name,
         email,
         message: enrichedMessage,

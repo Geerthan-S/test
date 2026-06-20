@@ -88,7 +88,7 @@ export function Hero({
           inset: 0,
           zIndex: 1,
           pointerEvents: "none",
-          background: "linear-gradient(100deg, #ffffff 0%, #ffffff 30%, rgba(255,255,255,0.96) 38%, rgba(255,255,255,0.80) 46%, rgba(255,255,255,0.38) 57%, rgba(255,255,255,0.06) 68%, rgba(255,255,255,0.00) 78%)",
+          background: "linear-gradient(100deg, #ffffff 0%, #ffffff 15%, rgba(255,255,255,0.95) 25%, rgba(255,255,255,0.80) 35%, rgba(255,255,255,0.30) 48%, rgba(255,255,255,0.00) 60%)",
         }}
       />
 

@@ -22,6 +22,8 @@ import { CountUp } from "@/components/ui/CountUp";
 import { ProjectsFilterGrid } from "@/components/projects-filter-grid";
 import { FloatingCTA } from "@/components/ui/floating-cta";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Projects",
   description:

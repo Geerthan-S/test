@@ -9,10 +9,13 @@ import {
 import { DOCKSIDE_LOGO_SRC, Logo } from "@/components/ui/logo";
 
 const companyLinks = [
-  ["About Us", "/about"],
+  ["About Us", "/#about"],
+  ["Services", "/#services"],
+  ["Equipment Fleet", "/equipment-fleet"],
+  ["Quality & Safety", "/quality-safety"],
   ["Projects", "/projects"],
+  ["Downloads", "/downloads"],
   ["Careers", "/careers"],
-  ["Clients", "/clients"],
   ["Contact Us", "/contact"],
 ] as const;
 

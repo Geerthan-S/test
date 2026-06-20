@@ -4,8 +4,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { deleteProject } from "@/app/admin/actions";
-import { canUseDatabase, getPrisma } from "@/lib/prisma";
-import { seedProjects } from "@/lib/content";
+import { canUseDatabase, getPrisma, runSafeQuery } from "@/lib/prisma";
+import { seedProjects, type ProjectView } from "@/lib/content";
 import { requireAdmin } from "@/lib/admin";
 
 export const metadata = { title: "Project CMS" };
@@ -17,9 +17,10 @@ export default async function AdminProjectsPage({
 }) {
   await requireAdmin();
   const params = await searchParams;
-  const projects = canUseDatabase()
-    ? await getPrisma().project.findMany({ orderBy: { updatedAt: "desc" } })
-    : seedProjects;
+  const projects = await runSafeQuery<ProjectView[]>(
+    () => getPrisma().project.findMany({ orderBy: { updatedAt: "desc" } }) as any,
+    seedProjects,
+  );
 
   return (
     <div>

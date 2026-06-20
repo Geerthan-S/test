@@ -4,8 +4,8 @@ import { deleteClient } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { requireAdmin } from "@/lib/admin";
-import { seedClients } from "@/lib/content";
-import { canUseDatabase, getPrisma } from "@/lib/prisma";
+import { seedClients, type ClientView } from "@/lib/content";
+import { canUseDatabase, getPrisma, runSafeQuery } from "@/lib/prisma";
 
 export const metadata = { title: "Client CMS" };
 
@@ -16,9 +16,10 @@ export default async function AdminClientsPage({
 }) {
   await requireAdmin();
   const params = await searchParams;
-  const clients = canUseDatabase()
-    ? await getPrisma().client.findMany({ orderBy: { updatedAt: "desc" } })
-    : seedClients;
+  const clients = await runSafeQuery<ClientView[]>(
+    () => getPrisma().client.findMany({ orderBy: { updatedAt: "desc" } }) as any,
+    seedClients,
+  );
 
   return (
     <div>

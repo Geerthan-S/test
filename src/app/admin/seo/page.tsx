@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { requireAdmin } from "@/lib/admin";
-import { canUseDatabase, getPrisma } from "@/lib/prisma";
+import { canUseDatabase, getPrisma, runSafeQuery } from "@/lib/prisma";
 
 export const metadata = { title: "SEO Metadata Editor" };
 
@@ -30,7 +30,10 @@ async function saveSeo(formData: FormData) {
 
 export default async function SeoPage() {
   await requireAdmin();
-  const entries = canUseDatabase() ? await getPrisma().seoEntry.findMany({ orderBy: { path: "asc" } }) : [];
+  const entries = await runSafeQuery(
+    () => getPrisma().seoEntry.findMany({ orderBy: { path: "asc" } }),
+    [],
+  );
 
   return (
     <div className="admin-split-page grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">

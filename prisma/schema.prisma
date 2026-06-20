@@ -35,38 +35,47 @@ model User {
 }
 
 model Project {
-  id              String        @id @default(cuid())
-  title           String
-  slug            String        @unique
-  clientName      String
-  clientType      String?
-  clientLogo      String?
-  featuredImage   String
-  gallery         String[]      @default([])
-  location        String
-  scopeOfWork     String
-  timeline        String
-  projectValue    String
-  yearsAssociated String?
-  projectCount    String?
-  contractValue   String?
-  status          ProjectStatus @default(IN_PROGRESS)
-  servicesUsed    String[]      @default([])
-  industry        String
-  summary         String
-  clientOverview  String?
-  keyAchievements String[]      @default([])
-  body            String
-  seoTitle        String?
-  seoDescription  String?
-  published       Boolean       @default(true)
-  featured        Boolean       @default(false)
-  completedAt     DateTime?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  authorId        String?
-  author          User?         @relation("ProjectAuthor", fields: [authorId], references: [id])
-  testimonial     Testimonial?
+  id                 String        @id @default(cuid())
+  title              String
+  slug               String        @unique
+  clientName         String
+  clientType         String?
+  clientLogo         String?
+  featuredImage      String
+  gallery            String[]      @default([])
+  folderName         String?
+  location           String
+  scopeOfWork        String
+  timeline           String
+  projectValue       String
+  yearsAssociated    String?
+  projectCount       String?
+  contractValue      String?
+  startDate          DateTime?
+  endDate            DateTime?
+  completionPct      Int           @default(0)
+  builtUpArea        String?
+  roadLength         String?
+  concreteUsed       String?
+  steelUsed          String?
+  workforceDeployed  String?
+  status             ProjectStatus @default(IN_PROGRESS)
+  servicesUsed       String[]      @default([])
+  industry           String
+  summary            String
+  clientOverview     String?
+  keyAchievements    String[]      @default([])
+  body               String
+  seoTitle           String?
+  seoDescription     String?
+  published          Boolean       @default(true)
+  featured           Boolean       @default(false)
+  completedAt        DateTime?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  authorId           String?
+  author             User?         @relation("ProjectAuthor", fields: [authorId], references: [id])
+  testimonial        Testimonial?
 
   @@index([published, featured, updatedAt])
   @@index([status, updatedAt])
@@ -151,4 +160,66 @@ model ContactMessage {
 
   @@index([createdAt])
   @@index([email])
+}
+
+model JobOpening {
+  id         String   @id @default(cuid())
+  title      String
+  department String
+  experience String
+  location   String
+  type       String   @default("Full-Time")
+  skills     String[] @default([])
+  published  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([published, updatedAt])
+}
+
+model CareerSetting {
+  id                   String   @id @default(cuid())
+  internshipButtonText String   @default("Apply for Internship")
+  internshipActionType String   @default("modal") // "modal" or "url"
+  internshipActionUrl  String   @default("")
+  updatedAt            DateTime @updatedAt
+}
+
+model Equipment {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  imageUrl     String?
+  quantity     Int      @default(1)
+  capacity     String?
+  manufacturer String?
+  year         Int?
+  status       String   @default("Active")
+  sortOrder    Int      @default(0)
+  published    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([published, sortOrder])
+}
+
+model Download {
+  id        String   @id @default(cuid())
+  title     String
+  category  String
+  fileUrl   String
+  fileType  String   @default("pdf")
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([published, category])
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
 }

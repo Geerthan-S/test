@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import { updateProject } from "@/app/admin/actions";
 import { ProjectForm } from "@/components/admin/project-form";
-import { canUseDatabase, getPrisma } from "@/lib/prisma";
+import { canUseDatabase, getPrisma, runSafeQuery } from "@/lib/prisma";
 import { seedProjects } from "@/lib/content";
 import { requireAdmin } from "@/lib/admin";
+import { normalizeProject } from "@/lib/repositories";
 
 export const metadata = { title: "Edit Project" };
 
@@ -16,11 +17,13 @@ export default async function EditProjectPage({
 }) {
   await requireAdmin();
   const [{ id }, flags] = await Promise.all([params, searchParams]);
-  const project = canUseDatabase()
-    ? await getPrisma().project.findUnique({ where: { id }, include: { testimonial: true } })
-    : seedProjects.find((item) => item.id === id);
+  const rawProject = await runSafeQuery<any>(
+    () => getPrisma().project.findUnique({ where: { id }, include: { testimonial: true } }),
+    seedProjects.find((item) => item.id === id),
+  );
 
-  if (!project) notFound();
+  if (!rawProject) notFound();
+  const project = normalizeProject(rawProject);
 
   return (
     <div>

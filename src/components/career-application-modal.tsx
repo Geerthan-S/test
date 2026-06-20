@@ -4,26 +4,29 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, Upload, CheckCircle2, AlertCircle } from "lucide-react";
-import { jobOpenings } from "@/lib/careers-data";
+import { jobOpenings as staticJobOpenings, type JobOpening } from "@/lib/careers-data";
 
 interface CareerApplicationModalProps {
   isOpen: boolean;
   onClose: () => void;
   selectedJobId?: string;
+  jobOpenings?: JobOpening[];
 }
 
 export function CareerApplicationModal({
   isOpen,
   onClose,
   selectedJobId = "",
+  jobOpenings = [],
 }: CareerApplicationModalProps) {
+  const activeJobOpenings = jobOpenings.length > 0 ? jobOpenings : staticJobOpenings;
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     jobId: selectedJobId,
     experience: "",
-    message: "",
   });
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -215,7 +218,7 @@ export function CareerApplicationModal({
                 <CheckCircle2 className="w-16 h-16 text-[#923e4d] mb-4 mx-auto" />
                 <h3 id="modal-title">Application Submitted!</h3>
                 <p>
-                  Thank you for applying, <strong>{formData.name}</strong>. Our recruiting team will review your application for the <strong>{jobOpenings.find(j => j.id === formData.jobId)?.title || "Selected"}</strong> role and get back to you shortly.
+                  Thank you for applying, <strong>{formData.name}</strong>. Our recruiting team will review your application for the <strong>{activeJobOpenings.find(j => j.id === formData.jobId)?.title || "Selected"}</strong> role and get back to you shortly.
                 </p>
                 <button
                   onClick={onClose}
@@ -306,7 +309,7 @@ export function CareerApplicationModal({
                     >
                       <option value="">Select a role...</option>
                       <option value="general">General Application / Other</option>
-                      {jobOpenings.map((job) => (
+                      {activeJobOpenings.map((job) => (
                         <option key={job.id} value={job.id}>
                           {job.title}
                         </option>
@@ -345,18 +348,6 @@ export function CareerApplicationModal({
                     )}
                   </div>
 
-                  {/* Cover Message */}
-                  <div className="career-form-group">
-                    <label htmlFor="message">Message / Statement of Purpose</label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      placeholder="Briefly describe your key project exposures or qualifications..."
-                      rows={3}
-                    />
-                  </div>
 
                   {/* Resume Upload */}
                   <div className="career-form-group">

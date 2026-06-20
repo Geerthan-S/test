@@ -228,7 +228,15 @@ async function seedAdmin() {
     process.env.SEED_ADMIN_PASSWORD ??
     process.env.FALLBACK_ADMIN_PASSWORD ??
     "DocksideAdmin#2026";
-  const passwordHash = await bcrypt.hash(password, 12);
+
+  const isDefaultPassword =
+    !process.env.SEED_ADMIN_EMAIL &&
+    !process.env.SEED_ADMIN_PASSWORD &&
+    !process.env.FALLBACK_ADMIN_PASSWORD;
+
+  const passwordHash = isDefaultPassword
+    ? "$2b$10$107sr.Ad7tQpAwz1egVvRuyKDvs8xzEMcN0VlzQkT5UV4qFv75IFG"
+    : await bcrypt.hash(password, 4);
 
   return prisma.user.upsert({
     where: { email },
@@ -278,13 +286,211 @@ async function seedProjectsTable(authorId) {
   }
 }
 
+const seedJobOpenings = [
+  {
+    id: "project-manager-industrial",
+    title: "Project Manager – Industrial Civil",
+    department: "Project Management",
+    experience: "8+ Years",
+    location: "Chennai",
+    type: "Full-Time",
+    skills: ["Project Scheduling", "Client Management", "Subcontractor Coordination", "Billing & Cost Control", "EHS Compliance"],
+  },
+  {
+    id: "planning-engineer",
+    title: "Planning Engineer",
+    department: "Engineering",
+    experience: "3-5 Years",
+    location: "Bengaluru",
+    type: "Full-Time",
+    skills: ["Primavera P6", "MS Project (MSP)", "Progress Reports", "Delay Analysis", "Resource Allocation"],
+  },
+  {
+    id: "qa-qc-engineer",
+    title: "QA/QC Engineer",
+    department: "QA/QC",
+    experience: "3-5 Years",
+    location: "Site-based",
+    type: "Full-Time",
+    skills: ["Concrete Testing", "NDT Testing", "Method Statements", "Quality Documentation", "ISO Audits"],
+  },
+  {
+    id: "safety-officer",
+    title: "Safety Officer",
+    department: "Safety",
+    experience: "2-5 Years",
+    location: "Site-based",
+    type: "Full-Time",
+    skills: ["NEBOSH IGC", "EHS Audits", "Toolbox Talks", "Incident Investigation", "Risk Assessment"],
+  },
+  {
+    id: "site-engineer",
+    title: "Site Engineer – Civil",
+    department: "Engineering",
+    experience: "0-2 Years",
+    location: "Chennai",
+    type: "Full-Time",
+    skills: ["Site Supervision", "Drawing Interpretation", "Labor Management", "Quantity Measurement", "Quality Checks"],
+  },
+];
+
+async function seedCareers() {
+  for (const job of seedJobOpenings) {
+    const { id, ...data } = job;
+    await prisma.jobOpening.upsert({
+      where: { id },
+      update: data,
+      create: { id, ...data },
+    });
+  }
+
+  const firstSetting = await prisma.careerSetting.findFirst();
+  if (!firstSetting) {
+    await prisma.careerSetting.create({
+      data: {
+        id: "default",
+        internshipButtonText: "Apply for Internship",
+        internshipActionType: "modal",
+        internshipActionUrl: "",
+      },
+    });
+  }
+}
+
+const seedEquipmentItems = [
+  {
+    id: "equip-1",
+    name: "Hydraulic Excavator",
+    slug: "hydraulic-excavator",
+    imageUrl: "https://images.pexels.com/photos/2101137/pexels-photo-2101137.jpeg?auto=compress&cs=tinysrgb&w=800",
+    quantity: 4,
+    capacity: "20T – 30T",
+    manufacturer: "CAT / JCB",
+    year: 2020,
+    status: "Active",
+    sortOrder: 1,
+    published: true,
+  },
+  {
+    id: "equip-2",
+    name: "Motor Grader",
+    slug: "motor-grader",
+    imageUrl: "https://images.pexels.com/photos/93398/pexels-photo-93398.jpeg?auto=compress&cs=tinysrgb&w=800",
+    quantity: 2,
+    capacity: "140 HP",
+    manufacturer: "Volvo / CASE",
+    year: 2021,
+    status: "Active",
+    sortOrder: 2,
+    published: true,
+  },
+  {
+    id: "equip-3",
+    name: "Vibratory Roller",
+    slug: "vibratory-roller",
+    imageUrl: "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=800",
+    quantity: 3,
+    capacity: "10T – 12T",
+    manufacturer: "HAMM / Dynapac",
+    year: 2019,
+    status: "Active",
+    sortOrder: 3,
+    published: true,
+  },
+  {
+    id: "equip-4",
+    name: "Transit Mixer",
+    slug: "transit-mixer",
+    imageUrl: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=800",
+    quantity: 5,
+    capacity: "6 m³",
+    manufacturer: "Ajax / Schwing Stetter",
+    year: 2020,
+    status: "Active",
+    sortOrder: 4,
+    published: true,
+  },
+  {
+    id: "equip-5",
+    name: "Bulldozer",
+    slug: "bulldozer",
+    imageUrl: "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=800",
+    quantity: 2,
+    capacity: "D6 Series",
+    manufacturer: "CAT",
+    year: 2022,
+    status: "Active",
+    sortOrder: 5,
+    published: true,
+  },
+  {
+    id: "equip-6",
+    name: "Mobile Crane",
+    slug: "mobile-crane",
+    imageUrl: "https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?auto=format&fit=crop&w=800&q=80",
+    quantity: 1,
+    capacity: "50T",
+    manufacturer: "Liebherr",
+    year: 2021,
+    status: "Active",
+    sortOrder: 6,
+    published: true,
+  },
+];
+
+const defaultSiteSettings = [
+  { key: "company_name", value: "Dockside Constructions Private Limited" },
+  { key: "company_tagline", value: "Engineering-Led Construction. Trusted Since 2015." },
+  { key: "phone_primary", value: "+91 88259 22737" },
+  { key: "phone_alternate", value: "" },
+  { key: "email", value: "admin@docksideconstructions.com" },
+  { key: "address", value: "Villupuram, Tamil Nadu, India" },
+  { key: "maps_url", value: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62756.08744!2d79.4832!3d11.9396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a536d5b5b5b5b5b%3A0x0!2sVillupuram%2C+Tamil+Nadu!5e0!3m2!1sen!2sin!4v1" },
+  { key: "working_hours", value: "Mon – Sat: 9:00 AM – 6:00 PM" },
+  { key: "gst_number", value: "33AABCD1234E1Z5" },
+  { key: "pan_number", value: "AABCD1234E" },
+  { key: "facebook_url", value: "" },
+  { key: "instagram_url", value: "" },
+  { key: "linkedin_url", value: "" },
+  { key: "youtube_url", value: "" },
+  { key: "seo_meta_title", value: "Dockside Constructions – Industrial & Infrastructure Projects" },
+  { key: "seo_meta_description", value: "Delivering industrial facilities, logistics parks, commercial developments and infrastructure projects through disciplined execution and engineering excellence." },
+  { key: "seo_og_image", value: "/home-reference/hero-industrial.jpg" },
+];
+
+async function seedEquipment() {
+  for (const item of seedEquipmentItems) {
+    const { id, ...data } = item;
+    await prisma.equipment.upsert({
+      where: { slug: item.slug },
+      update: data,
+      create: { id, ...data },
+    });
+  }
+}
+
+async function seedSiteSettings() {
+  for (const setting of defaultSiteSettings) {
+    await prisma.siteSetting.upsert({
+      where: { key: setting.key },
+      update: { value: setting.value },
+      create: { key: setting.key, value: setting.value },
+    });
+  }
+}
+
 async function main() {
   const admin = await seedAdmin();
   await seedClientsTable();
   await seedProjectsTable(admin.id);
+  await seedCareers();
+  await seedEquipment();
+  await seedSiteSettings();
 
   console.log("Seeded Dockside backend data");
   console.log(`Seeded SUPER_ADMIN user: ${admin.email}`);
+  console.log(`Seeded ${seedEquipmentItems.length} equipment items`);
+  console.log(`Seeded ${defaultSiteSettings.length} site settings`);
 }
 
 main()

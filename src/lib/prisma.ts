@@ -2,7 +2,10 @@ import { PrismaClient } from "@prisma/client";
 
 const globalForPrisma = globalThis as typeof globalThis & {
   prisma?: PrismaClient;
+  dbUnavailableUntil?: number;
 };
+
+const COOLDOWN_MS = 60_000; // 1 minute cooldown on failure
 
 function withConnectionTimeouts(url: string) {
   try {
@@ -29,6 +32,25 @@ export function getPrisma() {
   return globalForPrisma.prisma;
 }
 
+export function markDatabaseUnavailable() {
+  globalForPrisma.dbUnavailableUntil = Date.now() + COOLDOWN_MS;
+}
+
 export function canUseDatabase() {
-  return Boolean(process.env.DATABASE_URL);
+  if (!process.env.DATABASE_URL) return false;
+  if (globalForPrisma.dbUnavailableUntil && Date.now() < globalForPrisma.dbUnavailableUntil) {
+    return false;
+  }
+  return true;
+}
+
+export async function runSafeQuery<T>(operation: () => Promise<T>, fallback: T): Promise<T> {
+  if (!canUseDatabase()) return fallback;
+  try {
+    return await operation();
+  } catch (err) {
+    console.warn("Database connection failed, falling back to mock data:", err);
+    markDatabaseUnavailable();
+    return fallback;
+  }
 }
