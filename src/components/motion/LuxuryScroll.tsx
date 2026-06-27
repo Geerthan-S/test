@@ -45,7 +45,7 @@ export function LuxuryScroll() {
               opacity: 1,
               duration: 0.85,
               ease: "power3.out",
-              scrollTrigger: { trigger: element, start: "top 84%", once: true },
+              scrollTrigger: { trigger: element, start: "top 65%", once: true },
             },
           );
         });
@@ -60,7 +60,7 @@ export function LuxuryScroll() {
               duration: 0.7,
               stagger: 0.055,
               ease: "power3.out",
-              scrollTrigger: { trigger: scope, start: "top 82%", once: true },
+              scrollTrigger: { trigger: scope, start: "top 65%", once: true },
             },
           );
         });
@@ -68,7 +68,7 @@ export function LuxuryScroll() {
 
       cleanup = () => ctx.revert();
       ScrollTrigger.refresh();
-    }, 120);
+    }, 50);
 
     return () => {
       cancelled = true;

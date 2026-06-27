@@ -94,7 +94,7 @@ export function CertificateGrid() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               {/* Unit Badge (like Equipment fleet cards) */}
-              <span className="absolute top-0 left-0 bg-[#8A3841] text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 z-10">
+              <span className="absolute top-0 left-0 bg-[#8A3841] !text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 z-10">
                 {cert.code}
               </span>
               {/* Hover Preview Overlay */}
@@ -165,7 +165,7 @@ export function CertificateGrid() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="cert-lightbox__inner"
               onClick={(e) => e.stopPropagation()}
             >

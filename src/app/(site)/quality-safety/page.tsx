@@ -203,7 +203,7 @@ const subtitleVariants: Variants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { delay: 0.18, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { delay: 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -211,8 +211,8 @@ const staggerContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.25,
+      staggerChildren: 0.06,
+      delayChildren: 0.08,
     },
   },
 };
@@ -276,7 +276,7 @@ export default function QualityAndSafetyPage() {
             <span style={{ color: "#f0c9cc" }}>Every Process</span>
           </h1>
 
-          <p data-text-reveal className="text-white/80 max-w-[620px] mx-auto text-[14px] md:text-[15px] leading-[1.8] mb-10">
+          <p data-text-reveal className="text-white/95 max-w-[620px] mx-auto text-[14px] md:text-[15px] leading-[1.8] mb-10">
             Delivering projects through internationally aligned standards, rigorous
             inspections, material verification, and a proactive safety culture.
           </p>
@@ -286,7 +286,7 @@ export default function QualityAndSafetyPage() {
             {["ISO 9001:2015", "ISO 14001:2015", "ISO 45001:2018"].map((pill) => (
               <span
                 key={pill}
-                className="bg-white/10 border border-white/25 text-white font-mono text-[10px] md:text-[11px] font-bold tracking-widest uppercase px-5 py-2.5 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+                className="bg-white/20 border border-white/40 text-white font-mono text-[10px] md:text-[11px] font-bold tracking-widest uppercase px-5 py-2.5 backdrop-blur-sm hover:bg-white/30 transition-all duration-300"
               >
                 {pill}
               </span>
@@ -475,7 +475,7 @@ export default function QualityAndSafetyPage() {
             className="text-center mb-16"
             initial={initial}
             whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.25 }}
             variants={headerVariants}
           >
             <span data-text-reveal className="font-mono text-[11px] tracking-[0.2em] text-[#8A3841] uppercase block mb-3 font-bold">
@@ -490,7 +490,7 @@ export default function QualityAndSafetyPage() {
             className="text-gray-500 max-w-[560px] mx-auto text-[14px] leading-[1.75] text-center mb-16"
             initial={initial}
             whileInView="visible"
-            viewport={{ once: true, amount: 0.5 }}
+            viewport={{ once: true, amount: 0.25 }}
             variants={subtitleVariants}
           >
             A structured, step-by-step verification pipeline enforcing specifications and controls at every phase.
@@ -525,42 +525,46 @@ export default function QualityAndSafetyPage() {
       {/* ── 7. MATERIAL TESTING ── */}
       <section className="py-24 px-6 md:px-12 lg:px-16 bg-white border-b border-gray-100">
         <div className="max-w-[1320px] mx-auto">
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
-            <div>
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-16">
+            <div className="lg:max-w-[500px]">
               <span data-text-reveal className="font-mono text-[11px] tracking-[0.2em] text-[#8A3841] uppercase block mb-3 font-bold">
                 Lab &amp; Site Tests
               </span>
-              <h2 data-text-reveal className="font-display text-3xl md:text-4xl font-bold uppercase tracking-wide text-gray-900">
+              <h2 data-text-reveal className="font-display text-3xl md:text-4xl font-bold uppercase tracking-wide text-[#8A3841]">
                 Material Testing &amp; Verification
               </h2>
             </div>
-            <p data-text-reveal className="text-gray-500 max-w-[400px] text-[14px] leading-[1.75] lg:text-right">
+            <p data-text-reveal className="text-gray-500 max-w-[480px] text-[13px] leading-[1.75] lg:text-right">
               All critical construction materials undergo testing and verification to ensure compliance with project specifications.
             </p>
           </div>
 
-          <div data-stagger-reveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div data-stagger-reveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {materialTests.map((test) => {
               const Icon = test.icon;
               return (
                 <div
                   key={test.title}
-                  className="group relative bg-white border border-gray-100 px-7 pt-7 pb-6 hover:border-[#8A3841]/30 hover:shadow-[0_16px_44px_rgba(138,56,65,0.10)] transition-all duration-300 overflow-hidden"
+                  className="group relative flex gap-4"
                 >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#8A3841]/8 text-[#8A3841] group-hover:bg-[#8A3841]/10 group-hover:text-[#8A3841] transition-all duration-300">
-                      <Icon className="w-5 h-5" strokeWidth={1.5} />
+                  <div className="flex-shrink-0">
+                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-full border-2 border-[#8A3841] text-[#8A3841] group-hover:bg-[#8A3841] group-hover:text-white transition-all duration-300">
+                      <Icon className="w-6 h-6" strokeWidth={1.5} />
                     </div>
-                    <span className="font-mono text-[11px] font-bold text-[#8A3841] tracking-wider bg-[#8A3841]/6 px-2.5 py-1">
-                      {test.standard}
-                    </span>
                   </div>
-                  <h3 className="font-display text-[16px] font-extrabold uppercase tracking-wide text-gray-900 mb-2.5 group-hover:text-[#8A3841] transition-colors duration-300">
-                    {test.title}
-                  </h3>
-                  <p className="text-[13px] leading-[1.75] text-gray-500">
-                    {test.desc}
-                  </p>
+                  <div className="flex-1">
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <h3 className="font-display text-[13px] font-bold uppercase tracking-wide text-gray-900">
+                        {test.title}
+                      </h3>
+                      <span className="font-mono text-[11px] font-bold text-gray-400 tracking-wider flex-shrink-0">
+                        {test.standard}
+                      </span>
+                    </div>
+                    <p className="text-[12px] leading-[1.7] text-gray-500">
+                      {test.desc}
+                    </p>
+                  </div>
                 </div>
               );
             })}
@@ -579,29 +583,29 @@ export default function QualityAndSafetyPage() {
           }}
         />
 
-        <div className="relative z-10 max-w-[1000px] mx-auto text-center">
+        <div className="relative z-10 max-w-[1200px] mx-auto text-center">
           <span data-text-reveal className="font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase block mb-3 font-bold">
             Our Core Promise
           </span>
           <h2 data-text-reveal className="font-display text-4xl md:text-5xl font-bold uppercase tracking-wide mb-6">
             Our Commitment
           </h2>
-          <p data-text-reveal className="text-white/80 text-[14px] md:text-[15px] leading-[1.8] max-w-[680px] mx-auto mb-14">
+          <p data-text-reveal className="text-white text-[14px] md:text-[15px] leading-[1.8] max-w-[680px] mx-auto mb-16">
             Quality and safety are integrated into every stage of planning, procurement, execution, inspection, testing, and project handover.
           </p>
 
-          <div data-stagger-reveal className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-[800px] mx-auto">
+          <div data-stagger-reveal className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-7">
             {commitmentItems.map((item) => {
               const Icon = item.icon;
               return (
                 <div
                   key={item.title}
-                  className="flex flex-col items-center justify-center p-6 bg-white/8 border border-white/15 hover:bg-white/15 transition-colors duration-200"
+                  className="flex flex-col items-center justify-center"
                 >
-                  <div className="inline-flex items-center justify-center w-12 h-12 mb-4 text-white/90">
-                    <Icon className="w-6 h-6" strokeWidth={1.5} />
+                  <div className="inline-flex items-center justify-center w-16 h-16 mb-3 text-white">
+                    <Icon className="w-10 h-10" strokeWidth={1.5} />
                   </div>
-                  <span className="text-[11px] font-bold tracking-wider uppercase text-white/90 text-center">
+                  <span className="text-[11px] font-bold tracking-wider uppercase text-white text-center leading-tight">
                     {item.title}
                   </span>
                 </div>
@@ -614,32 +618,34 @@ export default function QualityAndSafetyPage() {
 
       {/* ── 10. CTA SECTION ── */}
       <section className="py-24 px-6 md:px-12 lg:px-16 bg-white border-t border-gray-100">
-        <div className="max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div className="max-w-[1320px] mx-auto flex flex-col lg:flex-row gap-12 items-center justify-between">
           {/* Left */}
-          <div>
-            <div data-text-reveal className="inline-flex items-center justify-center w-14 h-14 bg-white border border-gray-200 mb-6 text-[#8A3841] shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
-              <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />
+          <div className="flex items-start gap-6 flex-1">
+            <div data-text-reveal className="flex-shrink-0 inline-flex items-center justify-center w-16 h-16 border-2 border-[#8A3841] text-[#8A3841]">
+              <ShieldCheck className="w-7 h-7" strokeWidth={1.5} />
             </div>
-            <h2 data-text-reveal className="font-display text-3xl md:text-4xl font-bold uppercase text-gray-900 mb-4 tracking-wide">
-              Need More Information?
-            </h2>
-            <p data-text-reveal className="text-gray-500 text-[14px] leading-[1.75] max-w-[460px]">
-              Contact our team to learn more about our quality management and safety practices, or download our company profile.
-            </p>
+            <div>
+              <h2 data-text-reveal className="font-display text-2xl md:text-3xl font-bold uppercase text-gray-900 mb-3 tracking-wide">
+                Need More Information?
+              </h2>
+              <p data-text-reveal className="text-gray-500 text-[13px] leading-[1.75] max-w-[440px]">
+                Contact our team to learn more about our quality management and safety practices, or download our company profile.
+              </p>
+            </div>
           </div>
 
           {/* Right: Actions */}
-          <div className="flex flex-col sm:flex-row flex-wrap gap-4 lg:justify-end">
+          <div className="flex flex-col sm:flex-row gap-4 lg:flex-shrink-0">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2.5 bg-[#8A3841] text-white font-mono text-[11px] font-bold tracking-widest uppercase px-7 py-4 hover:bg-[#6D2B32] transition-colors duration-200"
+              className="inline-flex items-center justify-center gap-2.5 bg-[#8A3841] text-white font-mono text-[11px] font-bold tracking-widest uppercase px-8 py-4 hover:bg-[#6D2B32] transition-colors duration-200"
             >
               Contact Us <ArrowRight className="w-4 h-4" />
             </Link>
             <a
               href="/dockside-business-profile.pdf"
               download
-              className="inline-flex items-center gap-2.5 bg-white text-gray-800 font-mono text-[11px] font-bold tracking-widest uppercase px-7 py-4 hover:bg-gray-50 transition-colors duration-200 shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
+              className="inline-flex items-center justify-center gap-2.5 bg-white text-[#8A3841] font-mono text-[11px] font-bold tracking-widest uppercase px-8 py-4 border-2 border-[#8A3841] hover:bg-[#8A3841]/5 transition-colors duration-200"
             >
               Download Profile <Download className="w-4 h-4" />
             </a>
