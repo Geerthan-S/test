@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Gauge, CheckCircle2, PhoneCall, Truck } from "lucide-react";
