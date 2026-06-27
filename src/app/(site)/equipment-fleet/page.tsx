@@ -1,9 +1,8 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Gauge, CheckCircle2, PhoneCall, Truck } from "lucide-react";
-import { getEquipment, type EquipmentItem } from "@/lib/repositories";
+import { ArrowRight, PhoneCall, Truck } from "lucide-react";
+import { getEquipment } from "@/lib/repositories";
+import { EquipmentGridClient } from "@/components/equipment/EquipmentGridClient";
 
 export const dynamic = "force-dynamic";
 export const metadata = {
@@ -11,41 +10,6 @@ export const metadata = {
   description:
     "Explore Dockside Constructions' owned heavy equipment fleet — tipper trucks, excavators, motor graders, vibro rollers, JCB backhoe loaders, and water tankers deployed across all active project sites.",
 };
-
-/* ─── Static fallback maps (used when CMS fields are empty) ────────────────── */
-
-const fleetBadgeMap: Record<string, string> = {
-  "tipper-trucks": "50+ Units",
-  "excavators": "15+ Units",
-  "motor-graders": "10+ Units",
-  "vibro-rollers": "8+ Units",
-  "jcb-backhoe-loaders": "12+ Units",
-  "water-tankers": "6+ Units",
-};
-
-const fleetDescMap: Record<string, string> = {
-  "tipper-trucks":
-    "High-capacity haulage fleet for earthwork, material transportation and site logistics.",
-  "excavators":
-    "Versatile excavation equipment for digging, loading, grading and site preparation.",
-  "motor-graders":
-    "Precision grading machines ensuring superior road profiles and surface finishing.",
-  "vibro-rollers":
-    "Compaction equipment delivering optimal soil density and pavement performance.",
-  "jcb-backhoe-loaders":
-    "Multi-purpose machines ideal for excavation, loading, utility works and site support.",
-  "water-tankers":
-    "Supporting dust suppression, soil conditioning and construction site water management.",
-};
-
-const fleetCategories = [
-  { label: "Tipper Trucks", meta: "50+" },
-  { label: "Excavators", meta: "15+" },
-  { label: "Motor Graders", meta: "10+" },
-  { label: "Vibro Rollers", meta: "8+" },
-  { label: "JCBs", meta: "12+" },
-  { label: "Water Tankers", meta: "6+" },
-];
 
 function getBadgeLabel(item: EquipmentItem): string {
   return fleetBadgeMap[item.slug] ?? `${item.quantity}+ Units`;
@@ -314,24 +278,14 @@ export default async function EquipmentFleetPage() {
       </section>
 
       {/* ══ EQUIPMENT GRID ══════════════════════════════════════════════════ */}
-      {/*
-        pt-16 gives 64px top padding. Adding 26px for strip overhang = ~90px total
-        before cards begin — enough clearance for the floating strip.
-      */}
       <section className="pt-16 pb-16 px-4 md:px-8 bg-white">
         <div className="max-w-[1200px] mx-auto">
           {equipment.length > 0 ? (
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-              variants={containerVariants}
-            >
-              {equipment.map((item) => (
-                <EquipmentCard key={item.id} item={item} />
-              ))}
-            </motion.div>
+            <EquipmentGridClient
+              equipment={equipment}
+              fleetBadgeMap={fleetBadgeMap}
+              fleetDescMap={fleetDescMap}
+            />
           ) : (
             <div className="text-center py-24 text-gray-400">
               <Truck className="w-12 h-12 mx-auto mb-4 opacity-20" />
