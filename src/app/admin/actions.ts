@@ -8,6 +8,7 @@ import { requireAdmin, requireManager } from "@/lib/admin";
 import { canUseDatabase, getPrisma } from "@/lib/prisma";
 import { defaultSitePages, getDefaultSitePage, getSitePageRoute } from "@/lib/site-content";
 import { slugify } from "@/lib/slug";
+import { editableProjectCategories, normalizeProjectCategory } from "@/lib/project-categories";
 
 const listFromField = (value: FormDataEntryValue | null) =>
   String(value ?? "")
@@ -33,7 +34,7 @@ const fieldLabels: Record<string, string> = {
   title: "Title",
   slug: "Slug",
   clientName: "Client name",
-  clientType: "Client type",
+  clientType: "Project category",
   clientLogo: "Client logo",
   featuredImage: "Featured image",
   gallery: "Gallery",
@@ -86,7 +87,7 @@ const projectSchema = z.object({
   title: z.string().trim().min(3, "Enter at least 3 characters"),
   slug: z.string().trim().min(3, "Enter at least 3 characters"),
   clientName: z.string().trim().min(2, "Enter at least 2 characters"),
-  clientType: z.string().trim().min(2, "Choose a client type"),
+  clientType: z.enum(editableProjectCategories, { message: "Choose Government or Private Sector" }),
   clientLogo: optionalAssetPathSchema,
   featuredImage: assetPathSchema,
   gallery: z.array(assetPathSchema).min(1, "Add at least one image"),
@@ -117,7 +118,7 @@ function projectDataFromForm(formData: FormData, failurePath: string) {
     title,
     slug: String(formData.get("slug") || slugify(title)),
     clientName: String(formData.get("clientName") ?? ""),
-    clientType: String(formData.get("clientType") ?? ""),
+    clientType: normalizeProjectCategory(String(formData.get("clientType") ?? "")),
     clientLogo: String(formData.get("clientLogo") ?? "") || undefined,
     featuredImage: String(formData.get("featuredImage") ?? ""),
     gallery: listFromField(formData.get("gallery")),
@@ -461,6 +462,7 @@ const equipmentSchema = z.object({
   imageUrl: optionalAssetPathSchema,
   quantity: z.coerce.number().int().min(1, "Quantity must be at least 1"),
   capacity: z.string().trim().optional(),
+  description: z.string().trim().optional(),
   manufacturer: z.string().trim().optional(),
   year: z.coerce.number().int().min(1900).max(new Date().getFullYear() + 1).optional().or(z.literal(0)).transform((v) => (v === 0 ? undefined : v)),
   status: z.string().trim().min(2, "Enter a status"),
@@ -476,6 +478,7 @@ function equipmentDataFromForm(formData: FormData, failurePath: string) {
     imageUrl: String(formData.get("imageUrl") ?? "") || undefined,
     quantity: String(formData.get("quantity") ?? "1"),
     capacity: String(formData.get("capacity") ?? "") || undefined,
+    description: String(formData.get("description") ?? "") || undefined,
     manufacturer: String(formData.get("manufacturer") ?? "") || undefined,
     year: Number(formData.get("year") ?? 0) || 0,
     status: String(formData.get("status") ?? "Active"),
@@ -498,6 +501,7 @@ export async function createEquipment(formData: FormData) {
     throw error;
   }
   revalidatePath("/");
+  revalidatePath("/equipment-fleet");
   redirect("/admin/equipment?saved=1");
 }
 
@@ -516,6 +520,7 @@ export async function updateEquipment(id: string, formData: FormData) {
     throw error;
   }
   revalidatePath("/");
+  revalidatePath("/equipment-fleet");
   revalidatePath("/admin/equipment");
   redirect("/admin/equipment?saved=1");
 }
@@ -526,6 +531,7 @@ export async function deleteEquipment(id: string) {
 
   await getPrisma().equipment.delete({ where: { id } });
   revalidatePath("/");
+  revalidatePath("/equipment-fleet");
   revalidatePath("/admin/equipment");
 }
 

@@ -131,7 +131,7 @@ export default async function CareersPage() {
                 }}
               />
               <span style={{
-                fontFamily: "var(--font-dm-mono, monospace)",
+                fontFamily: "var(--font-body)",
                 fontSize: "9px",
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
@@ -159,7 +159,7 @@ export default async function CareersPage() {
                 }}
               />
               <span style={{
-                fontFamily: "var(--font-dm-mono, monospace)",
+                fontFamily: "var(--font-body)",
                 fontSize: "9px",
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
@@ -188,7 +188,7 @@ export default async function CareersPage() {
                 }}
               />
               <span style={{
-                fontFamily: "var(--font-dm-mono, monospace)",
+                fontFamily: "var(--font-body)",
                 fontSize: "9px",
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
@@ -216,7 +216,7 @@ export default async function CareersPage() {
                 }}
               />
               <span style={{
-                fontFamily: "var(--font-dm-mono, monospace)",
+                fontFamily: "var(--font-body)",
                 fontSize: "9px",
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",

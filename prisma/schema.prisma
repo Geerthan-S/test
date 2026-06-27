@@ -192,6 +192,7 @@ model Equipment {
   imageUrl     String?
   quantity     Int      @default(1)
   capacity     String?
+  description  String?
   manufacturer String?
   year         Int?
   status       String   @default("Active")

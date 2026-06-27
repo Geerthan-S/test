@@ -4,31 +4,24 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, CalendarClock, IndianRupee, MapPin, Ruler, BadgeCheck } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import type { ProjectView } from "@/lib/content";
+import { getProjectCategory, projectCategoryFilters, type ProjectCategoryFilter } from "@/lib/project-categories";
 
-const filters = ["All Projects", "Industrial", "Commercial", "Infrastructure", "Logistics", "Government", "Institutional"];
+const filters = projectCategoryFilters;
 
-function getProjectArea(project: ProjectView) {
-  const projectAreaBySlug: Record<string, string> = {
-    "whirlpool-industrial-works-program": "250,000 Sq.ft",
-    "lodha-industrial-park-chennai": "500,000 Sq.ft",
-    "adani-logistics-civil-structural-works": "300,000 Sq.ft",
-    "chennai-one-it-sez-land-development": "200,000 Sq.ft",
-    "state-highway-project": "120 Km Stretch",
-    "manufacturing-plant": "150,000 Sq.ft",
-    "government-college": "75,000 Sq.ft",
-    "water-supply-project": "Utility Network",
-  };
-  return projectAreaBySlug[project.slug] ?? project.scopeOfWork;
-}
-
-export function ProjectsFilterGrid({ projects }: { projects: ProjectView[] }) {
-  const [activeFilter, setActiveFilter] = useState("All Projects");
+export function ProjectsFilterGrid({
+  projects,
+  initialFilter = "All",
+}: {
+  projects: ProjectView[];
+  initialFilter?: ProjectCategoryFilter;
+}) {
+  const [activeFilter, setActiveFilter] = useState<ProjectCategoryFilter>(initialFilter);
 
   const filteredProjects = projects.filter((project) => {
-    if (activeFilter === "All Projects") return true;
-    return project.industry?.toLowerCase() === activeFilter.toLowerCase();
+    if (activeFilter === "All") return true;
+    return getProjectCategory(project) === activeFilter;
   });
 
   return (

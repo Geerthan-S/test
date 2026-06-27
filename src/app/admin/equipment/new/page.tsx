@@ -2,7 +2,7 @@ import { createEquipment } from "@/app/admin/actions";
 import { Button } from "@/components/ui/button";
 import { requireAdmin } from "@/lib/admin";
 
-export const metadata = { title: "Add Equipment" };
+export const metadata = { title: "Add Equipment | Admin" };
 
 export default async function NewEquipmentPage({
   searchParams,
@@ -16,7 +16,9 @@ export default async function NewEquipmentPage({
     <div>
       <div className="admin-page-title">
         <h1>Add Equipment</h1>
-        <p className="mt-2">Add a new machine to the Equipment Fleet section.</p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Add a new machine to the public Equipment Fleet page.
+        </p>
       </div>
 
       {params.error && (
@@ -35,6 +37,7 @@ export default async function NewEquipmentPage({
   );
 }
 
+/* ─── Shared form fields (used by both New and Edit pages) ─────────────────── */
 export function EquipmentFormFields({
   defaults,
 }: {
@@ -49,10 +52,13 @@ export function EquipmentFormFields({
     status: string;
     sortOrder: number;
     published: boolean;
+    description?: string | null;
   }>;
 }) {
   return (
     <div className="admin-form__grid">
+
+      {/* Name */}
       <div className="admin-form__field admin-form__field--full">
         <label htmlFor="eq-name">Equipment Name *</label>
         <input
@@ -65,6 +71,7 @@ export function EquipmentFormFields({
         />
       </div>
 
+      {/* Slug */}
       <div className="admin-form__field">
         <label htmlFor="eq-slug">Slug *</label>
         <input
@@ -75,17 +82,21 @@ export function EquipmentFormFields({
           defaultValue={defaults?.slug ?? ""}
           placeholder="e.g. hydraulic-excavator"
         />
+        <small>Auto-generated from name if left blank</small>
       </div>
 
+      {/* Status */}
       <div className="admin-form__field">
         <label htmlFor="eq-status">Status</label>
         <select id="eq-status" name="status" defaultValue={defaults?.status ?? "Active"}>
           <option value="Active">Active</option>
+          <option value="Active Fleet">Active Fleet</option>
           <option value="Maintenance">Under Maintenance</option>
           <option value="Inactive">Inactive</option>
         </select>
       </div>
 
+      {/* Image URL */}
       <div className="admin-form__field admin-form__field--full">
         <label htmlFor="eq-image">Image URL</label>
         <input
@@ -95,8 +106,10 @@ export function EquipmentFormFields({
           defaultValue={defaults?.imageUrl ?? ""}
           placeholder="https://... or /path/to/image.jpg"
         />
+        <small>Use Files Manager to upload images, then paste the path here</small>
       </div>
 
+      {/* Quantity */}
       <div className="admin-form__field">
         <label htmlFor="eq-qty">Quantity *</label>
         <input
@@ -107,8 +120,10 @@ export function EquipmentFormFields({
           required
           defaultValue={defaults?.quantity ?? 1}
         />
+        <small>Shown as &ldquo;N+ Units&rdquo; on the fleet page</small>
       </div>
 
+      {/* Capacity */}
       <div className="admin-form__field">
         <label htmlFor="eq-capacity">Capacity / Rating</label>
         <input
@@ -116,10 +131,24 @@ export function EquipmentFormFields({
           name="capacity"
           type="text"
           defaultValue={defaults?.capacity ?? ""}
-          placeholder="e.g. 20T – 30T"
+          placeholder="e.g. 20T – 30T or 140 HP"
         />
       </div>
 
+      {/* Description */}
+      <div className="admin-form__field admin-form__field--full">
+        <label htmlFor="eq-description">Description</label>
+        <textarea
+          id="eq-description"
+          name="description"
+          rows={4}
+          defaultValue={defaults?.description ?? ""}
+          placeholder="Brief public-facing description for this equipment category"
+        />
+        <small>Shown on the public Equipment Fleet card. Leave blank to use the default fallback copy.</small>
+      </div>
+
+      {/* Manufacturer */}
       <div className="admin-form__field">
         <label htmlFor="eq-manufacturer">Manufacturer</label>
         <input
@@ -127,10 +156,11 @@ export function EquipmentFormFields({
           name="manufacturer"
           type="text"
           defaultValue={defaults?.manufacturer ?? ""}
-          placeholder="e.g. CAT / JCB"
+          placeholder="e.g. CAT / JCB / Tata"
         />
       </div>
 
+      {/* Year */}
       <div className="admin-form__field">
         <label htmlFor="eq-year">Year</label>
         <input
@@ -144,6 +174,7 @@ export function EquipmentFormFields({
         />
       </div>
 
+      {/* Sort order */}
       <div className="admin-form__field">
         <label htmlFor="eq-sort">Sort Order</label>
         <input
@@ -153,9 +184,10 @@ export function EquipmentFormFields({
           min="0"
           defaultValue={defaults?.sortOrder ?? 0}
         />
-        <small>Lower number = displayed first</small>
+        <small>Lower number = displayed first on the fleet page</small>
       </div>
 
+      {/* Published toggle */}
       <div className="admin-form__field">
         <label className="admin-checkbox">
           <input
@@ -166,6 +198,7 @@ export function EquipmentFormFields({
           Published (visible on website)
         </label>
       </div>
+
     </div>
   );
 }

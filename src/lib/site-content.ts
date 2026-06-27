@@ -97,7 +97,7 @@ const defaultTopLevelPages: EditableSitePage[] = [
       {
         id: "company-introduction",
         label: "About Dockside",
-        heading: "ENGINEERING EXCELLENCE. EXECUTION CERTAINTY.",
+        heading: "PRECISION IN ENGINEERING. CONFIDENCE IN DELIVERY.",
         body:
           "Dockside Constructions helps owners move from scope to handover with disciplined planning, documented systems and accountable site execution.",
         layout: "split",

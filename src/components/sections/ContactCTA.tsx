@@ -1,47 +1,64 @@
 import Link from "next/link";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function ContactCTA() {
   return (
-    <section id="contact" className="contact-cta-section" aria-label="Contact Dockside Constructions">
-      <div className="contact-cta-section__inner">
-        <div className="contact-cta-section__content">
-          <span className="contact-cta-section__eyebrow">Let&apos;s Build Together</span>
-          <h2>
-            Looking for a Reliable<br />
-            Infrastructure Partner?
-          </h2>
-          <p>
-            From industrial facilities to highway infrastructure — Dockside brings disciplined execution,
-            ISO-certified systems and transparent delivery to every project.
-          </p>
-          <div className="contact-cta-section__actions">
-            <Link href="/contact" className="cta-btn cta-btn--primary">
-              Get In Touch <ArrowRight className="size-4" aria-hidden="true" />
+    <section id="contact" className="relative bg-gradient-to-b from-[#F9F6F0] to-[#FAF8F7] py-6 md:py-10 overflow-hidden" aria-label="Contact Dockside Constructions">
+
+
+
+      <div className="relative z-10 max-w-[1140px] mx-auto px-4 md:px-8 lg:px-12">
+
+        {/* The Card */}
+        <div className="relative bg-[#FCFBFA] border border-[#EAE4DD] p-8 md:p-14 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 overflow-hidden shadow-[0_20px_60px_rgba(138,56,65,0.06)]">
+
+          {/* Decorative Geometric Background Graphic (Left) */}
+          <div className="absolute left-[-40px] top-[-40px] opacity-[0.12] pointer-events-none transform -rotate-12 hidden md:block">
+            <svg width="300" height="300" viewBox="0 0 100 100" fill="none" stroke="#8A3841" strokeWidth="2.5" strokeLinecap="square">
+              <path d="M10 -20 L60 50 L10 120" />
+              <path d="M30 -20 L80 50 L30 120" />
+              <path d="M50 -20 L100 50 L50 120" />
+              <path d="M70 -20 L120 50 L70 120" />
+              <path d="M-10 -20 L40 50 L-10 120" />
+              <line x1="0" y1="50" x2="100" y2="50" strokeWidth="1" />
+              <line x1="50" y1="0" x2="50" y2="100" strokeWidth="1" />
+            </svg>
+          </div>
+
+          {/* Text Content */}
+          <div className="relative z-10 max-w-2xl text-left">
+            <div className="mb-4">
+              <span className="font-mono text-[10px] md:text-[11px] font-bold tracking-[0.15em] text-[#8A3841] uppercase">
+                Start Your Project
+              </span>
+            </div>
+
+            <h2 className="text-[#8A3841] font-display text-[40px] md:text-[54px] lg:text-[62px] leading-[0.95] font-bold mb-5 uppercase tracking-wide">
+              Ready to Build With<br />
+              Confidence?
+            </h2>
+
+            <p className="text-[rgba(26,20,22,0.78)] text-[14px] md:text-[15px] leading-[1.65] max-w-[480px]">
+              Partner with Dockside Constructions for engineering-led execution, disciplined safety standards, and reliable project delivery.
+            </p>
+          </div>
+
+          {/* Buttons */}
+          <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 shrink-0 mt-6 lg:mt-0">
+            <Link
+              href="/contact"
+              className="flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 bg-[#8A3841] hover:bg-[#6D2B32] !text-white font-bold text-[11px] tracking-widest uppercase transition-all duration-300 rounded-[4px] shadow-[0_12px_24px_rgba(138,56,65,0.25)] hover:shadow-[0_16px_32px_rgba(138,56,65,0.35)] hover:-translate-y-0.5"
+            >
+              Contact Us <ArrowRight className="w-[14px] h-[14px] !text-white" strokeWidth={2.5} />
             </Link>
-            <a href="tel:+918825922737" className="cta-btn cta-btn--outline">
-              <Phone className="size-4" aria-hidden="true" />
-              +91 88259 22737
-            </a>
+            <Link
+              href="/projects"
+              className="flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 border border-[#E5DFD6] bg-[#FCFBFA] hover:bg-white text-[#8A3841] font-bold text-[11px] tracking-widest uppercase transition-all duration-300 rounded-[4px] shadow-sm hover:shadow-md hover:-translate-y-0.5"
+            >
+              View Projects <ArrowRight className="w-[14px] h-[14px]" strokeWidth={2.5} />
+            </Link>
           </div>
-        </div>
-        <div className="contact-cta-section__stat-strip" aria-hidden="true">
-          <div className="cta-stat">
-            <strong>₹250Cr+</strong>
-            <span>Projects Delivered</span>
-          </div>
-          <div className="cta-stat">
-            <strong>10+</strong>
-            <span>Years Experience</span>
-          </div>
-          <div className="cta-stat">
-            <strong>3× ISO</strong>
-            <span>Certified</span>
-          </div>
-          <div className="cta-stat">
-            <strong>100%</strong>
-            <span>Owned Fleet</span>
-          </div>
+
         </div>
       </div>
     </section>

@@ -49,7 +49,7 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    const desktopQuery = window.matchMedia("(min-width: 981px)");
+    const desktopQuery = window.matchMedia("(min-width: 1201px)");
     const closeOnDesktop = () => {
       if (desktopQuery.matches) setOpen(false);
     };
@@ -73,6 +73,30 @@ export function SiteHeader() {
 
   const isActive = (href: string) =>
     href === "/" ? pathname === href : !href.startsWith("/#") && (pathname === href || pathname.startsWith(`${href}/`));
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // If we're on the home page and clicking a hash link
+    if (pathname === "/" && href.startsWith("/#")) {
+      const id = href.substring(2);
+      const element = document.getElementById(id);
+      if (element) {
+        e.preventDefault();
+        // Get navbar height and add extra padding so section is not hidden behind it
+        const navbar = document.querySelector(".industrial-nav") as HTMLElement;
+        const navbarHeight = navbar ? navbar.offsetHeight : 90;
+        const offsetPadding = 24; // extra breathing room below navbar
+        const elementTop = element.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: elementTop - navbarHeight - offsetPadding,
+          behavior: "smooth",
+        });
+        setOpen(false);
+        window.history.pushState(null, "", href);
+        return;
+      }
+    }
+    setOpen(false);
+  };
 
   return (
     <header className={`industrial-nav ${scrolled ? "is-scrolled" : ""}`}>
@@ -98,7 +122,12 @@ export function SiteHeader() {
             const active = isActive(href);
 
             return (
-              <Link key={href} href={href} className={active ? "is-active" : ""}>
+              <Link
+                key={href}
+                href={href}
+                className={active ? "is-active" : ""}
+                onClick={(e) => handleScroll(e, href)}
+              >
                 {label}
               </Link>
             );
@@ -133,7 +162,7 @@ export function SiteHeader() {
                 <Link
                   key={href}
                   href={href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => handleScroll(e, href)}
                   className={active ? "is-active" : ""}
                   style={{ transitionDelay: `${(index + 1) * 60}ms` }}
                 >

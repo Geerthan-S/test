@@ -1,5 +1,6 @@
 import { Prisma, ProjectStatus } from "@prisma/client";
 import { z } from "zod";
+import { editableProjectCategories, normalizeProjectCategory } from "@/lib/project-categories";
 import { slugify } from "@/lib/slug";
 
 const assetPathSchema = z
@@ -33,7 +34,7 @@ export const projectJsonSchema = z.object({
   title: z.string().trim().min(3, "Enter at least 3 characters"),
   slug: z.string().trim().min(3, "Enter at least 3 characters"),
   clientName: z.string().trim().min(2, "Enter at least 2 characters"),
-  clientType: z.string().trim().optional(),
+  clientType: z.enum(editableProjectCategories).optional(),
   clientLogo: optionalAssetPathSchema,
   featuredImage: assetPathSchema,
   gallery: stringListSchema.pipe(z.array(assetPathSchema).min(1, "Add at least one image")),
@@ -72,9 +73,17 @@ export const clientJsonSchema = z.object({
 export const clientPatchJsonSchema = clientJsonSchema.partial();
 
 export function prepareProjectJsonInput(body: Record<string, unknown>, createSlugFromTitle = true) {
-  return {
+  const prepared: Record<string, unknown> = {
     ...body,
     slug: body.slug || (createSlugFromTitle && typeof body.title === "string" ? slugify(body.title) : body.slug),
+  };
+
+  if (createSlugFromTitle || "clientType" in body) {
+    prepared.clientType = normalizeProjectCategory(String(body.clientType ?? ""));
+  }
+
+  return {
+    ...prepared,
   };
 }
 

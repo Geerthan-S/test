@@ -1,26 +1,22 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   BadgeCheck,
   Building2,
-  CalendarClock,
-  IndianRupee,
   Landmark,
-  MapPin,
-  Ruler,
   ShieldCheck,
   Timer,
   TrendingUp,
   Wrench,
 } from "lucide-react";
-import { seedClients, seedProjects, type ProjectView } from "@/lib/content";
-import { getClients, getProjects, getSitePage } from "@/lib/repositories";
+import { seedClients, seedProjects } from "@/lib/content";
+import { getClients, getProjects } from "@/lib/repositories";
 import { ClientLogoMarquee } from "@/components/client-logo-marquee";
 import { CountUp } from "@/components/ui/CountUp";
 import { ProjectsFilterGrid } from "@/components/projects-filter-grid";
 import { FloatingCTA } from "@/components/ui/floating-cta";
+import { projectCategoryFromParam } from "@/lib/project-categories";
 
 export const dynamic = "force-dynamic";
 
@@ -52,11 +48,16 @@ const proofItems: ProofItem[] = [
   { title: "Safety First", text: "Safety integrated across all sites.", icon: ShieldCheck },
 ];
 
-export default async function ProjectsPage() {
-  const [projects, clients, page] = await Promise.all([
+export default async function ProjectsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ category?: string | string[] }>;
+}) {
+  const params = await searchParams;
+  const initialFilter = projectCategoryFromParam(params?.category);
+  const [projects, clients] = await Promise.all([
     getProjects().catch(() => seedProjects),
     getClients().catch(() => seedClients),
-    getSitePage("projects").catch(() => null),
   ]);
 
   return (
@@ -101,7 +102,7 @@ export default async function ProjectsPage() {
       </section>
 
       <section className="shot-section shot-projects-main premium-projects" id="featured-projects">
-        <ProjectsFilterGrid projects={projects} />
+        <ProjectsFilterGrid projects={projects} initialFilter={initialFilter} />
 
         <section className="shot-delivery-panel">
           <div>

@@ -1,30 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowRight,
   ArrowUpRight,
-  Building2,
-  HardHat,
-  TrendingUp,
-  Wrench,
 } from "lucide-react";
 import { RevealText } from "@/components/motion/reveal";
 import { homeReferenceImages, type ProjectView } from "@/lib/content";
+import { projectCategoryFilters, projectCategoryHref } from "@/lib/project-categories";
 
-const projectMetrics = [
-  { value: "65+", label: "Works Delivered", icon: Building2 },
-  { value: "INR 60+ Cr", label: "Featured Value", icon: TrendingUp },
-  { value: "8", label: "Core Services", icon: Wrench },
-  { value: "3", label: "ISO Certifications", icon: HardHat },
-];
 
-const categoryPills = [
-  { label: "All", href: "/projects" },
-  { label: "Industrial", href: "/projects?category=industrial" },
-  { label: "Commercial", href: "/projects?category=commercial" },
-  { label: "Infrastructure", href: "/projects?category=infrastructure" },
-  { label: "Government", href: "/projects?category=government" },
-];
+const categoryPills = projectCategoryFilters.map((label) => ({
+  label,
+  href: projectCategoryHref(label),
+}));
 
 const homeFeaturedProjects = [
   {
@@ -105,18 +92,6 @@ export function Projects({ projects }: { projects: ProjectView[] }) {
             <h2>PROJECTS THAT DEFINE OUR CAPABILITY.</h2>
           </RevealText>
         </div>
-        <div className="premium-projects__metrics" aria-label="Project proof metrics">
-          {projectMetrics.map((metric) => {
-            const Icon = metric.icon;
-            return (
-              <article key={metric.label}>
-                <Icon aria-hidden="true" />
-                <strong>{metric.value}</strong>
-                <span>{metric.label}</span>
-              </article>
-            );
-          })}
-        </div>
       </div>
 
       <nav className="premium-projects__filters" aria-label="Featured project categories">
@@ -182,16 +157,6 @@ export function Projects({ projects }: { projects: ProjectView[] }) {
             </div>
           </Link>
         ))}
-      </div>
-
-      <div className="premium-projects__portfolio-cta">
-        <div>
-          <span>Explore our project portfolio</span>
-          <h3>65+ works across industrial, commercial and infrastructure sectors.</h3>
-        </div>
-        <Link href="/projects" className="studio-button studio-button--fill">
-          View All Projects <ArrowRight aria-hidden="true" />
-        </Link>
       </div>
     </section>
   );

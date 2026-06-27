@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
+import { ProjectDelivery } from "@/components/home/ProjectDelivery";
 import { Services } from "@/components/sections/Services";
 import { TrustSystems } from "@/components/sections/TrustSystems";
 import { TrustedByStrip } from "@/components/enterprise-proof";
@@ -20,7 +21,7 @@ export default async function HomePage() {
     section.id === "company-introduction"
       ? {
         ...section,
-        body: "Dockside Constructions is a leading infrastructure and civil construction company specialising in roads, industrial projects, railway works, and project management solutions.",
+        body: "Dockside Constructions is a professionally managed infrastructure and construction company specializing in earthworks, industrial infrastructure, logistics parks, roadworks and project management services. We combine engineering expertise, disciplined execution and transparent project controls to deliver successful outcomes.",
         media: homeReferenceImages.about,
         items: [
           { title: "Engineering-led planning" },
@@ -61,15 +62,17 @@ export default async function HomePage() {
         <Services />
       </div>
 
-      {/* 5 — Our Clients */}
+      {/* 5 — Featured Projects */}
       <div id="clients">
         <TrustedByStrip />
       </div>
 
-      {/* 6 — Featured Projects */}
       <Projects projects={projects} />
 
-      {/* 7 — Contact CTA */}
+      {/* 5.5 — Project Delivery Process */}
+      <ProjectDelivery />
+
+      {/* 6 — Contact CTA */}
       <ContactCTA />
     </>
   );

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import type { ProjectView } from "@/lib/content";
+import { editableProjectCategories, normalizeProjectCategory } from "@/lib/project-categories";
 
 export function ProjectForm({
   action,
@@ -21,11 +22,11 @@ export function ProjectForm({
         <Field label="SEO slug" name="slug" defaultValue={project?.slug} />
         <Field label="Client name" name="clientName" defaultValue={project?.clientName} required />
         <div className="grid gap-2">
-          <Label>Client type</Label>
-          <Select name="clientType" defaultValue={project?.clientType ?? "Government"}>
+          <Label>Project category</Label>
+          <Select name="clientType" defaultValue={normalizeProjectCategory(project?.clientType)}>
             <SelectTrigger><SelectValue /></SelectTrigger>
             <SelectContent>
-              {["Government", "Private", "NGO"].map((type) => (
+              {editableProjectCategories.map((type) => (
                 <SelectItem key={type} value={type}>{type}</SelectItem>
               ))}
             </SelectContent>

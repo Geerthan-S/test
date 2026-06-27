@@ -1,13 +1,13 @@
 "use client";
 
-import { Building2, Landmark, ShieldCheck, Workflow, Wrench } from "lucide-react";
+import { Building2, Landmark, Pickaxe, Users, Workflow } from "lucide-react";
 import { CountUp } from "@/components/ui/CountUp";
 
 const metrics = [
-  { icon: Building2, value: 65, suffix: "+", label: "Works Delivered" },
-  { icon: Wrench, value: 8, suffix: "", label: "Core Services" },
-  { icon: Landmark, value: 10, suffix: "", label: "Key References" },
-  { icon: ShieldCheck, value: 3, suffix: "", label: "ISO Certifications" },
+  { icon: Building2, value: 25, suffix: "+", label: "Projects Delivered" },
+  { icon: Landmark, value: 100, suffix: " CR+", label: "Project Exposure" },
+  { icon: Pickaxe, value: 500000, suffix: "+ M³", label: "Earthwork Executed" },
+  { icon: Users, value: 10, suffix: "+", label: "Major Clients" },
 ];
 
 export function TrustSystems() {

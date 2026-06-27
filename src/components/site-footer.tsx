@@ -131,7 +131,7 @@ export function SiteFooter() {
               style={{ width: "auto", height: "auto" }}
             />
           </span>
-          <span>Engineering Excellence &bull; Execution Certainty</span>
+          <span>Precision in Engineering. Confidence in Delivery.</span>
           <span>All Rights Reserved</span>
         </div>
       </div>

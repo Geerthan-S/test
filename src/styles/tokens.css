@@ -62,8 +62,9 @@
   /* ── FONT FAMILIES ───────────────────────────────── */
   /* Bridge: Next.js CSS variables → semantic design tokens */
   --font-display: var(--font-bebas-neue, "Bebas Neue", "Arial Black", sans-serif);
-  --font-mono:    var(--font-dm-mono, "DM Mono", "Fira Code", "Courier New", monospace);
   --font-body:    var(--font-inter, "Inter", "Helvetica Neue", Arial, sans-serif);
+  --font-ui:      var(--font-body);
+  --font-mono:    var(--font-body); /* Legacy alias: reference design uses proportional UI text. */
 
   /* ── SHADOWS ──────────────────────────────────────── */
   --shadow-glass:  0 12px 40px rgba(0, 0, 0, 0.08);

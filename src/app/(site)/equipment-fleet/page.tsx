@@ -1,124 +1,390 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Package, Truck, Zap } from "lucide-react";
+import { ArrowRight, Gauge, CheckCircle2, PhoneCall, Truck } from "lucide-react";
 import { getEquipment, type EquipmentItem } from "@/lib/repositories";
 
 export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Equipment Fleet | Dockside Constructions",
   description:
-    "Explore Dockside Constructions' owned heavy equipment fleet — excavators, graders, rollers, transit mixers and cranes deployed across all active project sites.",
+    "Explore Dockside Constructions' owned heavy equipment fleet — tipper trucks, excavators, motor graders, vibro rollers, JCB backhoe loaders, and water tankers deployed across all active project sites.",
 };
 
+/* ─── Static fallback maps (used when CMS fields are empty) ────────────────── */
+
+const fleetBadgeMap: Record<string, string> = {
+  "tipper-trucks": "50+ Units",
+  "excavators": "15+ Units",
+  "motor-graders": "10+ Units",
+  "vibro-rollers": "8+ Units",
+  "jcb-backhoe-loaders": "12+ Units",
+  "water-tankers": "6+ Units",
+};
+
+const fleetDescMap: Record<string, string> = {
+  "tipper-trucks":
+    "High-capacity haulage fleet for earthwork, material transportation and site logistics.",
+  "excavators":
+    "Versatile excavation equipment for digging, loading, grading and site preparation.",
+  "motor-graders":
+    "Precision grading machines ensuring superior road profiles and surface finishing.",
+  "vibro-rollers":
+    "Compaction equipment delivering optimal soil density and pavement performance.",
+  "jcb-backhoe-loaders":
+    "Multi-purpose machines ideal for excavation, loading, utility works and site support.",
+  "water-tankers":
+    "Supporting dust suppression, soil conditioning and construction site water management.",
+};
+
+const fleetCategories = [
+  { label: "Tipper Trucks", meta: "50+" },
+  { label: "Excavators", meta: "15+" },
+  { label: "Motor Graders", meta: "10+" },
+  { label: "Vibro Rollers", meta: "8+" },
+  { label: "JCBs", meta: "12+" },
+  { label: "Water Tankers", meta: "6+" },
+];
+
+function getBadgeLabel(item: EquipmentItem): string {
+  return fleetBadgeMap[item.slug] ?? `${item.quantity}+ Units`;
+}
+
+function getDescription(item: EquipmentItem): string {
+  return item.description?.trim() || fleetDescMap[item.slug] || "";
+}
+
+/* ─── Equipment Card ───────────────────────────────────────────────────────── */
+
 function EquipmentCard({ item }: { item: EquipmentItem }) {
+  const badge = getBadgeLabel(item);
+  const description = getDescription(item);
+
   return (
-    <article className="equipment-card">
-      <div className="equipment-card__image">
+    <article className="group flex flex-col bg-white border border-gray-200 hover:border-[#8A3841]/30 hover:shadow-[0_8px_32px_rgba(138,56,65,0.08)] transition-all duration-300 overflow-hidden">
+      {/* Image */}
+      <div className="relative aspect-[16/10] flex-shrink-0 overflow-hidden bg-gray-100">
         {item.imageUrl ? (
           <Image
             src={item.imageUrl}
             alt={item.name}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="equipment-card__placeholder">
-            <Truck aria-hidden="true" />
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
+            <Truck className="w-10 h-10 text-gray-200" aria-hidden="true" />
           </div>
         )}
-        <span className="equipment-card__qty">
-          <Package className="size-3" aria-hidden="true" />
-          {item.quantity} {item.quantity === 1 ? "Unit" : "Units"}
-        </span>
-        <span className={`equipment-card__status equipment-card__status--${item.status.toLowerCase()}`}>
-          {item.status}
+        {/* Red unit badge */}
+        <span
+          className="absolute top-0 left-0 bg-[#8A3841] text-[10px] font-extrabold tracking-widest uppercase px-3 py-1.5"
+          style={{ color: "#ffffff" }}
+        >
+          {badge}
         </span>
       </div>
-      <div className="equipment-card__body">
-        <h3>{item.name}</h3>
-        <dl className="equipment-card__specs">
+
+      {/* Body */}
+      <div className="flex flex-col flex-1 p-5">
+        <h3 className="font-display text-[17px] font-extrabold uppercase tracking-wide text-gray-900 mb-4 leading-tight">
+          {item.name}
+        </h3>
+
+        {/* Spec rows */}
+        <div className="space-y-2.5 mb-4">
           {item.capacity && (
-            <div>
-              <dt>
-                <Zap className="size-3" aria-hidden="true" /> Capacity
-              </dt>
-              <dd>{item.capacity}</dd>
+            <div className="flex items-center gap-2">
+              <Gauge className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" aria-hidden="true" />
+              <span className="text-[10px] font-bold tracking-widest uppercase text-gray-400 flex-1">
+                Capacity
+              </span>
+              <span className="text-[11px] font-semibold text-gray-700">
+                {item.capacity}
+              </span>
             </div>
           )}
-          {item.manufacturer && (
-            <div>
-              <dt>Manufacturer</dt>
-              <dd>{item.manufacturer}</dd>
-            </div>
-          )}
-          {item.year && (
-            <div>
-              <dt>Year</dt>
-              <dd>{item.year}</dd>
-            </div>
-          )}
-        </dl>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" aria-hidden="true" />
+            <span className="text-[10px] font-bold tracking-widest uppercase text-gray-400 flex-1">
+              Status
+            </span>
+            <span className="text-[11px] font-bold text-[#16A34A]">
+              {item.status || "Active Fleet"}
+            </span>
+          </div>
+        </div>
+
+        {/* Description */}
+        {description && (
+          <p className="text-[12.5px] leading-[1.7] text-gray-500 pt-3.5 mt-auto border-t border-gray-100">
+            {description}
+          </p>
+        )}
       </div>
     </article>
   );
 }
 
+/* ─── Page ─────────────────────────────────────────────────────────────────── */
+
 export default async function EquipmentFleetPage() {
   const equipment = await getEquipment();
-  const totalUnits = equipment.reduce((sum, e) => sum + e.quantity, 0);
 
   return (
-    <div className="fleet-page">
-      {/* Page Hero */}
-      <section className="fleet-hero">
-        <div className="fleet-hero__inner">
-          <span className="fleet-hero__eyebrow">Our Fleet</span>
-          <h1>Heavy Equipment Fleet</h1>
-          <p>
-            Owned and maintained machinery deployed across all active project sites — ensuring
-            schedule certainty and equipment reliability on every assignment.
+    <div className="min-h-screen bg-white">
+
+      {/* ══ HERO ════════════════════════════════════════════════════════════ */}
+      {/*
+        The section has:
+        - enough top padding to clear the fixed site-header
+        - enough responsive bottom padding so the absolute-positioned strip
+          is fully visible before the next section begins
+      */}
+      <section
+        className="relative overflow-visible bg-white pb-20 md:pb-20"
+        style={{ paddingTop: "144px" }}
+      >
+        {/* ── Background image (full-bleed, behind content) */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <Image
+            src="/hero/fleet-hero-bg.png"
+            alt="Dockside heavy equipment fleet at work"
+            fill
+            priority
+            className="object-cover object-center"
+          />
+          {/* Horizontal fade keeps centre text readable while showing image at sides */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.78) 18%, rgba(255,255,255,0.78) 82%, rgba(255,255,255,0.10) 100%)",
+            }}
+          />
+          {/* Bottom fade to white so the content area merges cleanly */}
+          <div
+            className="absolute left-0 right-0 bottom-0 h-32"
+            style={{
+              background: "linear-gradient(to bottom, transparent, #ffffff)",
+            }}
+          />
+        </div>
+
+        {/* ── Hero content */}
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 md:px-8">
+
+          {/* Eyebrow */}
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <span className="w-8 h-px bg-[#8A3841]/50" />
+            <span className="font-display text-[11px] font-bold tracking-[0.28em] text-[#8A3841] uppercase">
+              Our Fleet
+            </span>
+            <span className="w-8 h-px bg-[#8A3841]/50" />
+          </div>
+
+          {/* Main heading */}
+          <h1
+            className="font-display text-center font-extrabold uppercase tracking-wide text-[#8A3841] mb-5 leading-none"
+            style={{ fontSize: "clamp(40px, 6vw, 74px)" }}
+          >
+            Heavy Equipment Fleet
+          </h1>
+
+          {/* Sub-copy */}
+          <p className="text-gray-600 text-center text-[14px] md:text-[15px] leading-[1.75] max-w-[580px] mx-auto mb-10">
+            A modern fleet of heavy equipment maintained for rapid mobilisation,
+            operational reliability, and seamless execution across infrastructure
+            and civil construction projects.
           </p>
-          <div className="fleet-hero__stats">
-            <div className="fleet-stat">
-              <strong>{totalUnits}+</strong>
-              <span>Machines Deployed</span>
+
+          {/* ── 3 stat columns */}
+          <div className="grid grid-cols-3 max-w-[620px] mx-auto items-start mb-14 relative">
+
+            {/* Col 1 – Tipper Trucks */}
+            <div className="flex flex-col items-center text-center px-3">
+              <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#8A3841] mb-2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 18H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2z" />
+                <path d="M16 10h4l2 3v3a2 2 0 0 1-2 2h-4v-8z" />
+                <circle cx="7.5" cy="18.5" r="2.5" />
+                <circle cx="16.5" cy="18.5" r="2.5" />
+              </svg>
+              <span className="font-display text-[38px] md:text-[50px] font-bold text-[#8A3841] leading-none">50+</span>
+              <span className="text-[9px] md:text-[10px] font-extrabold tracking-wider text-gray-800 uppercase mt-1.5">Tipper Trucks</span>
             </div>
-            <div className="fleet-stat">
-              <strong>100%</strong>
-              <span>Owned Fleet</span>
+
+            <div className="absolute left-[33.33%] top-3 bottom-3 w-px bg-gray-200" />
+
+            {/* Col 2 – Heavy Equipment */}
+            <div className="flex flex-col items-center text-center px-3">
+              <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#8A3841] mb-2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 18H2v-2h4v-3h4v3h12v2z" />
+                <path d="M6 13V5l5 2 3-3 5 5-7 4" />
+              </svg>
+              <span className="font-display text-[38px] md:text-[50px] font-bold text-[#8A3841] leading-none">20+</span>
+              <span className="text-[9px] md:text-[10px] font-extrabold tracking-wider text-gray-800 uppercase mt-1.5">Heavy Equipment</span>
             </div>
-            <div className="fleet-stat">
-              <strong>{equipment.length}</strong>
-              <span>Equipment Types</span>
+
+            <div className="absolute left-[66.66%] top-3 bottom-3 w-px bg-gray-200" />
+
+            {/* Col 3 – Deployment Ready */}
+            <div className="flex flex-col items-center text-center px-3">
+              <svg viewBox="0 0 24 24" className="w-8 h-8 text-[#8A3841] mb-2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="m9 11 2 2 4-4" />
+              </svg>
+              <span className="font-display text-[38px] md:text-[50px] font-bold text-[#8A3841] leading-none">100%</span>
+              <span className="text-[9px] md:text-[10px] font-extrabold tracking-wider text-gray-800 uppercase mt-1.5">Deployment Ready</span>
             </div>
+
           </div>
         </div>
-      </section>
 
-      {/* Equipment Grid */}
-      <section className="fleet-grid-section">
-        <div className="fleet-grid-section__inner">
-          <div className="equipment-grid">
-            {equipment.map((item) => (
-              <EquipmentCard key={item.id} item={item} />
+        {/* ── Floating category strip — sits at the very bottom, overlapping the gap */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 z-20 flex w-[86%] max-w-[1038px] items-center justify-center gap-3 border border-[#eadcda] bg-[#fffaf8] px-5 py-3 shadow-[0_8px_24px_rgba(88,54,54,0.06)]"
+          style={{ bottom: "-20px", borderRadius: "4px" }}
+        >
+          <span className="relative h-4 w-4 flex-shrink-0">
+            <Image
+              src="/brand/dockside-company-logo.png"
+              alt=""
+              fill
+              sizes="16px"
+              className="object-contain"
+            />
+          </span>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[10px] font-extrabold uppercase tracking-[0.08em] text-[#5f1f29]">
+            {fleetCategories.map((category, index) => (
+              <span key={category.label} className="inline-flex items-center gap-3">
+                <span className="whitespace-nowrap">
+                  {index === 0 ? `${category.meta} ` : ""}
+                  {category.label}
+                </span>
+                {index < fleetCategories.length - 1 ? (
+                  <span className="text-[#8A3841]/55" aria-hidden="true">
+                    •
+                  </span>
+                ) : null}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="fleet-cta">
-        <div className="fleet-cta__inner">
-          <h2>Need Equipment for Your Project?</h2>
-          <p>
-            Contact us to discuss mobilisation timelines, site requirements and fleet availability.
-          </p>
-          <Link href="/contact" className="cta-btn cta-btn--primary">
-            Contact Us <ArrowRight className="size-4" aria-hidden="true" />
-          </Link>
+      {/* ══ EQUIPMENT GRID ══════════════════════════════════════════════════ */}
+      {/*
+        pt-16 gives 64px top padding. Adding 26px for strip overhang = ~90px total
+        before cards begin — enough clearance for the floating strip.
+      */}
+      <section className="pt-16 pb-16 px-4 md:px-8 bg-white">
+        <div className="max-w-[1200px] mx-auto">
+          {equipment.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {equipment.map((item) => (
+                <EquipmentCard key={item.id} item={item} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-24 text-gray-400">
+              <Truck className="w-12 h-12 mx-auto mb-4 opacity-20" />
+              <p className="text-sm font-medium">No equipment items found.</p>
+              <p className="text-xs mt-1 text-gray-300">Add items from the admin panel.</p>
+            </div>
+          )}
         </div>
       </section>
+
+      {/* ══ CTA ═════════════════════════════════════════════════════════════ */}
+      <section className="fleet-cta-enhanced relative overflow-hidden bg-[#2B1116] px-4 py-16 md:px-8 md:py-20">
+        <style>{`
+          .fleet-cta-enhanced .fleet-cta-kicker {
+            color: rgba(255, 255, 255, 0.78) !important;
+          }
+          .fleet-cta-enhanced .fleet-cta-title {
+            color: #ffffff !important;
+          }
+          .fleet-cta-enhanced .fleet-cta-copy {
+            color: rgba(255, 255, 255, 0.72) !important;
+          }
+          .fleet-cta-enhanced .fleet-cta-chip {
+            color: rgba(255, 255, 255, 0.82) !important;
+          }
+          .fleet-cta-enhanced .fleet-cta-chip svg {
+            color: #ffffff !important;
+          }
+        `}</style>
+        <Image
+          src="/hero/fleet-hero-bg.png"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-20 mix-blend-luminosity"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(43,17,22,0.98),rgba(43,17,22,0.88),rgba(43,17,22,0.72))]" />
+
+        <div className="relative mx-auto grid max-w-[1180px] gap-8 md:grid-cols-[1fr_auto] md:items-center">
+          <div className="max-w-[650px]">
+            <div className="mb-5 inline-flex items-center gap-3 border border-white/15 bg-white/7 px-3 py-2">
+              <span className="grid h-9 w-9 place-items-center bg-white text-[#8A3841]">
+                <Truck className="h-5 w-5" strokeWidth={1.9} aria-hidden="true" />
+              </span>
+              <span className="fleet-cta-kicker text-[10px] font-extrabold uppercase tracking-[0.22em]">
+                Fleet Mobilisation Desk
+              </span>
+            </div>
+
+            <h2
+              className="fleet-cta-title font-display font-bold uppercase leading-none"
+              style={{ fontSize: "clamp(34px, 5vw, 58px)" }}
+            >
+              Need Fleet Support for Your Next Project?
+            </h2>
+
+            <p
+              className="fleet-cta-copy mt-5 max-w-[540px] text-[14px] leading-[1.8] md:text-[15px]"
+            >
+              Share your site requirements and mobilisation schedule. Our team
+              will align available tipper trucks, graders, rollers, JCBs and
+              tankers for faster deployment.
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-2.5">
+              {["Rapid mobilisation", "Owned equipment", "Site-ready operators"].map((item) => (
+                <span
+                  key={item}
+                  className="fleet-cta-chip inline-flex items-center gap-2 border border-white/14 bg-white/6 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em]"
+                >
+                  <CheckCircle2
+                    className="h-3.5 w-3.5"
+                    aria-hidden="true"
+                  />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex w-full flex-col gap-3 md:w-[300px]">
+            <Link
+              href="/contact"
+              className="inline-flex min-h-14 items-center justify-center gap-3 bg-white px-7 text-[11px] font-extrabold uppercase tracking-[0.16em] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#F8EFEA]"
+              style={{ borderRadius: "3px", color: "#8A3841" }}
+            >
+              Request Availability <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
+            </Link>
+            <Link
+              href="tel:+918925922737"
+              className="inline-flex min-h-14 items-center justify-center gap-3 border border-white/22 bg-white/8 px-7 text-[11px] font-extrabold uppercase tracking-[0.16em] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/14"
+              style={{ borderRadius: "3px", color: "#ffffff" }}
+            >
+              <PhoneCall className="h-4 w-4" strokeWidth={2.3} aria-hidden="true" />
+              Call Fleet Team
+            </Link>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

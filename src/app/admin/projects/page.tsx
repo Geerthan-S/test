@@ -4,9 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { deleteProject } from "@/app/admin/actions";
-import { canUseDatabase, getPrisma, runSafeQuery } from "@/lib/prisma";
-import { seedProjects, type ProjectView } from "@/lib/content";
+import { getPrisma, runSafeQuery } from "@/lib/prisma";
+import { seedProjects } from "@/lib/content";
 import { requireAdmin } from "@/lib/admin";
+import { normalizeProject } from "@/lib/repositories";
 
 export const metadata = { title: "Project CMS" };
 
@@ -17,10 +18,12 @@ export default async function AdminProjectsPage({
 }) {
   await requireAdmin();
   const params = await searchParams;
-  const projects = await runSafeQuery<ProjectView[]>(
-    () => getPrisma().project.findMany({ orderBy: { updatedAt: "desc" } }) as any,
-    seedProjects,
-  );
+  const projects = (
+    await runSafeQuery<Parameters<typeof normalizeProject>[0][]>(
+      () => getPrisma().project.findMany({ orderBy: { updatedAt: "desc" } }),
+      seedProjects,
+    )
+  ).map(normalizeProject);
 
   return (
     <div>
@@ -42,6 +45,7 @@ export default async function AdminProjectsPage({
             <TableRow>
               <TableHead>Project</TableHead>
               <TableHead>Client</TableHead>
+              <TableHead>Category</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Featured</TableHead>
               <TableHead className="text-right">Actions</TableHead>
@@ -52,6 +56,7 @@ export default async function AdminProjectsPage({
               <TableRow key={project.id}>
                 <TableCell className="font-medium">{project.title}</TableCell>
                 <TableCell>{project.clientName}</TableCell>
+                <TableCell><Badge variant="outline">{project.clientType}</Badge></TableCell>
                 <TableCell><Badge>{project.status.replace("_", " ")}</Badge></TableCell>
                 <TableCell>{project.featured ? "Yes" : "No"}</TableCell>
                 <TableCell className="flex justify-end gap-2">

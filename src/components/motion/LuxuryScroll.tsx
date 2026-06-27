@@ -79,5 +79,40 @@ export function LuxuryScroll() {
     };
   }, [pathname]);
 
+  useEffect(() => {
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest("a");
+      if (!anchor) return;
+
+      const href = anchor.getAttribute("href");
+      if (href && (href.startsWith("/#") || href.startsWith("#"))) {
+        const id = href.startsWith("/#") ? href.substring(2) : href.substring(1);
+        if (id) {
+          // If we are on home page and it's /#something, or if it's just #something
+          if (pathname === "/" || href.startsWith("#")) {
+            const element = document.getElementById(id);
+            if (element) {
+              e.preventDefault();
+              // Account for the fixed navbar so the section heading isn't hidden
+              const navbar = document.querySelector(".industrial-nav") as HTMLElement;
+              const navbarHeight = navbar ? navbar.offsetHeight : 90;
+              const offsetPadding = 24; // breathing room below navbar
+              const elementTop = element.getBoundingClientRect().top + window.scrollY;
+              window.scrollTo({
+                top: elementTop - navbarHeight - offsetPadding,
+                behavior: "smooth",
+              });
+              window.history.pushState(null, "", href);
+            }
+          }
+        }
+      }
+    };
+
+    document.addEventListener("click", handleAnchorClick);
+    return () => document.removeEventListener("click", handleAnchorClick);
+  }, [pathname]);
+
   return null;
 }

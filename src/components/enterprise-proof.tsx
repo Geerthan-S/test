@@ -112,7 +112,7 @@ export function TrustedByStrip() {
 
   return (
     <section className="trusted-by-strip" aria-label="Trusted by">
-      <h2 data-text-reveal>TRUSTED BY INDUSTRY LEADERS AND PUBLIC INSTITUTIONS.</h2>
+      <h2 data-text-reveal>Supporting industrial, logistics, commercial and infrastructure developments across South India.</h2>
       <ClientLogoMarquee clients={clients} />
     </section>
   );

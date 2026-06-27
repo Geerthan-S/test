@@ -6,17 +6,9 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, MapPin } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { ProjectView } from "@/lib/content";
+import { getProjectCategory, projectCategoryFilters, type ProjectCategoryFilter } from "@/lib/project-categories";
 
-const filters = ["All", "Industrial", "Commercial", "Infrastructure", "Government"];
-
-function getProjectSector(project: ProjectView) {
-  const text = `${project.industry} ${project.clientName} ${project.servicesUsed.join(" ")} ${project.scopeOfWork}`.toLowerCase();
-
-  if (text.includes("government") || text.includes("public") || text.includes("pwd")) return "Government";
-  if (text.includes("commercial") || text.includes("campus") || text.includes("sez")) return "Commercial";
-  if (text.includes("road") || text.includes("drainage") || text.includes("utility") || text.includes("site development")) return "Infrastructure";
-  return "Industrial";
-}
+const filters = projectCategoryFilters;
 
 function getOutcome(project: ProjectView) {
   if (project.status === "IN_PROGRESS") {
@@ -31,12 +23,12 @@ function getOutcome(project: ProjectView) {
 }
 
 export function ProjectShowcase({ projects }: { projects: ProjectView[] }) {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [activeFilter, setActiveFilter] = useState<ProjectCategoryFilter>("All");
   const filteredProjects = useMemo(
     () =>
       activeFilter === "All"
         ? projects
-        : projects.filter((project) => getProjectSector(project) === activeFilter),
+        : projects.filter((project) => getProjectCategory(project) === activeFilter),
     [activeFilter, projects],
   );
 
@@ -79,7 +71,7 @@ export function ProjectShowcase({ projects }: { projects: ProjectView[] }) {
             >
             <Link href={`/projects/${project.slug}`} className="project-case-study-card__media">
               <Image src={project.featuredImage} alt={project.title} fill sizes="(min-width: 1100px) 48vw, 92vw" />
-              <span>{getProjectSector(project)}</span>
+              <span>{getProjectCategory(project)}</span>
             </Link>
             <div className="project-case-study-card__body">
               <div className="project-case-study-card__meta">

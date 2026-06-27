@@ -15,6 +15,7 @@ import {
   type EditableSitePage,
   type SitePageSection,
 } from "@/lib/site-content";
+import { normalizeProjectCategory } from "@/lib/project-categories";
 import { jobOpenings as seedJobOpenings, type JobOpening } from "@/lib/careers-data";
 
 export interface CareerSetting {
@@ -59,8 +60,10 @@ async function withDatabaseFallback<T>(operation: () => Promise<T>, fallback: T)
   }
 }
 
-export function normalizeProject(project: any): ProjectView {
-  const parseJsonArray = (val: any): string[] => {
+type NormalizableProject = Partial<ProjectView> & Record<string, unknown>;
+
+export function normalizeProject(project: NormalizableProject): ProjectView {
+  const parseJsonArray = (val: unknown): string[] => {
     if (Array.isArray(val)) return val.map(String);
     if (typeof val === "string") {
       try {
@@ -73,12 +76,18 @@ export function normalizeProject(project: any): ProjectView {
 
   return {
     ...project,
+    clientType: normalizeProjectCategory(
+      project.clientType ||
+        `${project.clientName ?? ""} ${project.industry ?? ""} ${parseJsonArray(project.servicesUsed).join(" ")} ${project.scopeOfWork ?? ""}`,
+    ),
     status: project.status as ProjectStatus,
     gallery: parseJsonArray(project.gallery),
     servicesUsed: parseJsonArray(project.servicesUsed),
     keyAchievements: parseJsonArray(project.keyAchievements),
-  };
+  } as ProjectView;
 }
+
+const fallbackProjects = seedProjects.map(normalizeProject);
 
 function normalizeSections(slug: string, value: Prisma.JsonValue, fallback: SitePageSection[]) {
   if (!Array.isArray(value)) return fallback;
@@ -194,7 +203,7 @@ function normalizeSitePage(
 }
 
 export const getProjects = cache(async (): Promise<ProjectView[]> => {
-  if (!canUseDatabase()) return seedProjects;
+  if (!canUseDatabase()) return fallbackProjects;
 
   return withDatabaseFallback(async () => {
     const projects = await getPrisma().project.findMany({
@@ -203,7 +212,7 @@ export const getProjects = cache(async (): Promise<ProjectView[]> => {
       orderBy: [{ featured: "desc" }, { updatedAt: "desc" }],
     });
     return projects.map(normalizeProject);
-  }, seedProjects);
+  }, fallbackProjects);
 });
 
 export const getFeaturedProjects = cache(async () => {
@@ -344,6 +353,7 @@ export interface EquipmentItem {
   imageUrl: string | null;
   quantity: number;
   capacity: string | null;
+  description?: string | null;
   manufacturer: string | null;
   year: number | null;
   status: string;
@@ -351,12 +361,12 @@ export interface EquipmentItem {
 }
 
 const seedEquipmentFallback: EquipmentItem[] = [
-  { id: "equip-1", name: "Hydraulic Excavator", slug: "hydraulic-excavator", imageUrl: "https://images.pexels.com/photos/2101137/pexels-photo-2101137.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 4, capacity: "20T – 30T", manufacturer: "CAT / JCB", year: 2020, status: "Active", sortOrder: 1 },
-  { id: "equip-2", name: "Motor Grader", slug: "motor-grader", imageUrl: "https://images.pexels.com/photos/93398/pexels-photo-93398.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 2, capacity: "140 HP", manufacturer: "Volvo / CASE", year: 2021, status: "Active", sortOrder: 2 },
-  { id: "equip-3", name: "Vibratory Roller", slug: "vibratory-roller", imageUrl: "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 3, capacity: "10T – 12T", manufacturer: "HAMM / Dynapac", year: 2019, status: "Active", sortOrder: 3 },
-  { id: "equip-4", name: "Transit Mixer", slug: "transit-mixer", imageUrl: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 5, capacity: "6 m³", manufacturer: "Ajax / Schwing Stetter", year: 2020, status: "Active", sortOrder: 4 },
-  { id: "equip-5", name: "Bulldozer", slug: "bulldozer", imageUrl: "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 2, capacity: "D6 Series", manufacturer: "CAT", year: 2022, status: "Active", sortOrder: 5 },
-  { id: "equip-6", name: "Mobile Crane", slug: "mobile-crane", imageUrl: "https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?auto=format&fit=crop&w=800&q=80", quantity: 1, capacity: "50T", manufacturer: "Liebherr", year: 2021, status: "Active", sortOrder: 6 },
+  { id: "equip-1", name: "Tipper Trucks", slug: "tipper-trucks", imageUrl: "https://images.pexels.com/photos/93398/pexels-photo-93398.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 50, capacity: "10T – 16T", manufacturer: "Tata / Ashok Leyland", year: 2022, status: "Active", sortOrder: 1 },
+  { id: "equip-2", name: "Excavators", slug: "excavators", imageUrl: "https://images.pexels.com/photos/2101137/pexels-photo-2101137.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 15, capacity: "20T – 30T", manufacturer: "CAT / JCB / Komatsu", year: 2021, status: "Active", sortOrder: 2 },
+  { id: "equip-3", name: "Motor Graders", slug: "motor-graders", imageUrl: "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 10, capacity: "140 HP", manufacturer: "Volvo / CASE", year: 2021, status: "Active", sortOrder: 3 },
+  { id: "equip-4", name: "Vibro Rollers", slug: "vibro-rollers", imageUrl: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 8, capacity: "10T – 12T", manufacturer: "HAMM / Dynapac", year: 2020, status: "Active", sortOrder: 4 },
+  { id: "equip-5", name: "JCB Backhoe Loaders", slug: "jcb-backhoe-loaders", imageUrl: "https://images.pexels.com/photos/1078884/pexels-photo-1078884.jpeg?auto=compress&cs=tinysrgb&w=800", quantity: 12, capacity: "1.0 m³", manufacturer: "JCB", year: 2022, status: "Active", sortOrder: 5 },
+  { id: "equip-6", name: "Water Tankers", slug: "water-tankers", imageUrl: "https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?auto=format&fit=crop&w=800&q=80", quantity: 6, capacity: "10,000L – 15,000L", manufacturer: "Tata / Leyland", year: 2021, status: "Active", sortOrder: 6 },
 ];
 
 export const getEquipment = cache(async (): Promise<EquipmentItem[]> => {
@@ -374,6 +384,7 @@ export const getEquipment = cache(async (): Promise<EquipmentItem[]> => {
       imageUrl: item.imageUrl,
       quantity: item.quantity,
       capacity: item.capacity,
+      description: item.description,
       manufacturer: item.manufacturer,
       year: item.year,
       status: item.status,

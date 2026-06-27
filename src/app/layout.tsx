@@ -1,19 +1,13 @@
 import "./globals.css";
 import "./screenshot-home.css";
 import type { Metadata } from "next";
-import { Bebas_Neue, DM_Mono, Inter } from "next/font/google";
+import { Bebas_Neue, Inter } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LuxuryScroll } from "@/components/motion/LuxuryScroll";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
   variable: "--font-bebas-neue",
-  subsets: ["latin"],
-});
-
-const dmMono = DM_Mono({
-  weight: ["400", "500"],
-  variable: "--font-dm-mono",
   subsets: ["latin"],
 });
 
@@ -80,7 +74,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${dmMono.variable} ${inter.variable} dark h-full antialiased`}
+      className={`${bebasNeue.variable} ${inter.variable} dark h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <LuxuryScroll />
