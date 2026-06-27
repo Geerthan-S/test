@@ -95,11 +95,6 @@ export const departmentContacts = [
     text: "Drawings, scope clarifications, quantities and technical feasibility.",
     href: "mailto:admin@docksideconstructions.com",
   },
-  {
-    title: "Careers & Internships",
-    text: "Site roles, engineering development and learning opportunities.",
-    href: "/careers",
-  },
 ];
 
 export function TrustedByStrip() {

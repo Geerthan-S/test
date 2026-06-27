@@ -78,7 +78,7 @@ function EquipmentCard({ item }: { item: EquipmentItem }) {
         )}
         {/* Red unit badge */}
         <span
-          className="absolute top-0 left-0 bg-[#8A3841] text-[10px] font-extrabold tracking-widest uppercase px-3 py-1.5"
+          className="absolute top-0 left-0 bg-[#8A3841] text-[11px] font-extrabold tracking-widest uppercase px-3 py-1.5"
           style={{ color: "#ffffff" }}
         >
           {badge}
@@ -96,20 +96,20 @@ function EquipmentCard({ item }: { item: EquipmentItem }) {
           {item.capacity && (
             <div className="flex items-center gap-2">
               <Gauge className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" aria-hidden="true" />
-              <span className="text-[10px] font-bold tracking-widest uppercase text-gray-400 flex-1">
+              <span className="text-[11px] font-bold tracking-widest uppercase text-gray-400 flex-1">
                 Capacity
               </span>
-              <span className="text-[11px] font-semibold text-gray-700">
+              <span className="text-[12px] font-semibold text-gray-700">
                 {item.capacity}
               </span>
             </div>
           )}
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" aria-hidden="true" />
-            <span className="text-[10px] font-bold tracking-widest uppercase text-gray-400 flex-1">
+            <span className="text-[11px] font-bold tracking-widest uppercase text-gray-400 flex-1">
               Status
             </span>
-            <span className="text-[11px] font-bold text-[#16A34A]">
+            <span className="text-[12px] font-bold text-[#16A34A]">
               {item.status || "Active Fleet"}
             </span>
           </div>
@@ -117,7 +117,7 @@ function EquipmentCard({ item }: { item: EquipmentItem }) {
 
         {/* Description */}
         {description && (
-          <p className="text-[12.5px] leading-[1.7] text-gray-500 pt-3.5 mt-auto border-t border-gray-100">
+          <p className="text-[13px] leading-[1.7] text-gray-500 pt-3.5 mt-auto border-t border-gray-100">
             {description}
           </p>
         )}
@@ -177,7 +177,7 @@ export default async function EquipmentFleetPage() {
           {/* Eyebrow */}
           <div className="flex items-center justify-center gap-4 mb-4">
             <span className="w-8 h-px bg-[#8A3841]/50" />
-            <span className="font-display text-[11px] font-bold tracking-[0.28em] text-[#8A3841] uppercase">
+            <span className="font-display text-[11px] font-bold tracking-[0.2em] text-[#8A3841] uppercase">
               Our Fleet
             </span>
             <span className="w-8 h-px bg-[#8A3841]/50" />
@@ -210,7 +210,7 @@ export default async function EquipmentFleetPage() {
                 <circle cx="16.5" cy="18.5" r="2.5" />
               </svg>
               <span className="font-display text-[38px] md:text-[50px] font-bold text-[#8A3841] leading-none">50+</span>
-              <span className="text-[9px] md:text-[10px] font-extrabold tracking-wider text-gray-800 uppercase mt-1.5">Tipper Trucks</span>
+              <span className="text-[11px] font-extrabold tracking-wider text-gray-800 uppercase mt-1.5">Tipper Trucks</span>
             </div>
 
             <div className="absolute left-[33.33%] top-3 bottom-3 w-px bg-gray-200" />
@@ -222,7 +222,7 @@ export default async function EquipmentFleetPage() {
                 <path d="M6 13V5l5 2 3-3 5 5-7 4" />
               </svg>
               <span className="font-display text-[38px] md:text-[50px] font-bold text-[#8A3841] leading-none">20+</span>
-              <span className="text-[9px] md:text-[10px] font-extrabold tracking-wider text-gray-800 uppercase mt-1.5">Heavy Equipment</span>
+              <span className="text-[11px] font-extrabold tracking-wider text-gray-800 uppercase mt-1.5">Heavy Equipment</span>
             </div>
 
             <div className="absolute left-[66.66%] top-3 bottom-3 w-px bg-gray-200" />
@@ -234,7 +234,7 @@ export default async function EquipmentFleetPage() {
                 <path d="m9 11 2 2 4-4" />
               </svg>
               <span className="font-display text-[38px] md:text-[50px] font-bold text-[#8A3841] leading-none">100%</span>
-              <span className="text-[9px] md:text-[10px] font-extrabold tracking-wider text-gray-800 uppercase mt-1.5">Deployment Ready</span>
+              <span className="text-[11px] font-extrabold tracking-wider text-gray-800 uppercase mt-1.5">Deployment Ready</span>
             </div>
 
           </div>
@@ -254,7 +254,7 @@ export default async function EquipmentFleetPage() {
               className="object-contain"
             />
           </span>
-          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[10px] font-extrabold uppercase tracking-[0.08em] text-[#5f1f29]">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-[11px] font-extrabold uppercase tracking-[0.08em] text-[#5f1f29]">
             {fleetCategories.map((category, index) => (
               <span key={category.label} className="inline-flex items-center gap-3">
                 <span className="whitespace-nowrap">

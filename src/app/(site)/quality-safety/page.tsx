@@ -21,6 +21,7 @@ import {
   HardHat,
   FolderOpen,
   Award,
+  Eye,
 } from "lucide-react";
 import { CertificateGrid } from "./CertificateGrid";
 import { QualityInspectionStep } from "@/components/quality-safety/QualityInspectionStep";
@@ -116,31 +117,64 @@ const materialTests = [
     title: "Concrete Testing",
     desc: "Regular casting of cubes for compressive strength verification, slump tests, and thermal monitoring.",
     standard: "IS 516",
+    icon: ClipboardCheck, // Using ClipboardCheck as a placeholder for concrete testing icon
   },
   {
     title: "Reinforcement Steel Testing",
     desc: "Tensile strength checks, elongation, bend tests, and physical dimension verification against IS standards.",
     standard: "IS 1786",
+    icon: Wrench, // Using Wrench as a placeholder for rebar testing icon
   },
   {
     title: "Aggregate Testing",
     desc: "Sieve grading analysis, aggregate impact values, flakiness indices, and moisture level verification.",
     standard: "IS 2386",
+    icon: FlaskConical, // Using FlaskConical as a placeholder for aggregate testing icon
   },
   {
     title: "Brick & Block Verification",
     desc: "Compressive load resistance testing, dimension consistency mapping, and water absorption checks.",
-    standard: "IS 3077",
+    standard: "IS 1077",
+    icon: HardHat, // Using HardHat as a placeholder for brick testing icon
   },
   {
     title: "Water Quality Testing",
     desc: "Chemical testing of construction water to verify neutral pH, salinity limits, and organic impurity thresholds.",
     standard: "IS 456",
+    icon: Zap, // Using Zap as a placeholder for water quality testing icon
   },
   {
     title: "Supplier Certification Review",
     desc: "Regular validation of manufacturer mill certificates, third-party lab checks, and origin audits.",
     standard: "ISO 9001",
+    icon: ShieldCheck, // Using ShieldCheck as a placeholder for supplier certification icon
+  },
+];
+
+const commitmentItems = [
+  {
+    title: "International Standards",
+    icon: Award,
+  },
+  {
+    title: "Daily Site Monitoring",
+    icon: Eye,
+  },
+  {
+    title: "Quality Verification",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Material Compliance",
+    icon: FolderOpen,
+  },
+  {
+    title: "Complete Documentation",
+    icon: FileText,
+  },
+  {
+    title: "Safety First Culture",
+    icon: HardHat,
   },
 ];
 
@@ -506,30 +540,21 @@ export default function QualityAndSafetyPage() {
           </div>
 
           <div data-stagger-reveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {materialTests.map((test, idx) => (
-              <div
-                key={test.title}
-                className="group relative bg-white border border-gray-100 hover:border-[#8A3841]/30 hover:shadow-[0_16px_44px_rgba(138,56,65,0.10)] transition-all duration-300 overflow-hidden"
-              >
-                {/* Full-height left accent */}
-                <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#8A3841]/20 group-hover:bg-[#8A3841] transition-all duration-300" />
-
-                <div className="pl-6 pr-6 pt-6 pb-6">
-                  {/* Standard badge */}
+            {materialTests.map((test) => {
+              const Icon = test.icon;
+              return (
+                <div
+                  key={test.title}
+                  className="group relative bg-white border border-gray-100 px-7 pt-7 pb-6 hover:border-[#8A3841]/30 hover:shadow-[0_16px_44px_rgba(138,56,65,0.10)] transition-all duration-300 overflow-hidden"
+                >
                   <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-[10px] font-bold text-gray-300 tracking-widest uppercase">
-                      Lab Verification
-                    </span>
-                    <span className="font-mono text-[11px] font-bold text-[#8A3841] tracking-wider bg-[#8A3841]/6 px-2 py-0.5">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#8A3841]/8 text-[#8A3841] group-hover:bg-[#8A3841]/10 group-hover:text-[#8A3841] transition-all duration-300">
+                      <Icon className="w-5 h-5" strokeWidth={1.5} />
+                    </div>
+                    <span className="font-mono text-[11px] font-bold text-[#8A3841] tracking-wider bg-[#8A3841]/6 px-2.5 py-1">
                       {test.standard}
                     </span>
                   </div>
-
-                  {/* Index number watermark */}
-                  <span className="absolute right-5 bottom-4 font-display text-5xl font-extrabold text-gray-50 group-hover:text-[#8A3841]/5 leading-none select-none transition-colors duration-300">
-                    {String(idx + 1).padStart(2, "0")}
-                  </span>
-
                   <h3 className="font-display text-[16px] font-extrabold uppercase tracking-wide text-gray-900 mb-2.5 group-hover:text-[#8A3841] transition-colors duration-300">
                     {test.title}
                   </h3>
@@ -537,8 +562,8 @@ export default function QualityAndSafetyPage() {
                     {test.desc}
                   </p>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -565,25 +590,23 @@ export default function QualityAndSafetyPage() {
             Quality and safety are integrated into every stage of planning, procurement, execution, inspection, testing, and project handover.
           </p>
 
-          <div data-stagger-reveal className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-[800px] mx-auto text-left">
-            {[
-              "International Standards",
-              "Daily Site Briefings",
-              "Material Verification",
-              "Zero Compliance Gaps",
-              "Complete Documentation",
-              "Safety-First Culture",
-            ].map((item) => (
-              <div
-                key={item}
-                className="flex items-center gap-3 bg-white/8 border border-white/15 px-4 py-3 hover:bg-white/15 transition-colors duration-200"
-              >
-                <CheckCircle2 className="w-4 h-4 text-white/90 flex-shrink-0" />
-                <span className="text-[11px] font-bold tracking-wider uppercase text-white/90">
-                  {item}
-                </span>
-              </div>
-            ))}
+          <div data-stagger-reveal className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-[800px] mx-auto">
+            {commitmentItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.title}
+                  className="flex flex-col items-center justify-center p-6 bg-white/8 border border-white/15 hover:bg-white/15 transition-colors duration-200"
+                >
+                  <div className="inline-flex items-center justify-center w-12 h-12 mb-4 text-white/90">
+                    <Icon className="w-6 h-6" strokeWidth={1.5} />
+                  </div>
+                  <span className="text-[11px] font-bold tracking-wider uppercase text-white/90 text-center">
+                    {item.title}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -594,7 +617,7 @@ export default function QualityAndSafetyPage() {
         <div className="max-w-[1320px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left */}
           <div>
-            <div data-text-reveal className="inline-flex items-center justify-center w-14 h-14 border border-gray-200 bg-gray-50 mb-6 text-[#8A3841]">
+            <div data-text-reveal className="inline-flex items-center justify-center w-14 h-14 bg-white border border-gray-200 mb-6 text-[#8A3841] shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
               <ShieldCheck className="w-6 h-6" strokeWidth={1.5} />
             </div>
             <h2 data-text-reveal className="font-display text-3xl md:text-4xl font-bold uppercase text-gray-900 mb-4 tracking-wide">
@@ -616,7 +639,7 @@ export default function QualityAndSafetyPage() {
             <a
               href="/dockside-business-profile.pdf"
               download
-              className="inline-flex items-center gap-2.5 border border-gray-200 text-gray-800 bg-white font-mono text-[11px] font-bold tracking-widest uppercase px-7 py-4 hover:border-[#8A3841] hover:text-[#8A3841] transition-colors duration-200"
+              className="inline-flex items-center gap-2.5 bg-white text-gray-800 font-mono text-[11px] font-bold tracking-widest uppercase px-7 py-4 hover:bg-gray-50 transition-colors duration-200 shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
             >
               Download Profile <Download className="w-4 h-4" />
             </a>

@@ -15,7 +15,6 @@ const companyLinks = [
   ["Quality & Safety", "/quality-safety"],
   ["Projects", "/projects"],
   ["Downloads", "/downloads"],
-  ["Careers", "/careers"],
   ["Contact Us", "/contact"],
 ] as const;
 

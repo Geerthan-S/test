@@ -81,8 +81,6 @@ export const industrialImages = {
     "/services-reference/hd-services-hero.jpg",
   projectsHero:
     "/hero-image/projects.png",
-  careersHero:
-    "/hero-image/careers.png",
   warehouseDusk:
     "https://images.pexels.com/photos/236705/pexels-photo-236705.jpeg?auto=compress&cs=tinysrgb&w=1800",
   logisticsAerial:
@@ -716,41 +714,6 @@ export const employeeBenefits = [
     title: "Engineering Development Programs",
     text: "Mentoring around drawings, quantities, method statements, inspections and handover records.",
   },
-];
-
-export const careerOpenings = [
-  {
-    title: "Project Manager - Industrial Civil",
-    meta: "Full-time",
-    text: "Lead civil packages, site teams, client coordination, progress reporting and handover discipline.",
-    items: ["Industrial civil execution", "Team leadership", "Client reporting"],
-  },
-  {
-    title: "Planning Engineer",
-    meta: "Full-time",
-    text: "Build schedules, track milestones, coordinate quantities and support project-control reporting.",
-    items: ["Scheduling", "Quantity tracking", "Progress dashboards"],
-  },
-  {
-    title: "Safety Officer",
-    meta: "Full-time",
-    text: "Support toolbox talks, PPE compliance, risk controls, site audits and safety documentation.",
-    items: ["ISO 45001 awareness", "Site audits", "Risk controls"],
-  },
-  {
-    title: "QA/QC Engineer",
-    meta: "Full-time",
-    text: "Manage inspection checkpoints, material documentation, work records and quality closeout.",
-    items: ["Inspection plans", "Material records", "Quality control"],
-  },
-];
-
-export const applicationTimeline = [
-  { title: "Apply", text: "Submit your role interest, experience and contact details." },
-  { title: "Review", text: "The relevant project or engineering team reviews fit and availability." },
-  { title: "Interview", text: "Shortlisted applicants discuss site exposure, technical capability and role expectations." },
-  { title: "Selection", text: "Selected candidates receive role, location and joining alignment." },
-  { title: "Onboarding", text: "New joiners begin with safety orientation, systems briefing and site induction." },
 ];
 
 export const seedClients: ClientView[] = [

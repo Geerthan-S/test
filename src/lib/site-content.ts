@@ -4,8 +4,6 @@ import {
   homeReferenceImages,
   industrialImages,
   projectReferenceImages,
-  applicationTimeline,
-  careerOpenings,
   certificationCertificates,
   leadershipProfiles,
   serviceCategories,
@@ -362,74 +360,6 @@ const defaultTopLevelPages: EditableSitePage[] = [
     ],
   },
   {
-    slug: "careers",
-    title: "Careers",
-    description:
-      "Why join Dockside, work culture, current openings, internships and apply now.",
-    heroTitle: "Careers For People Who Respect The Craft Of Construction",
-    heroDescription:
-      "Dockside hires site engineers, planners, safety professionals, project managers and commercial specialists for serious construction delivery.",
-    heroImage: industrialImages.careersHero,
-    published: true,
-    sections: [
-      {
-        id: "why-join-us",
-        label: "Why Join Us",
-        heading: "Join a company where site discipline and technical ownership matter.",
-        body:
-          "Dockside is suited to professionals who want exposure to industrial, commercial and public infrastructure projects with clear accountability and practical field learning.",
-        layout: "grid",
-        items: [
-          { title: "Meaningful project exposure", text: "Work across civil, structural, utility, renovation and infrastructure environments." },
-          { title: "Learning from experienced teams", text: "Develop under engineering, project and safety leadership." },
-          { title: "Quality and safety culture", text: "Operate inside systems that value preparation and responsible delivery." },
-        ],
-      },
-      {
-        id: "work-culture",
-        label: "Work Culture",
-        heading: "A practical, accountable and field-aware work environment.",
-        layout: "grid",
-        items: [
-          { title: "Site discipline", text: "Clear responsibilities, reporting and milestone awareness." },
-          { title: "Team coordination", text: "Collaboration between engineering, procurement, safety and execution teams." },
-          { title: "Growth orientation", text: "Opportunities to learn through real site conditions and client requirements." },
-        ],
-      },
-      {
-        id: "current-openings",
-        label: "Current Openings",
-        heading: "Roles currently useful to Dockside's project delivery engine.",
-        layout: "list",
-        items: careerOpenings,
-      },
-      {
-        id: "employee-benefits",
-        label: "Employee Benefits",
-        heading: "Professional growth shaped by real site exposure.",
-        layout: "grid",
-        items: employeeBenefits,
-      },
-      {
-        id: "application-process",
-        label: "Application Process",
-        heading: "From application to onboarding, the path is clear.",
-        layout: "timeline",
-        items: applicationTimeline,
-      },
-      {
-        id: "internship-opportunities",
-        label: "Internship Opportunities",
-        heading: "Internships for engineering and construction management learners.",
-        body:
-          "Students and early-career professionals can apply for site exposure, planning support, documentation and project coordination opportunities.",
-        layout: "cta",
-        media: industrialImages.planning,
-        cta: { label: "Apply now", href: "/contact" },
-      },
-    ],
-  },
-  {
     slug: "contact",
     title: "Contact",
     description:
@@ -464,7 +394,6 @@ const defaultTopLevelPages: EditableSitePage[] = [
         items: [
           { title: "Project Enquiries", text: "Industrial, commercial, infrastructure and site-development discussions.", href: "mailto:admin@docksideconstructions.com" },
           { title: "Engineering Review", text: "Drawings, quantities, technical scope and feasibility clarifications.", href: "mailto:admin@docksideconstructions.com" },
-          { title: "Careers & Internships", text: "Site roles, engineering development and practical learning opportunities.", href: "/careers" },
         ],
       },
     ],
@@ -504,7 +433,6 @@ export const sitePageRouteBySlug = new Map<string, string>([
   ["about", "/about"],
   ["services", "/services"],
   ["projects", "/projects"],
-  ["careers", "/careers"],
   ["clients", "/clients"],
   ["contact", "/contact"],
 ]);

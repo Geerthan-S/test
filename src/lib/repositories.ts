@@ -16,14 +16,6 @@ import {
   type SitePageSection,
 } from "@/lib/site-content";
 import { normalizeProjectCategory } from "@/lib/project-categories";
-import { jobOpenings as seedJobOpenings, type JobOpening } from "@/lib/careers-data";
-
-export interface CareerSetting {
-  id: string;
-  internshipButtonText: string;
-  internshipActionType: string;
-  internshipActionUrl: string;
-}
 
 
 const PUBLIC_DATABASE_READ_TIMEOUT_MS = 6000;
@@ -122,7 +114,6 @@ const staleDefaultHeroImages: Record<string, string[]> = {
   about: [industrialImages.structure],
   services: [industrialImages.highRise],
   projects: [industrialImages.hero, "/projects-hero-logistics.jpg"],
-  careers: [industrialImages.crane],
 };
 
 function normalizeHeroImage(slug: string, heroImage: string, fallback?: EditableSitePage | null) {
@@ -300,49 +291,6 @@ export async function getAdminMetrics() {
     downloads,
   };
 }
-
-export const getJobOpenings = cache(async (): Promise<JobOpening[]> => {
-  if (!canUseDatabase()) return seedJobOpenings;
-
-  return withDatabaseFallback(async () => {
-    const jobs = await getPrisma().jobOpening.findMany({
-      where: { published: true },
-      orderBy: { createdAt: "desc" },
-    });
-    return jobs.map((job) => ({
-      id: job.id,
-      title: job.title,
-      department: job.department,
-      experience: job.experience,
-      location: job.location,
-      type: job.type,
-      skills: job.skills,
-    }));
-  }, seedJobOpenings);
-});
-
-export const getCareerSetting = cache(async (): Promise<CareerSetting> => {
-  const defaultSetting: CareerSetting = {
-    id: "default",
-    internshipButtonText: "Apply for Internship",
-    internshipActionType: "modal",
-    internshipActionUrl: "",
-  };
-  if (!canUseDatabase()) return defaultSetting;
-
-  return withDatabaseFallback(async () => {
-    const setting = await getPrisma().careerSetting.findFirst();
-    if (setting) {
-      return {
-        id: setting.id,
-        internshipButtonText: setting.internshipButtonText,
-        internshipActionType: setting.internshipActionType,
-        internshipActionUrl: setting.internshipActionUrl,
-      };
-    }
-    return defaultSetting;
-  }, defaultSetting);
-});
 
 // ─── Equipment ────────────────────────────────────────────────────────────────
 

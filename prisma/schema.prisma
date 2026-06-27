@@ -8,109 +8,16 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-enum Role {
-  SUPER_ADMIN
-  ADMIN
-  EDITOR
-}
-
-enum ProjectStatus {
-  PLANNING
-  IN_PROGRESS
-  COMPLETED
-  ON_HOLD
-}
-
-model User {
-  id           String    @id @default(cuid())
-  name         String
-  email        String    @unique
-  passwordHash String
-  role         Role      @default(EDITOR)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  projects     Project[] @relation("ProjectAuthor")
-
-  @@index([role])
-}
-
-model Project {
-  id                 String        @id @default(cuid())
-  title              String
-  slug               String        @unique
-  clientName         String
-  clientType         String?
-  clientLogo         String?
-  featuredImage      String
-  gallery            String[]      @default([])
-  folderName         String?
-  location           String
-  scopeOfWork        String
-  timeline           String
-  projectValue       String
-  yearsAssociated    String?
-  projectCount       String?
-  contractValue      String?
-  startDate          DateTime?
-  endDate            DateTime?
-  completionPct      Int           @default(0)
-  builtUpArea        String?
-  roadLength         String?
-  concreteUsed       String?
-  steelUsed          String?
-  workforceDeployed  String?
-  status             ProjectStatus @default(IN_PROGRESS)
-  servicesUsed       String[]      @default([])
-  industry           String
-  summary            String
-  clientOverview     String?
-  keyAchievements    String[]      @default([])
-  body               String
-  seoTitle           String?
-  seoDescription     String?
-  published          Boolean       @default(true)
-  featured           Boolean       @default(false)
-  completedAt        DateTime?
-  createdAt          DateTime      @default(now())
-  updatedAt          DateTime      @updatedAt
-  authorId           String?
-  author             User?         @relation("ProjectAuthor", fields: [authorId], references: [id])
-  testimonial        Testimonial?
-
-  @@index([published, featured, updatedAt])
-  @@index([status, updatedAt])
-  @@index([industry])
-}
-
-model Testimonial {
-  id          String   @id @default(cuid())
-  quote       String
-  personName  String
-  designation String
-  company     String
-  avatar      String?
-  projectId   String?  @unique
-  project     Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
-  published   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([published, updatedAt])
-}
-
-model MediaAsset {
-  id           String   @id @default(cuid())
-  publicId     String
-  secureUrl    String
-  resourceType String
-  alt          String?
-  createdAt    DateTime @default(now())
-
-  @@index([createdAt])
+model CareerSetting {
+  id                   String   @id
+  internshipButtonText String   @default("Apply for Internship")
+  internshipActionType String   @default("modal")
+  internshipActionUrl  String   @default("")
+  updatedAt            DateTime
 }
 
 model Client {
-  id          String   @id @default(cuid())
+  id          String   @id
   name        String
   slug        String   @unique
   logoUrl     String?
@@ -119,40 +26,14 @@ model Client {
   testimonial String?
   featured    Boolean  @default(true)
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime
 
   @@index([featured, updatedAt])
   @@index([industry])
 }
 
-model SeoEntry {
-  id          String   @id @default(cuid())
-  path        String   @unique
-  title       String
-  description String
-  image       String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model SitePage {
-  id              String   @id @default(cuid())
-  slug            String   @unique
-  title           String
-  description     String
-  heroTitle       String
-  heroDescription String
-  heroImage       String
-  sections        Json
-  published       Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  @@index([published, slug])
-}
-
 model ContactMessage {
-  id        String   @id @default(cuid())
+  id        String   @id
   name      String
   email     String
   message   String
@@ -162,8 +43,40 @@ model ContactMessage {
   @@index([email])
 }
 
+model Download {
+  id        String   @id
+  title     String
+  category  String
+  fileUrl   String
+  fileType  String   @default("pdf")
+  sortOrder Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+
+  @@index([published, category])
+}
+
+model Equipment {
+  id           String   @id
+  name         String
+  slug         String   @unique
+  imageUrl     String?
+  quantity     Int      @default(1)
+  capacity     String?
+  manufacturer String?
+  year         Int?
+  status       String   @default("Active")
+  sortOrder    Int      @default(0)
+  published    Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+
+  @@index([published, sortOrder])
+}
+
 model JobOpening {
-  id         String   @id @default(cuid())
+  id         String   @id
   title      String
   department String
   experience String
@@ -172,55 +85,141 @@ model JobOpening {
   skills     String[] @default([])
   published  Boolean  @default(true)
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt  DateTime
 
   @@index([published, updatedAt])
 }
 
-model CareerSetting {
-  id                   String   @id @default(cuid())
-  internshipButtonText String   @default("Apply for Internship")
-  internshipActionType String   @default("modal") // "modal" or "url"
-  internshipActionUrl  String   @default("")
-  updatedAt            DateTime @updatedAt
-}
-
-model Equipment {
-  id           String   @id @default(cuid())
-  name         String
-  slug         String   @unique
-  imageUrl     String?
-  quantity     Int      @default(1)
-  capacity     String?
-  description  String?
-  manufacturer String?
-  year         Int?
-  status       String   @default("Active")
-  sortOrder    Int      @default(0)
-  published    Boolean  @default(true)
+model MediaAsset {
+  id           String   @id
+  publicId     String
+  secureUrl    String
+  resourceType String
+  alt          String?
   createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
 
-  @@index([published, sortOrder])
+  @@index([createdAt])
 }
 
-model Download {
-  id        String   @id @default(cuid())
-  title     String
-  category  String
-  fileUrl   String
-  fileType  String   @default("pdf")
-  sortOrder Int      @default(0)
-  published Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Project {
+  id                String        @id
+  title             String
+  slug              String        @unique
+  clientName        String
+  clientLogo        String?
+  featuredImage     String
+  gallery           String[]      @default([])
+  location          String
+  scopeOfWork       String
+  timeline          String
+  projectValue      String
+  status            ProjectStatus @default(IN_PROGRESS)
+  servicesUsed      String[]      @default([])
+  industry          String
+  summary           String
+  body              String
+  seoTitle          String?
+  seoDescription    String?
+  published         Boolean       @default(true)
+  featured          Boolean       @default(false)
+  completedAt       DateTime?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime
+  authorId          String?
+  clientOverview    String?
+  clientType        String?
+  contractValue     String?
+  keyAchievements   String[]      @default([])
+  projectCount      String?
+  yearsAssociated   String?
+  builtUpArea       String?
+  completionPct     Int           @default(0)
+  concreteUsed      String?
+  endDate           DateTime?
+  folderName        String?
+  roadLength        String?
+  startDate         DateTime?
+  steelUsed         String?
+  workforceDeployed String?
+  User              User?         @relation(fields: [authorId], references: [id])
+  Testimonial       Testimonial?
 
-  @@index([published, category])
+  @@index([industry])
+  @@index([published, featured, updatedAt])
+  @@index([status, updatedAt])
+}
+
+model SeoEntry {
+  id          String   @id
+  path        String   @unique
+  title       String
+  description String
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+}
+
+model SitePage {
+  id              String   @id
+  slug            String   @unique
+  title           String
+  description     String
+  heroTitle       String
+  heroDescription String
+  heroImage       String
+  sections        Json
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+
+  @@index([published, slug])
 }
 
 model SiteSetting {
-  id        String   @id @default(cuid())
+  id        String   @id
   key       String   @unique
   value     String
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime
+}
+
+model Testimonial {
+  id          String   @id
+  quote       String
+  personName  String
+  designation String
+  company     String
+  avatar      String?
+  projectId   String?  @unique
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  Project     Project? @relation(fields: [projectId], references: [id])
+
+  @@index([published, updatedAt])
+}
+
+model User {
+  id           String    @id
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(EDITOR)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime
+  Project      Project[]
+
+  @@index([role])
+}
+
+enum ProjectStatus {
+  PLANNING
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
 }
