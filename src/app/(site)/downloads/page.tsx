@@ -11,6 +11,28 @@ import {
 import { getDownloads, type DownloadGroup } from "@/lib/repositories";
 import { DownloadGroupCard } from "@/components/downloads/DownloadGroupCard";
 
+const categoryIcons: Record<string, React.ElementType> = {
+  "Company Profile": BookOpen,
+  Brochure: BookOpen,
+  Certifications: ShieldCheck,
+  "Registration Documents": FileCheck,
+  "Tender Documents": FolderOpen,
+  "GST Certificate": FileCheck,
+  PAN: FileCheck,
+  "Vendor Registration Forms": FolderOpen,
+  Policies: ShieldCheck,
+};
+
+const downloadCategories = [
+  "Company Profile",
+  "Brochure",
+  "Certifications",
+  "Registration Documents",
+  "Tender Documents",
+  "Policies",
+  "Vendor Registration Forms",
+];
+
 export default async function DownloadsPage() {
   const groups = await getDownloads();
 

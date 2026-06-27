@@ -182,10 +182,11 @@ export function Projects({ projects }: { projects: ProjectView[] }) {
                 <ArrowUpRight />
               </span>
             </div>
-          </Link>
-        ))}
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
-    
   );
 }

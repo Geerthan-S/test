@@ -161,7 +161,7 @@ function EquipmentCard({ item }: { item: EquipmentItem }) {
           </p>
         )}
       </div>
-    </article>
+    </motion.article>
   );
 }
 
