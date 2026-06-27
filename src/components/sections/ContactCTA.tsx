@@ -1,14 +1,41 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+
+const sectionVariants: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const buttonVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.92 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.3 },
+  },
+  hover: {
+    scale: 1.05,
+    transition: { duration: 0.2 },
+  },
+};
 
 export function ContactCTA() {
   return (
-    <section id="contact" className="relative bg-gradient-to-b from-[#F9F6F0] to-[#FAF8F7] py-6 md:py-10 overflow-hidden" aria-label="Contact Dockside Constructions">
-
-
-
+    <motion.section
+      id="contact"
+      className="relative bg-gradient-to-b from-[#F9F6F0] to-[#FAF8F7] py-6 md:py-10 overflow-hidden"
+      aria-label="Contact Dockside Constructions"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={sectionVariants}
+    >
       <div className="relative z-10 max-w-[1140px] mx-auto px-4 md:px-8 lg:px-12">
-
         {/* The Card */}
         <div className="relative bg-[#FCFBFA] border border-[#EAE4DD] p-8 md:p-14 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 overflow-hidden shadow-[0_20px_60px_rgba(138,56,65,0.06)]">
 
@@ -45,22 +72,32 @@ export function ContactCTA() {
 
           {/* Buttons */}
           <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 shrink-0 mt-6 lg:mt-0">
-            <Link
-              href="/contact"
-              className="flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 bg-[#8A3841] hover:bg-[#6D2B32] !text-white font-bold text-[11px] tracking-widest uppercase transition-all duration-300 rounded-[4px] shadow-[0_12px_24px_rgba(138,56,65,0.25)] hover:shadow-[0_16px_32px_rgba(138,56,65,0.35)] hover:-translate-y-0.5"
+            <motion.div
+              variants={buttonVariants}
+              whileHover="hover"
             >
-              Contact Us <ArrowRight className="w-[14px] h-[14px] !text-white" strokeWidth={2.5} />
-            </Link>
-            <Link
-              href="/projects"
-              className="flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 border border-[#E5DFD6] bg-[#FCFBFA] hover:bg-white text-[#8A3841] font-bold text-[11px] tracking-widest uppercase transition-all duration-300 rounded-[4px] shadow-sm hover:shadow-md hover:-translate-y-0.5"
+              <Link
+                href="/contact"
+                className="flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 bg-[#8A3841] hover:bg-[#6D2B32] !text-white font-bold text-[11px] tracking-widest uppercase transition-all duration-300 rounded-[4px] shadow-[0_12px_24px_rgba(138,56,65,0.25)] hover:shadow-[0_16px_32px_rgba(138,56,65,0.35)] hover:-translate-y-0.5"
+              >
+                Contact Us <ArrowRight className="w-[14px] h-[14px] !text-white" strokeWidth={2.5} />
+              </Link>
+            </motion.div>
+            <motion.div
+              variants={buttonVariants}
+              whileHover="hover"
             >
-              View Projects <ArrowRight className="w-[14px] h-[14px]" strokeWidth={2.5} />
-            </Link>
+              <Link
+                href="/projects"
+                className="flex items-center justify-center gap-2 w-full sm:w-auto h-12 px-8 border border-[#E5DFD6] bg-[#FCFBFA] hover:bg-white text-[#8A3841] font-bold text-[11px] tracking-widest uppercase transition-all duration-300 rounded-[4px] shadow-sm hover:shadow-md hover:-translate-y-0.5"
+              >
+                View Projects <ArrowRight className="w-[14px] h-[14px]" strokeWidth={2.5} />
+              </Link>
+            </motion.div>
           </div>
 
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

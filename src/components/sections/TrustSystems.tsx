@@ -2,6 +2,24 @@
 
 import { Building2, Landmark, Pickaxe, Users, Workflow } from "lucide-react";
 import { CountUp } from "@/components/ui/CountUp";
+import { motion, type Variants } from "framer-motion";
+
+const metricVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.05 },
+  },
+};
 
 const metrics = [
   { icon: Building2, value: 25, suffix: "+", label: "Projects Delivered" },
@@ -12,12 +30,19 @@ const metrics = [
 
 export function TrustSystems() {
   return (
-    <section className="trust-systems" aria-label="Trust metrics">
-      <div className="trust-metric-strip">
+    <motion.section
+      className="trust-systems"
+      aria-label="Trust metrics"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.4 }}
+      variants={containerVariants}
+    >
+      <motion.div className="trust-metric-strip">
         {metrics.map((metric) => {
           const Icon = metric.icon;
           return (
-            <article key={metric.label}>
+            <motion.article key={metric.label} variants={metricVariants}>
               <Icon aria-hidden="true" />
               <div>
                 <strong>
@@ -25,11 +50,11 @@ export function TrustSystems() {
                 </strong>
                 <span>{metric.label}</span>
               </div>
-            </article>
+            </motion.article>
           );
         })}
-      </div>
+      </motion.div>
       <Workflow className="trust-systems__watermark" aria-hidden="true" />
-    </section>
+    </motion.section>
   );
 }

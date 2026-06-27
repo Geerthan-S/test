@@ -1,5 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion, type Variants } from "framer-motion";
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.92, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 const deliverCards = [
   {
@@ -89,14 +102,26 @@ export function Services() {
           </div>
         </div>
 
-        <div className="delivers-grid">
+        <motion.div
+          className="delivers-grid"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+            },
+          }}
+        >
           {deliverCards.map(({ num, slug, title, tagline, image }) => (
-            <Link
-              key={slug}
-              href={`/services#${slug}`}
-              className="delivers-card"
-              aria-label={`Learn about ${title}`}
-            >
+            <motion.div key={slug} variants={cardVariants}>
+              <Link
+                href={`/services#${slug}`}
+                className="delivers-card"
+                aria-label={`Learn about ${title}`}
+              >
               <span className="delivers-card__num">{num}</span>
               <div className="delivers-card__illustration" aria-hidden="true">
                 <Image
@@ -112,8 +137,9 @@ export function Services() {
                 <p className="delivers-card__desc">{tagline}</p>
               </div>
             </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

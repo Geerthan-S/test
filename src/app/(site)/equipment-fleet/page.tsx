@@ -55,12 +55,45 @@ function getDescription(item: EquipmentItem): string {
 
 /* ─── Equipment Card ───────────────────────────────────────────────────────── */
 
+import { motion, type Variants } from "framer-motion";
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, rotateY: 90, y: 20 },
+  visible: {
+    opacity: 1,
+    rotateY: 0,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const specRowVariants: Variants = {
+  hidden: { opacity: 0, x: -16 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.06, delayChildren: 0.05 },
+  },
+};
+
 function EquipmentCard({ item }: { item: EquipmentItem }) {
   const badge = getBadgeLabel(item);
   const description = getDescription(item);
 
   return (
-    <article className="group flex flex-col bg-white border border-gray-200 hover:border-[#8A3841]/30 hover:shadow-[0_8px_32px_rgba(138,56,65,0.08)] transition-all duration-300 overflow-hidden">
+    <motion.article
+      className="group flex flex-col bg-white border border-gray-200 hover:border-[#8A3841]/30 hover:shadow-[0_8px_32px_rgba(138,56,65,0.08)] transition-all duration-300 overflow-hidden"
+      variants={cardVariants}
+      style={{ perspective: "1200px" }}
+    >
       {/* Image */}
       <div className="relative aspect-[16/10] flex-shrink-0 overflow-hidden bg-gray-100">
         {item.imageUrl ? (
@@ -92,9 +125,15 @@ function EquipmentCard({ item }: { item: EquipmentItem }) {
         </h3>
 
         {/* Spec rows */}
-        <div className="space-y-2.5 mb-4">
+        <motion.div
+          className="space-y-2.5 mb-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={containerVariants}
+        >
           {item.capacity && (
-            <div className="flex items-center gap-2">
+            <motion.div className="flex items-center gap-2" variants={specRowVariants}>
               <Gauge className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" aria-hidden="true" />
               <span className="text-[11px] font-bold tracking-widest uppercase text-gray-400 flex-1">
                 Capacity
@@ -102,9 +141,9 @@ function EquipmentCard({ item }: { item: EquipmentItem }) {
               <span className="text-[12px] font-semibold text-gray-700">
                 {item.capacity}
               </span>
-            </div>
+            </motion.div>
           )}
-          <div className="flex items-center gap-2">
+          <motion.div className="flex items-center gap-2" variants={specRowVariants}>
             <CheckCircle2 className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" aria-hidden="true" />
             <span className="text-[11px] font-bold tracking-widest uppercase text-gray-400 flex-1">
               Status
@@ -112,8 +151,8 @@ function EquipmentCard({ item }: { item: EquipmentItem }) {
             <span className="text-[12px] font-bold text-[#16A34A]">
               {item.status || "Active Fleet"}
             </span>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Description */}
         {description && (
@@ -280,11 +319,17 @@ export default async function EquipmentFleetPage() {
       <section className="pt-16 pb-16 px-4 md:px-8 bg-white">
         <div className="max-w-[1200px] mx-auto">
           {equipment.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={containerVariants}
+            >
               {equipment.map((item) => (
                 <EquipmentCard key={item.id} item={item} />
               ))}
-            </div>
+            </motion.div>
           ) : (
             <div className="text-center py-24 text-gray-400">
               <Truck className="w-12 h-12 mx-auto mb-4 opacity-20" />
