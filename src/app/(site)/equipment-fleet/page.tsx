@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, PhoneCall, Truck } from "lucide-react";
-import { getEquipment } from "@/lib/repositories";
+import { ArrowRight, Gauge, CheckCircle2, PhoneCall, Truck } from "lucide-react";
+import { getEquipment, type EquipmentItem } from "@/lib/repositories";
 import { EquipmentGridClient } from "@/components/equipment/EquipmentGridClient";
 
 export const dynamic = "force-dynamic";
