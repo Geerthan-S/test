@@ -1,71 +1,26 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 import {
   ArrowRight,
   Clock3,
-  Cog,
-  LockKeyhole,
   Mail,
   MapPin,
   Phone,
   ShieldCheck,
-  Timer,
   UsersRound,
+  AlertTriangle,
 } from "lucide-react";
-import { seedClients } from "@/lib/content";
-import { canUseDatabase, getPrisma } from "@/lib/prisma";
 import { getClients } from "@/lib/repositories";
+import { seedClients } from "@/lib/content";
 import { ClientLogoMarquee } from "@/components/client-logo-marquee";
-import { ContactReasons } from "@/components/contact/ContactReasons";
+import { ContactForm } from "@/components/contact/ContactForm";
 
 export const dynamic = "force-dynamic";
-
-
-export const metadata = { title: "Contact" };
-
-const OFFICE_LAT = "12.886303218652689";
-const OFFICE_LNG = "80.0823886117243";
-const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${OFFICE_LAT},${OFFICE_LNG}`;
-const mapUrl = `https://www.google.com/maps?q=${OFFICE_LAT},${OFFICE_LNG}&z=15&output=embed`;
-
-const contactSchema = z.object({
-  name: z.string().min(2),
-  company: z.string().optional(),
-  phone: z.string().min(6),
-  email: z.string().email(),
-  projectType: z.string().min(2),
-  message: z.string().min(10),
-});
-
-async function submitContact(formData: FormData) {
-  "use server";
-
-  const parsed = contactSchema.safeParse(Object.fromEntries(formData));
-  if (parsed.success && canUseDatabase()) {
-    const { name, email, message, ...details } = parsed.data;
-    const enrichedMessage = [
-      message,
-      "",
-      "Project enquiry details:",
-      `Company: ${details.company || "Not provided"}`,
-      `Phone: ${details.phone}`,
-      `Project type: ${details.projectType}`,
-      `Map location: ${OFFICE_LAT}, ${OFFICE_LNG}`,
-    ].join("\n");
-
-    await getPrisma().contactMessage.create({
-      data: {
-        id: crypto.randomUUID(),
-        name,
-        email,
-        message: enrichedMessage,
-      },
-    });
-  }
-
-  redirect("/contact/thank-you");
-}
+export const metadata = {
+  title: "Contact | Dockside Constructions",
+  description:
+    "Get in touch with Dockside Constructions. Contact our team for inquiries, project requests, or grievances. We're here to help.",
+};
 
 const reasons = [
   {
@@ -81,12 +36,12 @@ const reasons = [
   {
     title: "Tailored Solutions",
     text: "Customized solutions that fit your project and goals.",
-    icon: Cog,
+    icon: ShieldCheck,
   },
   {
     title: "On-Time Delivery",
     text: "Commitment to deadlines and efficient execution always.",
-    icon: Timer,
+    icon: ShieldCheck,
   },
   {
     title: "Quality Assured",
@@ -99,133 +54,193 @@ export default async function ContactPage() {
   const clientRecords = await getClients().catch(() => seedClients);
 
   return (
-    <div className="shot-page shot-page--contact">
-      <section className="shot-subhero shot-subhero--contact">
-        <div className="shot-subhero__inner">
-          <span className="shot-kicker">LET&apos;S BUILD TOGETHER</span>
-          <h1>
-            Every Successful Project Starts with the Right Conversation<em>.</em>
-          </h1>
-          <p>
-            Whether you&apos;re planning an industrial facility, commercial development or
-            infrastructure project, our team is ready to discuss your requirements and help
-            bring your vision to life.
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="pt-20 pb-12 px-4 md:px-8 bg-white">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-8">
+            <span className="text-[11px] font-bold tracking-widest text-[#8A3841] uppercase">
+              LET'S BUILD TOGETHER
+            </span>
+            <h1 className="text-4xl md:text-5xl font-bold text-[#8A3841] mt-3 mb-4 leading-tight">
+              GET IN TOUCH WITH DOCKSIDE
+            </h1>
+            <p className="text-gray-600 text-lg leading-relaxed max-w-2xl">
+              Have a project in mind, need more information, or want to share feedback? We're
+              here to help.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Two-Column Contact Section */}
+      <section className="px-4 md:px-8 py-12 bg-white">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Left Column - Contact Information */}
+          <div className="space-y-8">
+            {/* Contact Info Box */}
+            <div className="bg-gray-50 p-8 rounded-lg space-y-8">
+              <div>
+                <h2 className="text-[11px] font-bold tracking-widest text-[#8A3841] uppercase mb-6">
+                  Contact Information
+                </h2>
+              </div>
+
+              {/* Registered Office */}
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-[#8A3841] text-white">
+                    <MapPin className="h-6 w-6" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 text-sm">REGISTERED OFFICE</h3>
+                  <p className="text-gray-600 text-sm mt-1">
+                    No.56, V.G.P. Nagar East,<br />
+                    Salamedu, Villupuram - 605401<br />
+                    Tamil Nadu, India
+                  </p>
+                </div>
+              </div>
+
+              {/* Phone */}
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-[#8A3841] text-white">
+                    <Phone className="h-6 w-6" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 text-sm">PHONE</h3>
+                  <p className="text-gray-600 text-sm mt-1">
+                    <a href="tel:+918825922737" className="hover:text-[#8A3841]">
+                      +91 88259 22737
+                    </a>
+                    <br />
+                    <a href="tel:+919940100557" className="hover:text-[#8A3841]">
+                      +91 99401 00557
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-[#8A3841] text-white">
+                    <Mail className="h-6 w-6" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 text-sm">EMAIL</h3>
+                  <p className="text-gray-600 text-sm mt-1">
+                    <a
+                      href="mailto:admin@docksideconstructions.com"
+                      className="hover:text-[#8A3841]"
+                    >
+                      admin@docksideconstructions.com
+                    </a>
+                    <br />
+                    <a
+                      href="mailto:projects@docksideconstructions.com"
+                      className="hover:text-[#8A3841]"
+                    >
+                      projects@docksideconstructions.com
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              {/* Office Hours */}
+              <div className="flex gap-4">
+                <div className="flex-shrink-0">
+                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-[#8A3841] text-white">
+                    <Clock3 className="h-6 w-6" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-900 text-sm">OFFICE HOURS</h3>
+                  <p className="text-gray-600 text-sm mt-1">
+                    Monday - Saturday<br />
+                    9:00 AM - 6:00 PM
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Emergency Support */}
+            <div className="bg-[#2B1116] p-6 rounded-lg text-white space-y-4">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="h-6 w-6 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-bold text-sm uppercase tracking-wider">
+                    Emergency Support
+                  </h3>
+                  <p className="text-sm text-gray-300 mt-2">
+                    For urgent site support or equipment breakdown, call anytime.
+                  </p>
+                </div>
+              </div>
+              <a
+                href="tel:+918825922737"
+                className="inline-block bg-[#8A3841] hover:bg-[#6B2F33] text-white px-4 py-2 rounded font-semibold text-sm transition-colors"
+              >
+                <Phone className="h-4 w-4 inline mr-2" />
+                +91 88259 22737
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column - Contact Form */}
+          <div className="bg-white">
+            <div className="mb-6">
+              <h2 className="text-[11px] font-bold tracking-widest text-[#8A3841] uppercase mb-4">
+                Send us a message
+              </h2>
+              <h3 className="text-2xl font-bold text-gray-900">
+                We will get back to you
+              </h3>
+            </div>
+            <ContactForm />
+          </div>
+        </div>
+      </section>
+
+      {/* Why Connect Section */}
+      <section className="px-4 md:px-8 py-20 bg-gray-50">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="mb-12">
+            <span className="text-[11px] font-bold tracking-widest text-[#8A3841] uppercase">
+              Why connect with us?
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3">
+              We're committed to your success
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            {reasons.map((reason) => {
+              const Icon = reason.icon;
+              return (
+                <div key={reason.title} className="bg-white p-6 rounded-lg">
+                  <Icon className="h-8 w-8 text-[#8A3841] mb-4" />
+                  <h3 className="font-bold text-gray-900 mb-2">{reason.title}</h3>
+                  <p className="text-sm text-gray-600">{reason.text}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Clients Strip */}
+      <section className="px-4 md:px-8 py-16 bg-white border-t border-gray-200">
+        <div className="max-w-[1200px] mx-auto">
+          <p className="text-center text-gray-600 text-sm mb-8">
+            Trusted by industrial leaders & public sector organizations
           </p>
-          <div className="shot-subhero__actions">
-            <Link href="#contact-form" className="shot-button shot-button--fill">
-              Request a Quote <ArrowRight aria-hidden="true" />
-            </Link>
-            <a href="tel:+918825922737" className="shot-button shot-button--outline">
-              Contact Our Team <ArrowRight aria-hidden="true" />
-            </a>
-          </div>
+          <ClientLogoMarquee clients={clientRecords} />
         </div>
-      </section>
-
-      <section className="shot-contact-panel">
-        <div className="shot-contact-info">
-          <span>Contact Information</span>
-          <h2>Reach out to Dockside</h2>
-          <div className="shot-contact-info__list">
-            <article>
-              <MapPin aria-hidden="true" />
-              <div>
-                <h3>Registered Office</h3>
-                <p>No.56, V.G.P. Nagar East,<br />Salamedu, Villupuram - 605401<br />Tamil Nadu, India</p>
-              </div>
-            </article>
-            <article>
-              <Phone aria-hidden="true" />
-              <div>
-                <h3>Phone</h3>
-                <p><a href="tel:+918925922737">+91 89259 22737</a><br /><a href="tel:+919940100557">+91 99401 00557</a></p>
-              </div>
-            </article>
-            <article>
-              <Mail aria-hidden="true" />
-              <div>
-                <h3>Email</h3>
-                <p><a href="mailto:admin@docksideconstructions.com">admin@docksideconstructions.com</a><br /><a href="mailto:projects@docksideconstructions.com">projects@docksideconstructions.com</a></p>
-              </div>
-            </article>
-            <article>
-              <Clock3 aria-hidden="true" />
-              <div>
-                <h3>Office Hours</h3>
-                <p>Monday - Saturday<br />9:00 AM - 6:00 PM</p>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <form id="contact-form" action={submitContact} className="shot-contact-form">
-          <span>Send us a message</span>
-          <h2>We will get back to you</h2>
-          <div className="shot-contact-form__grid">
-            <input name="name" placeholder="Full Name *" required />
-            <input name="email" type="email" placeholder="Email Address *" required />
-            <input name="phone" placeholder="Phone Number *" required />
-            <input name="company" placeholder="Company Name" />
-            <select name="projectType" defaultValue="" required>
-              <option value="" disabled>Project Type / Service Required</option>
-              <option value="Civil Construction">Civil Construction</option>
-              <option value="Road & Highways">Road & Highways</option>
-              <option value="Railway Works">Railway Works</option>
-              <option value="Electrical Works">Electrical Works</option>
-              <option value="Industrial Projects">Industrial Projects</option>
-              <option value="Project Management">Project Management</option>
-            </select>
-            <textarea name="message" placeholder="Your Message *" rows={5} required />
-          </div>
-          <button type="submit">
-            Send Message <ArrowRight aria-hidden="true" />
-          </button>
-          <p>
-            <LockKeyhole aria-hidden="true" />
-            Your information is secure and will never be shared.
-          </p>
-        </form>
-      </section>
-
-      <section className="shot-contact-reasons">
-        <span>Why connect with us?</span>
-        <h2>We&apos;re committed to your success</h2>
-        <div>
-          {reasons.map((reason) => {
-            const Icon = reason.icon;
-            return (
-              <article key={reason.title}>
-                <Icon aria-hidden="true" />
-                <h3>{reason.title}</h3>
-                <p>{reason.text}</p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="shot-contact-location">
-        <div>
-          <span>Our Location</span>
-          <h2>Find us here</h2>
-          <p>No.56, V.G.P. Nagar East<br />Salamedu, Villupuram - 605401<br />Tamil Nadu, India</p>
-          <Link href={directionsUrl} target="_blank" rel="noreferrer" className="shot-button shot-button--outline">
-            <MapPin aria-hidden="true" />
-            Get Directions <ArrowRight aria-hidden="true" />
-          </Link>
-        </div>
-        <div className="shot-contact-map">
-          <iframe title="Dockside Constructions map location" loading="lazy" src={mapUrl} />
-          <div className="shot-contact-map__pin">
-            <MapPin aria-hidden="true" />
-            <strong>Dockside Constructions<br />Private Limited</strong>
-          </div>
-        </div>
-      </section>
-
-      <section className="shot-client-strip shot-client-strip--contact">
-        <span>Trusted by industrial leaders & public sector organizations</span>
-        <ClientLogoMarquee clients={clientRecords} />
       </section>
     </div>
   );
