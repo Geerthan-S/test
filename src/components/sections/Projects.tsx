@@ -130,22 +130,21 @@ export function Projects({ projects }: { projects: ProjectView[] }) {
         </Link>
       </div>
 
-      <div className="premium-project-rail" aria-label="Featured projects">
-        <motion.div
-          className="premium-project-rail"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-          style={{ display: "contents" }}
-        >
-          {displayProjects.map(({ project, featured }, index) => (
-            <motion.div key={project.id} variants={projectCardVariants}>
-              <Link
-                href={`/projects/${project.slug}`}
-                className="premium-project-card"
-                style={{ ["--index" as string]: index }}
-              >
+      <motion.div
+        className="premium-project-rail"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={containerVariants}
+        aria-label="Featured projects"
+      >
+        {displayProjects.map(({ project, featured }, index) => (
+          <motion.div key={project.id} variants={projectCardVariants}>
+            <Link
+              href={`/projects/${project.slug}`}
+              className="premium-project-card"
+              style={{ ["--index" as string]: index }}
+            >
             <div className="premium-project-card__image">
               <Image
                 src={featured.image}
@@ -188,7 +187,6 @@ export function Projects({ projects }: { projects: ProjectView[] }) {
             </motion.div>
           ))}
         </motion.div>
-      </div>
     </section>
   );
 }
