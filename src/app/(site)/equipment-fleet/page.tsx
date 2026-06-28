@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Gauge, CheckCircle2, PhoneCall, Truck } from "lucide-react";
+import { ArrowRight, CheckCircle2, PhoneCall, Truck } from "lucide-react";
 import { getEquipment, type EquipmentItem } from "@/lib/repositories";
 import { EquipmentGridClient } from "@/components/equipment/EquipmentGridClient";
 
@@ -11,128 +11,32 @@ export const metadata = {
     "Explore Dockside Constructions' owned heavy equipment fleet — tipper trucks, excavators, motor graders, vibro rollers, JCB backhoe loaders, and water tankers deployed across all active project sites.",
 };
 
-function getBadgeLabel(item: EquipmentItem): string {
-  return fleetBadgeMap[item.slug] ?? `${item.quantity}+ Units`;
-}
-
-function getDescription(item: EquipmentItem): string {
-  return item.description?.trim() || fleetDescMap[item.slug] || "";
-}
-
-/* ─── Equipment Card ───────────────────────────────────────────────────────── */
-
-import { motion, type Variants } from "framer-motion";
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, rotateY: 90, y: 20 },
-  visible: {
-    opacity: 1,
-    rotateY: 0,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
+const fleetBadgeMap: Record<string, string> = {
+  "tipper-truck": "TIPPER",
+  "excavator": "EXCAVATOR",
+  "motor-grader": "GRADER",
+  "vibro-roller": "ROLLER",
+  "jcb-backhoe": "JCB",
+  "water-tanker": "TANKER",
 };
 
-const specRowVariants: Variants = {
-  hidden: { opacity: 0, x: -16 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-  },
+const fleetDescMap: Record<string, string> = {
+  "tipper-truck": "Heavy-duty tipper trucks for bulk material transport and site clearing operations.",
+  "excavator": "Hydraulic excavators for earthwork, trenching, and foundation digging.",
+  "motor-grader": "Motor graders for road construction, grading, and surface finishing.",
+  "vibro-roller": "Vibratory compactors for soil compaction and pavement finishing.",
+  "jcb-backhoe": "JCB backhoe loaders for versatile on-site material handling.",
+  "water-tanker": "Water tankers for dust suppression, site watering, and hydration.",
 };
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.06, delayChildren: 0.05 },
-  },
-};
-
-function EquipmentCard({ item }: { item: EquipmentItem }) {
-  const badge = getBadgeLabel(item);
-  const description = getDescription(item);
-
-  return (
-    <motion.article
-      className="group flex flex-col bg-white border border-gray-200 hover:border-[#8A3841]/30 hover:shadow-[0_8px_32px_rgba(138,56,65,0.08)] transition-all duration-300 overflow-hidden"
-      variants={cardVariants}
-      style={{ perspective: "1200px" }}
-    >
-      {/* Image */}
-      <div className="relative aspect-[16/10] flex-shrink-0 overflow-hidden bg-gray-100">
-        {item.imageUrl ? (
-          <Image
-            src={item.imageUrl}
-            alt={item.name}
-            fill
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
-            <Truck className="w-10 h-10 text-gray-200" aria-hidden="true" />
-          </div>
-        )}
-        {/* Red unit badge */}
-        <span
-          className="absolute top-0 left-0 bg-[#8A3841] text-[11px] font-extrabold tracking-widest uppercase px-3 py-1.5"
-          style={{ color: "#ffffff" }}
-        >
-          {badge}
-        </span>
-      </div>
-
-      {/* Body */}
-      <div className="flex flex-col flex-1 p-5">
-        <h3 className="font-display text-[17px] font-extrabold uppercase tracking-wide text-gray-900 mb-4 leading-tight">
-          {item.name}
-        </h3>
-
-        {/* Spec rows */}
-        <motion.div
-          className="space-y-2.5 mb-4"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={containerVariants}
-        >
-          {item.capacity && (
-            <motion.div className="flex items-center gap-2" variants={specRowVariants}>
-              <Gauge className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" aria-hidden="true" />
-              <span className="text-[11px] font-bold tracking-widest uppercase text-gray-400 flex-1">
-                Capacity
-              </span>
-              <span className="text-[12px] font-semibold text-gray-700">
-                {item.capacity}
-              </span>
-            </motion.div>
-          )}
-          <motion.div className="flex items-center gap-2" variants={specRowVariants}>
-            <CheckCircle2 className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" aria-hidden="true" />
-            <span className="text-[11px] font-bold tracking-widest uppercase text-gray-400 flex-1">
-              Status
-            </span>
-            <span className="text-[12px] font-bold text-[#16A34A]">
-              {item.status || "Active Fleet"}
-            </span>
-          </motion.div>
-        </motion.div>
-
-        {/* Description */}
-        {description && (
-          <p className="text-[13px] leading-[1.7] text-gray-500 pt-3.5 mt-auto border-t border-gray-100">
-            {description}
-          </p>
-        )}
-      </div>
-    </motion.article>
-  );
-}
-
-/* ─── Page ─────────────────────────────────────────────────────────────────── */
-
+const fleetCategories = [
+  { meta: "FLEET", label: "Tipper Trucks" },
+  { label: "Excavators" },
+  { label: "Motor Graders" },
+  { label: "Vibro Rollers" },
+  { label: "JCB Backhoes" },
+  { label: "Water Tankers" },
+];
 export default async function EquipmentFleetPage() {
   const equipment = await getEquipment();
 
