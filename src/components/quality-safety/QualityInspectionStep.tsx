@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ShieldCheck, type LucideIcon } from "lucide-react";
+import { ShieldCheck, ArrowRight, type LucideIcon } from "lucide-react";
 
 type QualityInspectionStepProps = {
   number: string;
@@ -102,7 +102,9 @@ export function QualityInspectionStep({
         transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
       >
         <span className="delivery-step__circle-outer" aria-hidden="true" />
-        <span className="delivery-step__circle-arrow" aria-hidden="true" />
+        <span className="delivery-step__circle-arrow" aria-hidden="true">
+          {index < 5 && <ArrowRight className="w-6 h-6 text-[#8A3841]" strokeWidth={2.5} />}
+        </span>
         <motion.span
           className="delivery-step__circle-inner"
           whileHover={{ rotate: 6 }}

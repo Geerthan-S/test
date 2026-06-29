@@ -18,7 +18,7 @@ export default async function EditProjectPage({
   await requireAdmin();
   const [{ id }, flags] = await Promise.all([params, searchParams]);
   const rawProject = await runSafeQuery<any>(
-    () => getPrisma().project.findUnique({ where: { id }, include: { testimonial: true } }),
+    () => getPrisma().project.findUnique({ where: { id } }),
     seedProjects.find((item) => item.id === id),
   );
 

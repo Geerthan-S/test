@@ -18,6 +18,7 @@ const navItems = [
   ["Quality & Safety", "/quality-safety"],
   ["Projects", "/projects"],
   ["Downloads", "/downloads"],
+  ["Careers", "/careers"],
   ["Contact", "/contact"],
 ] as const;
 

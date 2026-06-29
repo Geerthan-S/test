@@ -9,15 +9,15 @@ datasource db {
 }
 
 model CareerSetting {
-  id                   String   @id
+  id                   String   @id @default(cuid())
   internshipButtonText String   @default("Apply for Internship")
   internshipActionType String   @default("modal")
   internshipActionUrl  String   @default("")
-  updatedAt            DateTime
+  updatedAt            DateTime @updatedAt
 }
 
 model Client {
-  id          String   @id
+  id          String   @id @default(cuid())
   name        String
   slug        String   @unique
   logoUrl     String?
@@ -26,26 +26,26 @@ model Client {
   testimonial String?
   featured    Boolean  @default(true)
   createdAt   DateTime @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime @updatedAt
 
   @@index([featured, updatedAt])
   @@index([industry])
 }
 
 model ContactMessage {
-  id                     String   @id
-  name                   String
-  email                  String
-  phone                  String?
-  company                String?
-  inquiryType            String   @default("General")
-  grievanceCategory      String?
-  projectLocation        String?
-  priorityLevel          String?
-  preferredContactMethod String?
-  message                String
-  attachments            String[] @default([])
-  createdAt              DateTime @default(now())
+  id                      String   @id @default(cuid())
+  inquiryType             String   @default("General")
+  name                    String
+  email                   String
+  phone                   String   @default("")
+  company                 String?
+  grievanceCategory       String?
+  projectLocation         String?
+  priorityLevel           String?
+  preferredContactMethod  String   @default("Email")
+  message                 String
+  attachments             String[] @default([])
+  createdAt               DateTime @default(now())
 
   @@index([createdAt])
   @@index([email])
@@ -53,7 +53,7 @@ model ContactMessage {
 }
 
 model Download {
-  id        String   @id
+  id        String   @id @default(cuid())
   title     String
   category  String
   fileUrl   String
@@ -61,46 +61,66 @@ model Download {
   sortOrder Int      @default(0)
   published Boolean  @default(true)
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt
 
   @@index([published, category])
 }
 
 model Equipment {
-  id           String   @id
+  id           String   @id @default(cuid())
   name         String
   slug         String   @unique
   imageUrl     String?
   quantity     Int      @default(1)
   capacity     String?
+  description  String?
   manufacturer String?
   year         Int?
   status       String   @default("Active")
   sortOrder    Int      @default(0)
   published    Boolean  @default(true)
   createdAt    DateTime @default(now())
-  updatedAt    DateTime
+  updatedAt    DateTime @updatedAt
 
   @@index([published, sortOrder])
 }
 
 model JobOpening {
-  id         String   @id
-  title      String
-  department String
-  experience String
-  location   String
-  type       String   @default("Full-Time")
-  skills     String[] @default([])
-  published  Boolean  @default(true)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime
+  id           String           @id @default(cuid())
+  title        String
+  department   String
+  experience   String
+  location     String
+  type         String           @default("Full-Time")
+  skills       String[]         @default([])
+  published    Boolean          @default(true)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  applications JobApplication[]
 
   @@index([published, updatedAt])
 }
 
+model JobApplication {
+  id           String     @id @default(cuid())
+  jobOpeningId String
+  jobOpening   JobOpening @relation(fields: [jobOpeningId], references: [id], onDelete: Cascade)
+  name         String
+  email        String
+  phone        String
+  resumeUrl    String
+  coverLetter  String?
+  status       String     @default("NEW")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([jobOpeningId])
+  @@index([status, createdAt])
+  @@index([email])
+}
+
 model MediaAsset {
-  id           String   @id
+  id           String   @id @default(cuid())
   publicId     String
   secureUrl    String
   resourceType String
@@ -111,7 +131,7 @@ model MediaAsset {
 }
 
 model Project {
-  id                String        @id
+  id                String        @id @default(cuid())
   title             String
   slug              String        @unique
   clientName        String
@@ -133,7 +153,7 @@ model Project {
   featured          Boolean       @default(false)
   completedAt       DateTime?
   createdAt         DateTime      @default(now())
-  updatedAt         DateTime
+  updatedAt         DateTime      @updatedAt
   authorId          String?
   clientOverview    String?
   clientType        String?
@@ -151,7 +171,6 @@ model Project {
   steelUsed         String?
   workforceDeployed String?
   User              User?         @relation(fields: [authorId], references: [id])
-  Testimonial       Testimonial?
 
   @@index([industry])
   @@index([published, featured, updatedAt])
@@ -159,17 +178,17 @@ model Project {
 }
 
 model SeoEntry {
-  id          String   @id
+  id          String   @id @default(cuid())
   path        String   @unique
   title       String
   description String
   image       String?
   createdAt   DateTime @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime @updatedAt
 }
 
 model SitePage {
-  id              String   @id
+  id              String   @id @default(cuid())
   slug            String   @unique
   title           String
   description     String
@@ -179,42 +198,26 @@ model SitePage {
   sections        Json
   published       Boolean  @default(true)
   createdAt       DateTime @default(now())
-  updatedAt       DateTime
+  updatedAt       DateTime @updatedAt
 
   @@index([published, slug])
 }
 
 model SiteSetting {
-  id        String   @id
+  id        String   @id @default(cuid())
   key       String   @unique
   value     String
-  updatedAt DateTime
-}
-
-model Testimonial {
-  id          String   @id
-  quote       String
-  personName  String
-  designation String
-  company     String
-  avatar      String?
-  projectId   String?  @unique
-  published   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime
-  Project     Project? @relation(fields: [projectId], references: [id])
-
-  @@index([published, updatedAt])
+  updatedAt DateTime @updatedAt
 }
 
 model User {
-  id           String    @id
+  id           String    @id @default(cuid())
   name         String
   email        String    @unique
   passwordHash String
   role         Role      @default(EDITOR)
   createdAt    DateTime  @default(now())
-  updatedAt    DateTime
+  updatedAt    DateTime  @updatedAt
   Project      Project[]
 
   @@index([role])

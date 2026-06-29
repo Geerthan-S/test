@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Upload, X, Mail, Phone, MessageSquare } from "lucide-react";
+import { Upload, X, Mail, Phone, MessageSquare, AlertTriangle, FileText, Circle, Shield, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -62,7 +62,7 @@ export function ContactForm() {
   const [charCount, setCharCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const MAX_CHARS = 1000;
+  const MAX_CHARS = 3000;
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -118,6 +118,25 @@ export function ContactForm() {
     setLoading(true);
     setError("");
 
+    // Validate required fields based on inquiry type
+    if (!formData.preferredContactMethod) {
+      setError("Please select your preferred contact method");
+      setLoading(false);
+      return;
+    }
+
+    if (inquiryType === "Grievance" && !formData.grievanceCategory) {
+      setError("Please select a grievance category");
+      setLoading(false);
+      return;
+    }
+
+    if ((inquiryType === "Project" || inquiryType === "Grievance") && !formData.priorityLevel) {
+      setError("Please select a priority level");
+      setLoading(false);
+      return;
+    }
+
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("inquiryType", formData.inquiryType);
@@ -167,25 +186,29 @@ export function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Inquiry Type Tabs */}
       <div className="flex gap-3 flex-wrap">
-        {(["General", "Project", "Grievance"] as const).map((type) => (
-          <button
-            key={type}
-            type="button"
-            onClick={() => handleInquiryTypeChange(type)}
-            className={cn(
-              "px-4 py-2 rounded-lg font-semibold text-sm transition-all",
-              inquiryType === type
-                ? "bg-[#8A3841] text-white"
-                : "border border-gray-300 text-gray-700 hover:bg-gray-50"
-            )}
-          >
-            {type === "Grievance"
-              ? "Grievance / Complaint"
-              : type === "Project"
-                ? "Project Request"
-                : "General Inquiry"}
-          </button>
-        ))}
+        {(["General", "Project", "Grievance"] as const).map((type) => {
+          const Icon = type === "General" ? Circle : type === "Project" ? FileText : AlertTriangle;
+          return (
+            <button
+              key={type}
+              type="button"
+              onClick={() => handleInquiryTypeChange(type)}
+              className={cn(
+                "px-4 py-2 rounded-lg font-semibold text-sm transition-all flex items-center gap-2",
+                inquiryType === type
+                  ? "bg-[#8A3841] text-white font-bold"
+                  : "border border-gray-300 text-gray-700 hover:bg-gray-50"
+              )}
+            >
+              <Icon className="w-4 h-4" />
+              {type === "Grievance"
+                ? "Grievance / Complaint"
+                : type === "Project"
+                  ? "Project Request"
+                  : "General Inquiry"}
+            </button>
+          );
+        })}
       </div>
 
       {/* Basic Fields */}
@@ -248,47 +271,53 @@ export function ContactForm() {
         onChange={handleInputChange}
       />
 
-      {(inquiryType === "Project" || inquiryType === "Grievance") && (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {(inquiryType === "Project" || inquiryType === "Grievance") && (
+          <Select
+            value={formData.priorityLevel}
+            onValueChange={(value) => handleSelectChange("priorityLevel", value)}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Priority Level *" />
+            </SelectTrigger>
+            <SelectContent>
+              {PRIORITY_LEVELS.map((level) => (
+                <SelectItem key={level} value={level}>
+                  {level}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+
         <Select
-          value={formData.priorityLevel}
-          onValueChange={(value) => handleSelectChange("priorityLevel", value)}
+          value={formData.preferredContactMethod}
+          onValueChange={(value) =>
+            handleSelectChange("preferredContactMethod", value)
+          }
         >
           <SelectTrigger>
-            <SelectValue placeholder="Priority Level *" />
+            <SelectValue placeholder="Preferred Contact Method *" />
           </SelectTrigger>
           <SelectContent>
-            {PRIORITY_LEVELS.map((level) => (
-              <SelectItem key={level} value={level}>
-                {level}
+            {CONTACT_METHODS.map((method) => (
+              <SelectItem key={method} value={method}>
+                {method}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
-      )}
-
-      <Select
-        value={formData.preferredContactMethod}
-        onValueChange={(value) =>
-          handleSelectChange("preferredContactMethod", value)
-        }
-      >
-        <SelectTrigger>
-          <SelectValue placeholder="Preferred Contact Method *" />
-        </SelectTrigger>
-        <SelectContent>
-          {CONTACT_METHODS.map((method) => (
-            <SelectItem key={method} value={method}>
-              {method}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      </div>
 
       {/* Message Textarea with Character Counter */}
       <div className="space-y-2">
         <Textarea
           name="message"
-          placeholder="Please describe your inquiry in detail *"
+          placeholder={
+            inquiryType === "Grievance"
+              ? "Please describe your grievance in detail *"
+              : "Please describe your inquiry in detail *"
+          }
           value={formData.message}
           onChange={handleInputChange}
           maxLength={MAX_CHARS}
@@ -302,6 +331,9 @@ export function ContactForm() {
 
       {/* File Upload */}
       <div className="space-y-4">
+        <p className="text-sm font-medium text-gray-700">
+          Upload Documents / Photos (Optional)
+        </p>
         <label className="block">
           <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-gray-400 transition">
             <Upload className="w-6 h-6 mx-auto mb-2 text-gray-400" />
@@ -345,11 +377,15 @@ export function ContactForm() {
 
       {/* Privacy Note */}
       <div className="flex items-start gap-2 bg-gray-50 p-3 rounded-lg">
-        <Mail className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
-        <p className="text-xs text-gray-600">
-          Your information is secure. We respect your privacy. Your details will
-          only be used to address your concern.
-        </p>
+        <Shield className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
+        <div>
+          <p className="text-xs font-semibold text-gray-700">
+            Your information is secure
+          </p>
+          <p className="text-xs text-gray-600">
+            We respect your privacy. Your details will only be used to address your concern.
+          </p>
+        </div>
       </div>
 
       {/* Error Message */}
@@ -363,9 +399,20 @@ export function ContactForm() {
       <Button
         type="submit"
         disabled={loading}
-        className="w-full bg-[#8A3841] hover:bg-[#6B2F33] text-white py-3 rounded-lg font-semibold"
+        className="w-full bg-[#8A3841] hover:bg-[#6B2F33] text-white py-3 rounded-lg font-bold uppercase flex items-center justify-center gap-2"
       >
-        {loading ? "Submitting..." : "Submit Grievance"}
+        {loading ? (
+          "Submitting..."
+        ) : (
+          <>
+            {inquiryType === "Grievance"
+              ? "Submit Grievance"
+              : inquiryType === "Project"
+                ? "Submit Project Request"
+                : "Send Message"}
+            <ArrowRight className="w-4 h-4" />
+          </>
+        )}
       </Button>
     </form>
   );

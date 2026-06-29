@@ -93,6 +93,8 @@ export const industrialImages = {
     "https://images.pexels.com/photos/1599791/pexels-photo-1599791.jpeg?auto=compress&cs=tinysrgb&w=1800",
   residential:
     "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1800",
+  careersHero:
+    "https://images.pexels.com/photos/3862388/pexels-photo-3862388.jpeg?auto=compress&cs=tinysrgb&w=1800",
 };
 
 export const homeReferenceImages = {

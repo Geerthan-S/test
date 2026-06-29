@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Download, FileCog, FolderOpen, LayoutDashboard, LogOut, Settings, ShieldCheck, Truck, Users, Wrench, type LucideIcon } from "lucide-react";
+import { Briefcase, Download, FileCog, FolderOpen, LayoutDashboard, LogOut, Settings, ShieldCheck, Truck, Users, Wrench, type LucideIcon } from "lucide-react";
 import { signOut } from "@/auth";
 import { requireAdmin } from "@/lib/admin";
 import { DOCKSIDE_LOGO_SRC } from "@/components/ui/logo";
@@ -11,6 +11,7 @@ const adminNav: Array<[string, string, LucideIcon]> = [
   ["Projects", "/admin/projects", Wrench],
   ["Equipment Fleet", "/admin/equipment", Truck],
   ["Quality & Safety", "/admin/quality-safety", ShieldCheck],
+  ["Job Applications", "/admin/job-applications", Briefcase],
   ["Downloads", "/admin/downloads", Download],
   ["Files Manager", "/admin/files", FolderOpen],
   ["Site Content", "/admin/site-content", FileCog],

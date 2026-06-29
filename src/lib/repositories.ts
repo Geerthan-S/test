@@ -199,7 +199,6 @@ export const getProjects = cache(async (): Promise<ProjectView[]> => {
   return withDatabaseFallback(async () => {
     const projects = await getPrisma().project.findMany({
       where: { published: true },
-      include: { testimonial: true },
       orderBy: [{ featured: "desc" }, { updatedAt: "desc" }],
     });
     return projects.map(normalizeProject);
@@ -273,9 +272,8 @@ export async function getAdminMetrics() {
   }
 
   const db = getPrisma();
-  const [projects, testimonials, clients, sitePages, equipment, downloads] = await Promise.all([
+  const [projects, clients, sitePages, equipment, downloads] = await Promise.all([
     db.project.count(),
-    db.testimonial.count(),
     db.client.count(),
     db.sitePage.count({ where: { slug: { notIn: retiredSitePageSlugs } } }),
     db.equipment.count({ where: { published: true } }),
@@ -284,7 +282,6 @@ export async function getAdminMetrics() {
 
   return {
     projects,
-    testimonials,
     clients,
     sitePages: Math.max(sitePages, defaultSitePages.length),
     equipment,
@@ -422,3 +419,120 @@ export async function getSiteSetting(key: string): Promise<string> {
   const settings = await getSiteSettings();
   return settings[key] ?? "";
 }
+
+// ─── Job Openings ─────────────────────────────────────────────────────────────
+
+export interface JobOpening {
+  id: string;
+  title: string;
+  department: string;
+  experience: string;
+  location: string;
+  type: string;
+  skills: string[];
+  published: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const seedJobOpenings: JobOpening[] = [
+  {
+    id: "seed-1",
+    title: "Senior Civil Engineer",
+    department: "Civil Engineering",
+    experience: "5-8 years",
+    location: "Mumbai, Maharashtra",
+    type: "Full-Time",
+    skills: ["AutoCAD", "Project Management", "Structural Design", "Site Supervision", "Contract Management"],
+    published: true,
+    createdAt: new Date("2024-06-01"),
+    updatedAt: new Date("2024-06-01"),
+  },
+  {
+    id: "seed-2",
+    title: "Site Engineer",
+    department: "Civil Engineering",
+    experience: "2-4 years",
+    location: "Pune, Maharashtra",
+    type: "Full-Time",
+    skills: ["Site Management", "Quality Control", "BOQ Preparation", "Total Station", "MS Project"],
+    published: true,
+    createdAt: new Date("2024-06-10"),
+    updatedAt: new Date("2024-06-10"),
+  },
+  {
+    id: "seed-3",
+    title: "Planning Engineer",
+    department: "Planning & Estimation",
+    experience: "3-5 years",
+    location: "Bangalore, Karnataka",
+    type: "Full-Time",
+    skills: ["Primavera P6", "MS Project", "Resource Planning", "Cost Estimation", "Progress Monitoring"],
+    published: true,
+    createdAt: new Date("2024-06-15"),
+    updatedAt: new Date("2024-06-15"),
+  },
+  {
+    id: "seed-4",
+    title: "QA/QC Engineer",
+    department: "Quality & Safety",
+    experience: "3-6 years",
+    location: "Chennai, Tamil Nadu",
+    type: "Full-Time",
+    skills: ["Quality Auditing", "ISO Standards", "Material Testing", "NDT Methods", "Inspection Planning"],
+    published: true,
+    createdAt: new Date("2024-06-20"),
+    updatedAt: new Date("2024-06-20"),
+  },
+  {
+    id: "seed-5",
+    title: "Safety Engineer",
+    department: "Quality & Safety",
+    experience: "2-5 years",
+    location: "Hyderabad, Telangana",
+    type: "Full-Time",
+    skills: ["Safety Audits", "Risk Assessment", "NEBOSH", "Emergency Response", "PPE Management"],
+    published: true,
+    createdAt: new Date("2024-06-25"),
+    updatedAt: new Date("2024-06-25"),
+  },
+];
+
+export const getJobOpenings = cache(async (): Promise<JobOpening[]> => {
+  if (!canUseDatabase()) return seedJobOpenings;
+
+  return withDatabaseFallback(async () => {
+    const jobs = await getPrisma().jobOpening.findMany({
+      where: { published: true },
+      orderBy: { updatedAt: "desc" },
+    });
+    return jobs;
+  }, seedJobOpenings);
+});
+
+// ─── Career Settings ──────────────────────────────────────────────────────────
+
+export interface CareerSetting {
+  id: string;
+  internshipButtonText: string;
+  internshipActionType: string;
+  internshipActionUrl: string;
+  updatedAt: Date;
+}
+
+const defaultCareerSetting: CareerSetting = {
+  id: "default",
+  internshipButtonText: "Apply for Internship",
+  internshipActionType: "modal",
+  internshipActionUrl: "",
+  updatedAt: new Date(),
+};
+
+export const getCareerSetting = cache(async (): Promise<CareerSetting> => {
+  if (!canUseDatabase()) return defaultCareerSetting;
+
+  return withDatabaseFallback(async () => {
+    const setting = await getPrisma().careerSetting.findFirst();
+    return setting || defaultCareerSetting;
+  }, defaultCareerSetting);
+});

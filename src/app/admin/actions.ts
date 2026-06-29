@@ -523,3 +523,30 @@ export async function updateSiteSettings(formData: FormData) {
   revalidatePath("/admin/site-settings");
   redirect("/admin/site-settings?saved=1");
 }
+
+// ─── Job Applications ─────────────────────────────────────────────────────────
+
+export async function updateApplicationStatus(formData: FormData) {
+  await requireAdmin();
+  if (!canUseDatabase()) redirect("/admin/job-applications?database=missing");
+
+  const applicationId = String(formData.get("applicationId") ?? "");
+  const status = String(formData.get("status") ?? "");
+
+  const validStatuses = ["NEW", "REVIEWED", "SHORTLISTED", "REJECTED"];
+  if (!validStatuses.includes(status)) {
+    redirect("/admin/job-applications?error=Invalid+status");
+  }
+
+  try {
+    await getPrisma().jobApplication.update({
+      where: { id: applicationId },
+      data: { status },
+    });
+  } catch (error) {
+    console.error("Failed to update application status:", error);
+    redirect("/admin/job-applications?error=Failed+to+update+status");
+  }
+
+  revalidatePath("/admin/job-applications");
+}

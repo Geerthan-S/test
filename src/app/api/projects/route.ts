@@ -12,7 +12,7 @@ import {
 
 export async function GET() {
   if (!canUseDatabase()) return NextResponse.json(seedProjects);
-  const projects = await getPrisma().project.findMany({ include: { testimonial: true } });
+  const projects = await getPrisma().project.findMany();
   return NextResponse.json(projects);
 }
 

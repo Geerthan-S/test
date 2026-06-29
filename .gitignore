@@ -31,3 +31,9 @@ work-report-*.md
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Claude Code working directory
+.claude/
+
+# Playwright MCP server
+.playwright-mcp/
