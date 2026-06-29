@@ -5,6 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { requireAdmin } from "@/lib/admin";
 import { canUseDatabase, getPrisma } from "@/lib/prisma";
 import { updateApplicationStatus } from "@/app/admin/actions";
+import { Prisma } from "@prisma/client";
 
 export const metadata = { title: "Job Applications CMS" };
 
@@ -15,10 +16,21 @@ const STATUS_OPTIONS = [
   { value: "REJECTED", label: "Rejected", color: "bg-red-100 text-red-800" },
 ];
 
+type JobApplicationWithOpening = Prisma.JobApplicationGetPayload<{
+  include: {
+    jobOpening: {
+      select: {
+        title: true;
+        department: true;
+      };
+    };
+  };
+}>;
+
 export default async function AdminJobApplicationsPage() {
   await requireAdmin();
 
-  let applications = [];
+  let applications: JobApplicationWithOpening[] = [];
   let dbAvailable = canUseDatabase();
 
   if (dbAvailable) {
@@ -92,7 +104,7 @@ export default async function AdminJobApplicationsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {applications.map((app: any) => (
+              {applications.map((app) => (
                 <TableRow key={app.id}>
                   <TableCell>
                     <div className="flex flex-col">
