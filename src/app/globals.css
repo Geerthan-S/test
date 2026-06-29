@@ -10036,17 +10036,6 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
   margin-left: auto;
   flex-shrink: 0;
 }
-  color: var(--ref-text);
-  font-size: clamp(22px, 2.5vw, 36px);
-  font-weight: 500;
-  line-height: 1.15;
-  text-transform: uppercase;
-}
-
-.project-case-footer-cta .studio-button {
-  margin-left: auto;
-  flex-shrink: 0;
-}
 
 /* Responsive Styles for New Project Case Study Layout */
 @media (max-width: 1024px) {

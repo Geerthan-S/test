@@ -37,3 +37,6 @@ work-report-*.md
 
 # Playwright MCP server
 .playwright-mcp/
+
+# User uploads
+public/uploads/
