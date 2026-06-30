@@ -9325,7 +9325,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
 
 .project-case-hero__image {
   object-fit: cover;
-  filter: brightness(0.85);
+  filter: brightness(1.05) saturate(0.95);
 }
 
 .project-case-hero::after {
@@ -9333,9 +9333,9 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg,
-      rgba(3, 4, 5, 0.1) 0%,
-      rgba(3, 4, 5, 0.4) 50%,
-      rgba(3, 4, 5, 0.75) 100%);
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0.9) 100%);
   pointer-events: none;
 }
 
@@ -9351,10 +9351,10 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
   display: inline-block;
   margin-bottom: 14px;
   padding: 6px 12px;
-  border: 1px solid rgba(220, 166, 92, 0.5);
+  border: 1px solid rgba(139, 63, 74, 0.3);
   border-radius: 3px;
-  background: rgba(3, 4, 5, 0.7);
-  color: var(--ref-gold-bright);
+  background: rgba(255, 255, 255, 0.95);
+  color: #8b3f4a;
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.08em;
@@ -9364,7 +9364,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
 .project-case-hero h1 {
   max-width: 760px;
   margin: 0 0 18px;
-  color: #fff;
+  color: #101211;
   font-size: clamp(38px, 5vw, 72px);
   font-weight: 700;
   line-height: 1.05;
@@ -9373,7 +9373,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
 .project-case-hero p {
   max-width: 570px;
   margin: 0 0 32px;
-  color: rgba(255, 255, 255, 0.9);
+  color: #3d4340;
   font-size: 15px;
   line-height: 1.65;
 }
