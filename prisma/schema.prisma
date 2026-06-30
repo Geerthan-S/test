@@ -53,17 +53,19 @@ model ContactMessage {
 }
 
 model Download {
-  id        String   @id @default(cuid())
-  title     String
-  category  String
-  fileUrl   String
-  fileType  String   @default("pdf")
-  sortOrder Int      @default(0)
-  published Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              String   @id @default(cuid())
+  title           String
+  category        String
+  fileUrl         String
+  fileType        String   @default("pdf")
+  sortOrder       Int      @default(0)
+  published       Boolean  @default(true)
+  downloadEnabled Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([published, category])
+  @@index([downloadEnabled])
 }
 
 model Equipment {
