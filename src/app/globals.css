@@ -9272,18 +9272,18 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
   gap: 28px;
   flex-wrap: wrap;
   padding: 52px clamp(22px, 5vw, 80px);
-  background: rgba(8, 10, 11, 0.75);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: #fdfaf7;
+  border-top: 1px solid rgba(139, 63, 74, 0.15);
 }
 
 .project-contact-cta svg:first-child {
-  color: var(--ref-gold);
+  color: #8b3f4a;
   flex-shrink: 0;
 }
 
 .project-contact-cta h2 {
   margin: 0 0 6px;
-  color: var(--ref-text);
+  color: #101211;
   font-size: clamp(22px, 2.5vw, 30px);
   font-weight: 600;
   text-transform: uppercase;
@@ -9291,7 +9291,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
 
 .project-contact-cta p {
   margin: 0;
-  color: var(--ref-muted);
+  color: #5e645f;
   font-size: 13px;
 }
 
