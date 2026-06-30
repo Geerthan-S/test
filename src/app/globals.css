@@ -8893,9 +8893,9 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg,
-      rgba(3, 4, 5, 0.35) 0%,
-      rgba(3, 4, 5, 0.18) 40%,
-      rgba(3, 4, 5, 0.82) 100%);
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(255, 255, 255, 0.8) 40%,
+      rgba(255, 255, 255, 0.9) 100%);
 }
 
 .project-detail-hero__content {
@@ -8958,7 +8958,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
 
 .project-detail-hero h1 {
   margin: 0 0 18px;
-  color: #fff;
+  color: #101211;
   font-size: clamp(28px, 4vw, 52px);
   font-weight: 700;
   line-height: 1.1;
@@ -8975,7 +8975,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
   display: flex;
   align-items: center;
   gap: 6px;
-  color: rgba(255, 255, 255, 0.65);
+  color: #5e645f;
   font-size: 12px;
 }
 
