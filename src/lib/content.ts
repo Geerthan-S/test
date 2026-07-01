@@ -20,9 +20,7 @@ export type ProjectView = {
   servicesUsed: string[];
   industry: string;
   summary: string;
-  clientOverview?: string | null;
   keyAchievements?: string[];
-  body: string;
   seoTitle?: string | null;
   seoDescription?: string | null;
   featured: boolean;
@@ -866,8 +864,6 @@ export const seedProjects: ProjectView[] = [
     industry: "Industrial manufacturing",
     summary:
       "A multi-scope industrial execution program covering production support buildings, renovation, utilities and civil-electrical works.",
-    body:
-      "Dockside executed more than 20 works for Whirlpool of India Ltd in Puducherry, including warehouse and packaging lab construction, reliability lab renovation, fire hydrant pipeline work, mezzanine floor construction and coordinated civil, electrical and interior scopes. The program reflects DCPL's ability to work inside active industrial environments with quality controls and timely execution.",
     seoTitle: "Whirlpool Puducherry Industrial Works",
     seoDescription:
       "Dockside Constructions industrial works program for Whirlpool of India Ltd in Puducherry.",
@@ -899,8 +895,6 @@ export const seedProjects: ProjectView[] = [
     industry: "Logistics parks",
     summary:
       "Large-format industrial park development with land grading, site development and common infrastructure scope.",
-    body:
-      "For Lodha Industrial Park at Eichoor, Chennai, DCPL handled earthwork, land grading, material supply, site development and common area development works. The project showcases large-scale site execution capability for logistics and industrial park environments.",
     seoTitle: "Lodha Industrial Park Chennai Case Study",
     seoDescription:
       "Earthwork, land grading and site development works by Dockside Constructions at Lodha Industrial Park Chennai.",
@@ -932,8 +926,6 @@ export const seedProjects: ProjectView[] = [
     industry: "Logistics",
     summary:
       "Ongoing civil, RCC, drainage and structural works for logistics infrastructure in Karnataka.",
-    body:
-      "DCPL's Adani Logistics scope at Malur, Karnataka includes miscellaneous civil works, RCC works, drainage and structural works. The ongoing project demonstrates Dockside's ability to coordinate high-utility industrial logistics infrastructure with active project controls.",
     seoTitle: "Adani Logistics Malur Civil Works",
     seoDescription:
       "Ongoing civil, RCC, drainage and structural works by Dockside Constructions for Adani Logistics Limited in Malur, Karnataka.",
@@ -959,8 +951,6 @@ export const seedProjects: ProjectView[] = [
     industry: "Commercial campus",
     summary:
       "Large-scale campus land development and site preparation scope for a major Chennai commercial development.",
-    body:
-      "At Chennai One IT SEZ's Mandra City Project, DCPL supports large-scale land development, soil filling, site preparation, DGPS and survey works. The project highlights Dockside's capacity to bring survey-led precision and execution discipline to early-stage campus infrastructure.",
     seoTitle: "Chennai One IT SEZ Land Development",
     seoDescription:
       "Land development, soil filling, DGPS and survey works by Dockside Constructions for Chennai One IT SEZ.",

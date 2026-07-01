@@ -3604,7 +3604,7 @@ body::after {
 .shot-contact-panel {
   display: grid;
   grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.12fr);
-  width: min(var(--shot-max), calc(100% - clamp(44px, 9.2vw, 128px)));
+  width: min(var(--shot-max), calc(100% - clamp(24px, 4vw, 48px)));
   margin: 0 auto;
   border: 1px solid var(--shot-line);
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.014));
@@ -3772,7 +3772,7 @@ body::after {
 .shot-contact-reasons,
 .shot-contact-location,
 .shot-client-strip--contact {
-  width: min(var(--shot-max), calc(100% - clamp(44px, 9.2vw, 128px)));
+  width: min(var(--shot-max), calc(100% - clamp(24px, 4vw, 48px)));
   margin: 0 auto;
   border-right: 1px solid var(--shot-line);
   border-left: 1px solid var(--shot-line);

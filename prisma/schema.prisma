@@ -148,7 +148,6 @@ model Project {
   servicesUsed      String[]      @default([])
   industry          String
   summary           String
-  body              String
   seoTitle          String?
   seoDescription    String?
   published         Boolean       @default(true)
@@ -157,12 +156,9 @@ model Project {
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
   authorId          String?
-  clientOverview    String?
   clientType        String?
   contractValue     String?
   keyAchievements   String[]      @default([])
-  projectCount      String?
-  yearsAssociated   String?
   builtUpArea       String?
   completionPct     Int           @default(0)
   concreteUsed      String?

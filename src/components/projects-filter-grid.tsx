@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import type { ProjectView } from "@/lib/content";
 import { getProjectCategory, projectCategoryFilters, type ProjectCategoryFilter } from "@/lib/project-categories";
+import { ProjectModal } from "@/components/projects/project-modal";
 
 const filters = projectCategoryFilters;
 
@@ -18,11 +18,17 @@ export function ProjectsFilterGrid({
   initialFilter?: ProjectCategoryFilter;
 }) {
   const [activeFilter, setActiveFilter] = useState<ProjectCategoryFilter>(initialFilter);
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState<number | null>(null);
 
   const filteredProjects = projects.filter((project) => {
     if (activeFilter === "All") return true;
     return getProjectCategory(project) === activeFilter;
   });
+
+  const handleFilterChange = (filter: ProjectCategoryFilter) => {
+    setActiveFilter(filter);
+    setSelectedProjectIndex(null); // Close modal when filter changes
+  };
 
   return (
     <>
@@ -31,7 +37,7 @@ export function ProjectsFilterGrid({
           <button
             key={filter}
             className={activeFilter === filter ? "is-active" : ""}
-            onClick={() => setActiveFilter(filter)}
+            onClick={() => handleFilterChange(filter)}
             type="button"
           >
             {filter}
@@ -51,9 +57,9 @@ export function ProjectsFilterGrid({
               transition={{ duration: 0.4, delay: index * 0.05 }}
               style={{ width: "100%", height: "100%" }}
             >
-              <Link
-                className="premium-project-card"
-                href={`/projects/${project.slug}`}
+              <div
+                className="premium-project-card cursor-pointer"
+                onClick={() => setSelectedProjectIndex(index)}
                 style={{ ["--index" as string]: index }}
               >
                 <div className="premium-project-card__image">
@@ -92,11 +98,20 @@ export function ProjectsFilterGrid({
                     <ArrowUpRight />
                   </span>
                 </div>
-              </Link>
+              </div>
             </motion.div>
           ))}
         </AnimatePresence>
       </motion.div>
+
+      <ProjectModal
+        project={selectedProjectIndex !== null ? filteredProjects[selectedProjectIndex] : null!}
+        allProjects={filteredProjects}
+        currentIndex={selectedProjectIndex ?? 0}
+        isOpen={selectedProjectIndex !== null}
+        onClose={() => setSelectedProjectIndex(null)}
+        onNavigate={(newIndex) => setSelectedProjectIndex(newIndex)}
+      />
     </>
   );
 }

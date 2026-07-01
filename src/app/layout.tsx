@@ -1,21 +1,11 @@
 import "./globals.css";
 import "./screenshot-home.css";
 import type { Metadata } from "next";
-import { Bebas_Neue, Inter } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LuxuryScroll } from "@/components/motion/LuxuryScroll";
 
-const bebasNeue = Bebas_Neue({
-  weight: "400",
-  variable: "--font-bebas-neue",
-  subsets: ["latin"],
-});
-
-const inter = Inter({
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
+// Using system fonts to bypass Google Fonts network fetch issues during build
+// TODO: Switch to local fonts (Bebas Neue, Work Sans) once network connectivity is resolved
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://docksideconstructions.com"),
@@ -72,10 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${bebasNeue.variable} ${inter.variable} dark h-full antialiased`}
-    >
+    <html lang="en" className="dark h-full antialiased">
       <body className="flex min-h-full flex-col">
         <LuxuryScroll />
         <TooltipProvider>{children}</TooltipProvider>

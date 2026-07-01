@@ -32,14 +32,12 @@ export function ProjectForm({
             </SelectContent>
           </Select>
         </div>
-        <Field label="Total projects" name="projectCount" defaultValue={project?.projectCount ?? ""} placeholder="15+" />
-        <Field label="Total contract value" name="contractValue" defaultValue={project?.contractValue ?? project?.projectValue} placeholder="INR 400+ Lakhs" />
+        <Field label="Project value" name="contractValue" defaultValue={project?.contractValue ?? project?.projectValue} placeholder="INR 400+ Lakhs" required />
         <Field label="Client logo URL" name="clientLogo" defaultValue={project?.clientLogo ?? ""} placeholder="https://... or /client-logos/logo.svg" />
         <Field label="Featured image URL" name="featuredImage" defaultValue={project?.featuredImage} placeholder="https://... or /home-reference/project.jpg" required />
         <Field label="Gallery URLs, comma separated" name="gallery" defaultValue={project?.gallery.join(", ")} placeholder="/image-1.jpg, /image-2.jpg" required />
         <Field label="Location" name="location" defaultValue={project?.location} required />
         <Field label="Timeline" name="timeline" defaultValue={project?.timeline} required />
-        <Field label="Years associated" name="yearsAssociated" defaultValue={project?.yearsAssociated ?? ""} placeholder="8" />
         <input name="projectValue" type="hidden" defaultValue={project?.projectValue ?? project?.contractValue ?? ""} />
         <Field label="Industry" name="industry" defaultValue={project?.industry} required />
         <div className="grid gap-2">
@@ -64,20 +62,12 @@ export function ProjectForm({
       <TextField label="Scope of work" name="scopeOfWork" defaultValue={project?.scopeOfWork} minLength={10} required />
       <TextField label="Summary" name="summary" defaultValue={project?.summary} minLength={10} required />
       <TextField
-        label="Client Overview"
-        name="clientOverview"
-        defaultValue={project?.clientOverview ?? ""}
-        placeholder="Dockside Constructions has executed multiple infrastructure projects for PWD Tamil Nadu including road formation, drainage systems and public infrastructure upgrades."
-        rows={5}
-      />
-      <TextField
         label="Key Achievements"
         name="keyAchievements"
         defaultValue={project?.keyAchievements?.join(", ") ?? ""}
         placeholder={"Completed 15+ projects,\nINR 400+ Lakhs worth of contracts,\nDelivered projects within schedule"}
         rows={5}
       />
-      <TextField label="Case-study body" name="body" defaultValue={project?.body} minLength={20} required rows={8} />
       <div className="grid gap-5 md:grid-cols-2">
         <Field label="SEO title" name="seoTitle" defaultValue={project?.seoTitle ?? ""} />
         <Field label="SEO description" name="seoDescription" defaultValue={project?.seoDescription ?? ""} />

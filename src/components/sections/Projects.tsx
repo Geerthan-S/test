@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -9,6 +10,7 @@ import { motion, type Variants } from "framer-motion";
 import { RevealText } from "@/components/motion/reveal";
 import { homeReferenceImages, type ProjectView } from "@/lib/content";
 import { projectCategoryFilters, projectCategoryHref } from "@/lib/project-categories";
+import { ProjectModal } from "@/components/projects/project-modal";
 
 const projectCardVariants: Variants = {
   hidden: { opacity: 0, scale: 0.92, y: 24 },
@@ -78,6 +80,8 @@ const homeFeaturedProjects = [
 ];
 
 export function Projects({ projects }: { projects: ProjectView[] }) {
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState<number | null>(null);
+
   const orderedProjects = homeFeaturedProjects
     .map((featured) => {
       const project = projects.find((entry) => entry.slug === featured.slug);
@@ -105,6 +109,7 @@ export function Projects({ projects }: { projects: ProjectView[] }) {
   const displayProjects = [...orderedProjects, ...fallbackProjects].slice(0, 4);
 
   return (
+    <>
     <section className="premium-projects" id="featured-projects">
       <div className="premium-projects__header">
         <div>
@@ -140,9 +145,12 @@ export function Projects({ projects }: { projects: ProjectView[] }) {
       >
         {displayProjects.map(({ project, featured }, index) => (
           <motion.div key={project.id} variants={projectCardVariants}>
-            <Link
-              href={`/projects/${project.slug}`}
-              className="premium-project-card"
+            <div
+              onClick={() => {
+                const projectIndex = projects.findIndex(p => p.id === project.id);
+                setSelectedProjectIndex(projectIndex);
+              }}
+              className="premium-project-card cursor-pointer"
               style={{ ["--index" as string]: index }}
             >
             <div className="premium-project-card__image">
@@ -183,10 +191,20 @@ export function Projects({ projects }: { projects: ProjectView[] }) {
                 <ArrowUpRight />
               </span>
             </div>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
+
+    <ProjectModal
+      project={selectedProjectIndex !== null ? projects[selectedProjectIndex] : null!}
+      allProjects={projects}
+      currentIndex={selectedProjectIndex ?? 0}
+      isOpen={selectedProjectIndex !== null}
+      onClose={() => setSelectedProjectIndex(null)}
+      onNavigate={(newIndex) => setSelectedProjectIndex(newIndex)}
+    />
+    </>
   );
 }

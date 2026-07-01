@@ -59,6 +59,7 @@ export function DownloadFormFields({
     fileType: string;
     sortOrder: number;
     published: boolean;
+    downloadEnabled: boolean;
   }>;
 }) {
   return (
@@ -132,6 +133,17 @@ export function DownloadFormFields({
             defaultChecked={defaults?.published ?? true}
           />
           Published (visible on website)
+        </label>
+      </div>
+
+      <div className="admin-form__field">
+        <label className="admin-checkbox">
+          <input
+            name="downloadEnabled"
+            type="checkbox"
+            defaultChecked={defaults?.downloadEnabled ?? true}
+          />
+          Download Enabled (allow visitors to download)
         </label>
       </div>
     </div>

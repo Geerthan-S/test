@@ -136,6 +136,13 @@ export default async function ContactPage() {
               </div>
             </article>
             <article>
+              <MapPin aria-hidden="true" />
+              <div>
+                <h3>Functional Office</h3>
+                <p>Vandalur, Chennai - 600048<br />Tamil Nadu, India</p>
+              </div>
+            </article>
+            <article>
               <Phone aria-hidden="true" />
               <div>
                 <h3>Phone</h3>
@@ -178,10 +185,6 @@ export default async function ContactPage() {
         </div>
         <div className="shot-contact-map">
           <iframe title="Dockside Constructions map location" loading="lazy" src={mapUrl} />
-          <div className="shot-contact-map__pin">
-            <MapPin aria-hidden="true" />
-            <strong>Dockside Constructions<br />Private Limited</strong>
-          </div>
         </div>
       </section>
 

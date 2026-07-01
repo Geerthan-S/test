@@ -354,12 +354,31 @@ export interface DownloadGroup {
   items: DownloadItem[];
 }
 
+const seedDownloadsFallback: DownloadGroup[] = [
+  {
+    category: "Company Documents",
+    items: [
+      {
+        id: "dl-1",
+        title: "Company Profile",
+        category: "Company Documents",
+        fileUrl: "/Dockside Business Profile.pdf",
+        fileType: "pdf",
+        sortOrder: 1,
+      },
+    ],
+  },
+];
+
 export const getDownloads = cache(async (): Promise<DownloadGroup[]> => {
-  if (!canUseDatabase()) return [];
+  if (!canUseDatabase()) return seedDownloadsFallback;
 
   return withDatabaseFallback(async () => {
     const rows = await getPrisma().download.findMany({
-      where: { published: true },
+      where: {
+        published: true,
+        downloadEnabled: true
+      },
       orderBy: [{ category: "asc" }, { sortOrder: "asc" }],
     });
     const grouped: Record<string, DownloadItem[]> = {};
@@ -375,7 +394,7 @@ export const getDownloads = cache(async (): Promise<DownloadGroup[]> => {
       });
     }
     return Object.entries(grouped).map(([category, items]) => ({ category, items }));
-  }, []);
+  }, seedDownloadsFallback);
 });
 
 // ─── Site Settings ────────────────────────────────────────────────────────────
