@@ -21,7 +21,7 @@ export function Reveal({
       className={className}
       initial={reduceMotion ? false : { opacity: 0, y: 28 }}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-12% 0px" }}
+      viewport={{ once: true, margin: "0px 0px 100px 0px" }}
       transition={{ duration: 0.8, delay, ease }}
     >
       {children}
@@ -45,7 +45,7 @@ export function RevealText({
       className={className}
       initial={reduceMotion ? false : { clipPath: "inset(0 0 100% 0)", y: 24 }}
       whileInView={reduceMotion ? undefined : { clipPath: "inset(0 0 0% 0)", y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px" }}
+      viewport={{ once: true, margin: "0px 0px 100px 0px" }}
       transition={{ duration: 1, delay, ease }}
     >
       {children}
