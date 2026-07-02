@@ -8,6 +8,9 @@ import {
   Send,
   ShieldCheck,
   BadgeCheck,
+  Briefcase,
+  TrendingUp,
+  Users,
 } from "lucide-react";
 import { CountUp } from "@/components/ui/CountUp";
 import { CareersFilterGrid } from "@/components/careers-filter-grid";
@@ -61,51 +64,124 @@ export default async function CareersPage() {
 
   return (
     <div className="careers-page-v2">
-      {/* ── 1. HERO ── */}
-      <section className="about-premium-hero">
-        <div className="about-premium-hero__copy">
-          <RevealText>
-            <span className="about-premium__eyebrow">JOIN OUR ENGINEERING LEGACY</span>
-            <h1>
-              Build Infrastructure
-              <br />
-              That Shapes Tomorrow.
-            </h1>
-          </RevealText>
-          <Reveal delay={0.12}>
-            <p>
-              Join Dockside Constructions and take technical ownership of high-impact industrial
-              facilities, logistics corridors, and civil infrastructure. We don&apos;t just execute
-              scopes; we build careers with safety, quality, and discipline.
-            </p>
-            <div className="about-premium-hero__actions">
-              <Link
-                href="#open-positions"
-                className="about-premium-button about-premium-button--fill"
-              >
-                <ArrowRight aria-hidden="true" />
-                Explore Openings
-              </Link>
-              <Link href="/contact" className="about-premium-button about-premium-button--outline">
-                Discuss Your Career
-                <ArrowRight aria-hidden="true" />
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-        <Reveal className="about-premium-hero__media" delay={0.18}>
+      {/* ── 1. HERO - REDESIGNED ── */}
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-white">
+        {/* Background Image */}
+        <div className="absolute inset-0">
           <Image
             src={industrialImages.careersHero}
             alt="Dockside Constructions site engineers reviewing project drawings"
             fill
             priority
-            sizes="(min-width: 1024px) 55vw, 100vw"
+            sizes="100vw"
+            className="object-cover object-center opacity-20"
           />
-          <div className="about-premium-hero__media-caption">
-            <span>Engineering careers</span>
-            <strong>Real site exposure from day one.</strong>
+          {/* Gradient Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 py-24 w-full">
+          <div className="max-w-[900px]">
+
+            {/* Eyebrow */}
+            <RevealText>
+              <div className="flex items-center gap-4 mb-10">
+                <div className="h-[2px] w-12 bg-[#923e4d]" />
+                <span className="font-mono text-[11px] tracking-[0.28em] text-[#923e4d] uppercase font-bold">
+                  JOIN OUR ENGINEERING LEGACY
+                </span>
+              </div>
+            </RevealText>
+
+            {/* Main Heading with Gradient Text */}
+            <RevealText>
+              <h1 className="font-display font-extrabold uppercase leading-[0.92] mb-10 tracking-tight">
+                <span
+                  className="block text-[#1a0a0c]"
+                  style={{ fontSize: "clamp(48px, 7vw, 96px)" }}
+                >
+                  Build Infrastructure
+                </span>
+                <span
+                  className="block bg-gradient-to-r from-[#923e4d] via-[#c95d6f] to-[#923e4d] bg-clip-text text-transparent"
+                  style={{ fontSize: "clamp(48px, 7vw, 96px)" }}
+                >
+                  That Shapes Tomorrow
+                </span>
+              </h1>
+            </RevealText>
+
+            {/* Description */}
+            <Reveal delay={0.12}>
+              <p className="text-[#2d1a1c]/90 text-[16px] md:text-[17px] leading-[1.75] mb-12 max-w-[680px]">
+                Join Dockside Constructions and take technical ownership of high-impact industrial
+                facilities, logistics corridors, and civil infrastructure. We don&apos;t just execute
+                scopes; we build careers with safety, quality, and discipline.
+              </p>
+
+              {/* Key Career Highlights */}
+              <div className="grid sm:grid-cols-3 gap-4 mb-12 max-w-[680px]">
+                {[
+                  { icon: Briefcase, label: "Real Projects, Day One" },
+                  { icon: TrendingUp, label: "Clear Career Path" },
+                  { icon: Users, label: "Expert Mentorship" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-center gap-3 px-4 py-3 bg-[#923e4d]/5 border border-[#923e4d]/10 backdrop-blur-sm hover:bg-[#923e4d]/10 hover:border-[#923e4d]/30 transition-all duration-300"
+                  >
+                    <item.icon className="w-4 h-4 text-[#923e4d] flex-shrink-0" />
+                    <span className="text-[13px] font-medium text-[#2d1a1c]/90">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="#open-positions"
+                  className="inline-flex items-center gap-3 bg-[#923e4d] text-white px-8 py-4 font-bold text-[13px] uppercase tracking-[0.1em] hover:bg-[#7a3340] transition-all duration-300 group"
+                >
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  Explore Openings
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-3 bg-transparent border-2 border-[#923e4d]/30 text-[#923e4d] px-8 py-4 font-bold text-[13px] uppercase tracking-[0.1em] hover:border-[#923e4d] hover:bg-[#923e4d]/5 transition-all duration-300 group"
+                >
+                  Discuss Your Career
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </Reveal>
+
           </div>
-        </Reveal>
+
+          {/* Floating Caption Badge */}
+          <Reveal delay={0.18} className="absolute bottom-12 right-12 hidden lg:block">
+            <div className="bg-white/95 backdrop-blur-sm px-6 py-4 shadow-2xl max-w-[280px]">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-2 h-2 bg-[#923e4d] rounded-full animate-pulse" />
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-gray-500 font-bold">
+                  Engineering Careers
+                </span>
+              </div>
+              <strong className="text-[#0a0204] text-[14px] font-bold block leading-tight">
+                Real site exposure from day one.
+              </strong>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Decorative Grid Pattern Overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 80px, #1a0a0c 80px, #1a0a0c 81px), repeating-linear-gradient(90deg, transparent, transparent 80px, #1a0a0c 80px, #1a0a0c 81px)',
+          }}
+        />
       </section>
 
       {/* ── 2. STATS BAR ── */}
