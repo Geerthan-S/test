@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ShieldCheck, ArrowRight, type LucideIcon } from "lucide-react";
+import { ShieldCheck, type LucideIcon } from "lucide-react";
 
 type QualityInspectionStepProps = {
   number: string;
@@ -102,9 +102,38 @@ export function QualityInspectionStep({
         transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
       >
         <span className="delivery-step__circle-outer" aria-hidden="true" />
-        <span className="delivery-step__circle-arrow" aria-hidden="true">
-          {index < 5 && <ArrowRight className="w-6 h-6 text-[#8A3841]" strokeWidth={2.5} />}
-        </span>
+        {index < 5 && (
+          <div className="connector-premium-flow" aria-hidden="true">
+            {[1, 2, 3].map((segment) => (
+              <motion.div
+                key={segment}
+                className="connector-premium-flow-segment"
+                initial={{ scale: 0, rotate: 45, opacity: 0 }}
+                animate={{ scale: 1, rotate: 45, opacity: 1 }}
+                transition={{
+                  delay: 0.3 + index * 0.1 + segment * 0.05,
+                  duration: 0.4,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
+                whileHover={{
+                  scale: 1.1,
+                  rotate: 50,
+                  transition: { duration: 0.2 }
+                }}
+              />
+            ))}
+            <motion.div
+              className="connector-premium-flow-arrow"
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{
+                delay: 0.5 + index * 0.1,
+                duration: 0.5,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+            />
+          </div>
+        )}
         <motion.span
           className="delivery-step__circle-inner"
           whileHover={{ rotate: 6 }}
