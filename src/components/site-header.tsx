@@ -50,7 +50,7 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    const desktopQuery = window.matchMedia("(min-width: 1201px)");
+    const desktopQuery = window.matchMedia("(min-width: 1441px)");
     const closeOnDesktop = () => {
       if (desktopQuery.matches) setOpen(false);
     };

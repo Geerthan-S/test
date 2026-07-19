@@ -635,7 +635,7 @@ body::after {
   color: rgba(255, 255, 255, 0.45) !important;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1440px) {
   .industrial-nav__links {
     display: none !important;
   }
