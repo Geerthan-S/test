@@ -1,4 +1,4 @@
-/* Screenshot rebuild: black/red Dockside homepage. Loaded after globals.css. */
+﻿/* Screenshot rebuild: black/red Dockside homepage. Loaded after globals.css. */
 :root {
   --shot-bg: #030506;
   --shot-panel: #090d0f;
@@ -1088,7 +1088,7 @@ body::after {
   background: var(--shot-red);
   color: #fff;
   padding: 0 24px;
-  content: "GET A QUOTE  →";
+  content: "GET A QUOTE  â†’";
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 800;
@@ -1230,7 +1230,7 @@ body::after {
 }
 
 .industrial-footer {
-  border-top: 1px solid rgba(178, 12, 45, 0.52) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
   background:
     radial-gradient(circle at 12% 0%, rgba(178, 12, 45, 0.12), transparent 30%),
     linear-gradient(180deg, #061018, #030506) !important;
@@ -1414,7 +1414,7 @@ body::after {
   width: min(1320px, 100%);
   min-height: 56px;
   margin: clamp(34px, 3.8vw, 46px) auto 0 !important;
-  border-top: 1px solid var(--shot-line-soft) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
   color: var(--shot-dim) !important;
   padding: 17px 0;
   font-family: var(--font-mono);
@@ -1534,7 +1534,7 @@ body::after {
   }
 
   .industrial-footer__bar {
-    margin-top: 36px !important;
+    margin-top: 9px !important;
   }
 }
 
@@ -1798,7 +1798,7 @@ body::after {
   .industrial-footer__bar {
     grid-template-columns: 1fr;
     min-height: auto;
-    margin-top: 36px !important;
+    margin-top: 9px !important;
     padding: 18px 0 20px;
     gap: 7px;
   }
@@ -1819,7 +1819,7 @@ body::after {
   .trusted-client-logo,
   .trusted-by-strip strong {
     border-left: 0 !important;
-    border-top: 1px solid var(--shot-line-soft) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
   }
 
   #company-introduction .cms-split-media {
@@ -4792,7 +4792,7 @@ input[type="submit"]:hover {
 }
 
 .industrial-footer {
-  border-top: 1px solid rgba(124, 45, 56, 0.36) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.03) !important;
   background:
     linear-gradient(135deg, rgba(124, 45, 56, 0.11), transparent 34%),
     #050505 !important;
@@ -4816,7 +4816,7 @@ input[type="submit"]:hover {
 }
 
 .industrial-footer__bar {
-  border-top: 1px solid rgba(124, 45, 56, 0.32) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
 }
 
 /* Tailwind utility color normalization for admin and form-heavy pages. */
@@ -7007,7 +7007,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) :wher
 
 .industrial-footer__bar,
 .industrial-footer__grid>div:not(:first-child) {
-  border-color: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
 }
 
 .footer-heading-icon,
@@ -7643,7 +7643,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .prem
   width: min(1320px, calc(100% - 56px)) !important;
   margin: 0 auto !important;
   padding: 12px 0 14px !important;
-  border-top: 1px solid var(--footer-border) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
   color: rgba(255, 255, 255, 0.58) !important;
   font-size: 12px !important;
   line-height: 1.4 !important;
@@ -8766,7 +8766,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
   justify-content: space-between !important;
   margin: 0 auto !important;
   padding: 22px 0 24px !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.13) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
 }
 
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-footer__bar span {
@@ -9733,9 +9733,9 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
   width: 100% !important;
   max-width: none !important;
   gap: 12px 18px !important;
-  margin: 66px 0 0 !important;
+  margin: 28px 0 0 !important;
   padding: 28px 0 0 !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
   color: rgba(255, 255, 255, 0.62) !important;
   font-family: var(--font-body), Inter, Arial, sans-serif !important;
   font-size: 13px !important;
@@ -12547,7 +12547,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
   color: #ffffff !important;
 }
 
-/* Email & location link — keep normal case */
+/* Email & location link â€” keep normal case */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-nav__utility a[href^="mailto:"],
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-nav__utility a[href="/contact"] {
   text-transform: none !important;
@@ -13279,7 +13279,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .prem
   align-items: center !important;
   justify-content: space-between !important;
   gap: 24px !important;
-  margin-top: 36px !important;
+  margin-top: 9px !important;
   padding-top: 22px !important;
   border-top: 1px solid rgba(146, 62, 77, 0.14) !important;
 }
@@ -15036,8 +15036,8 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
 }
 
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-footer__bar {
-  margin-top: 24px !important;
-  padding: 10px 0 0 !important;
+  margin-top: 6px !important;
+  padding: 16px 0 0 !important;
   min-height: 0 !important;
 }
 
@@ -15047,8 +15047,8 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
   }
 
   body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-footer__bar {
-    margin-top: 24px !important;
-    padding-top: 10px !important;
+    margin-top: 6px !important;
+    padding-top: 16px !important;
   }
 }
 
@@ -17252,7 +17252,7 @@ html:has(.admin-shell) :where([data-slot="select-item"]:hover, [data-slot="dropd
   outline: none !important;
 }
 
-/* ── Careers Page Hero Responsive Redesign ─────────────────────── */
+/* â”€â”€ Careers Page Hero Responsive Redesign â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 /* 1. TABLET ONLY (768px < width <= 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -17434,10 +17434,10 @@ html:has(.admin-shell) :where([data-slot="select-item"]:hover, [data-slot="dropd
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   DELIVERS SECTION — force white / light theme regardless of dark overrides
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   DELIVERS SECTION â€” force white / light theme regardless of dark overrides
    Must stay at the END of this file to win the cascade.
-═══════════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 body .delivers-section,
 body:has(main.flex-1) .delivers-section {
@@ -17500,10 +17500,10 @@ body:has(main.flex-1) .delivers-card__illustration svg {
   filter: none !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    HERO SLIDESHOW OVERRIDES
    Override all CSS rules that cover the image slideshow background
-   ═══════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 /* Remove the forced ivory/champagne gradient covering the hero */
 .premium-hero,
@@ -17512,7 +17512,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .prem
   background: transparent !important;
 }
 
-/* Allow the slideshow layers to be fully visible — remove before/after overlays */
+/* Allow the slideshow layers to be fully visible â€” remove before/after overlays */
 .premium-hero::before,
 .premium-hero::after,
 body:has(main.flex-1) .premium-hero::before,
@@ -17546,7 +17546,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .prem
   z-index: 2 !important;
 }
 
-/* Image fills the slide — no blend mode, full opacity */
+/* Image fills the slide â€” no blend mode, full opacity */
 .premium-hero .hero-slide__img,
 .premium-hero .hero-slideshow img {
   opacity: 1 !important;
@@ -18656,7 +18656,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .proj
 
 @media (min-width: 1280px) {
   .delivery-step__content {
-    margin-top: 36px !important;
+    margin-top: 9px !important;
   }
 }
 
@@ -19065,3 +19065,6 @@ body:has(.qs-reference-hero) .industrial-nav.quality-safety-nav .industrial-nav_
     min-height: 86px !important;
   }
 }
+
+
+

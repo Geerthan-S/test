@@ -512,7 +512,6 @@ export function Hero({
         @media (max-width: 1200px) {
           .qs-reference-hero {
             height: auto !important;
-            min-height: 0 !important;
             padding-top: 86px !important;
           }
           .qs-reference-hero__layout {
@@ -526,6 +525,46 @@ export function Hero({
             grid-template-columns: repeat(2, 1fr) !important;
           }
         }
+        @media (max-width: 768px) {
+          .home-hero-reference {
+            display: flex !important;
+            flex-direction: column !important;
+          }
+          .home-hero-reference .home-hero-bg {
+            position: relative !important;
+            height: auto !important;
+            inset: auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            order: 2 !important;
+            margin-top: 24px !important;
+          }
+          .home-hero-reference .qs-reference-hero__layout {
+            position: relative !important;
+            height: auto !important;
+            pointer-events: auto !important;
+            padding-top: 72px !important;
+            order: 1 !important;
+          }
+          .home-hero-reference .qs-reference-hero__copy {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            padding-top: 0 !important;
+            padding-bottom: 30px !important;
+          }
+          .home-hero-reference .hero-slideshow-wrapper {
+            position: relative !important;
+            inset: auto !important;
+            border-radius: 12px !important;
+            min-height: 480px !important;
+            margin-top: 20px !important;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.15) !important;
+          }
+        }
         @media (max-width: 760px) {
           .qs-reference-hero__badge {
             height: auto !important;
@@ -534,17 +573,28 @@ export function Hero({
             padding: 14px 16px !important;
           }
           .qs-reference-hero__actions {
-            gap: 20px !important;
+            gap: 16px !important;
             margin-bottom: 32px !important;
-          }
-          .qs-reference-hero__primary {
+            flex-direction: column !important;
             width: 100% !important;
+          }
+          .qs-reference-hero__primary,
+          .qs-reference-hero__secondary {
+            width: 100% !important;
+            justify-content: center !important;
           }
           .qs-reference-hero__certs {
             grid-template-columns: 1fr !important;
           }
           .qs-reference-hero__cert {
             padding-inline: 22px !important;
+          }
+          .qs-reference-hero__title {
+            font-size: clamp(2rem, 7vw, 3.5rem) !important;
+            line-height: 1.1 !important;
+          }
+          .qs-reference-hero__body {
+            font-size: clamp(1rem, 3.8vw, 1.15rem) !important;
           }
         }
       `}</style>

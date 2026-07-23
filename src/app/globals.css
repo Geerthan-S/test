@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 @import "../styles/tokens.css";
 
@@ -444,7 +444,7 @@ body::after {
 }
 
 .industrial-footer__main {
-  width: min(1440px, calc(100% - 40px)) !important;
+  width: 100% !important; padding-inline: 4vw !important;
   margin-inline: auto !important;
   position: relative;
   z-index: 1;
@@ -566,7 +566,7 @@ body::after {
 }
 
 .premium-project-card::after {
-  content: "ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢";
+  content: "ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢";
   position: absolute;
   right: 18px;
   bottom: 18px;
@@ -655,7 +655,11 @@ body::after {
 }
 
 .industrial-footer__bar {
-  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding-top: 24px !important;
+  margin-top: 9px !important;
   color: rgba(255, 255, 255, 0.45) !important;
 }
 
@@ -719,7 +723,7 @@ body::after {
   .premium-services,
   .premium-cta,
   .industrial-footer {
-    width: min(100% - 28px, 1320px) !important;
+    width: 100% !important;
   }
 
   .trust-systems {
@@ -1437,7 +1441,7 @@ body::after {
 .premium-services,
 .premium-cta,
 .cms-section {
-  width: min(1440px, calc(100% - 40px)) !important;
+  width: 100% !important; padding-inline: 4vw !important;
   margin-inline: auto !important;
 }
 
@@ -1468,7 +1472,7 @@ body::after {
 .project-showcase {
   position: relative;
   z-index: 1;
-  width: min(1440px, calc(100% - 40px)) !important;
+  width: 100% !important; padding-inline: 4vw !important;
   margin-inline: auto !important;
   background: var(--ref-bg) !important;
 }
@@ -1529,7 +1533,7 @@ body::after {
 /* Homepage capability tabs: clear, boxed alignment across breakpoints. */
 .premium-services {
   display: block !important;
-  width: min(1440px, calc(100% - 40px)) !important;
+  width: 100% !important; padding-inline: 4vw !important;
   margin: 24px auto 0 !important;
   border: 1px solid rgba(220, 166, 92, 0.2) !important;
   border-radius: 6px !important;
@@ -2277,7 +2281,7 @@ main.flex-1 {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: 12px !important;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 0 auto;
 }
 
@@ -2328,7 +2332,7 @@ main.flex-1 {
 
 .trusted-by-strip h2,
 .trusted-by-strip>div {
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin-inline: auto;
 }
 
@@ -2349,7 +2353,7 @@ main.flex-1 {
 }
 
 .cms-section>* {
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin-inline: auto;
 }
 
@@ -2582,7 +2586,7 @@ main.flex-1 {
 
 .premium-cta>div {
   min-height: clamp(520px, 58vw, 760px) !important;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin-inline: auto;
   padding: clamp(38px, 6vw, 88px) clamp(20px, 5vw, 78px) !important;
 }
@@ -2882,7 +2886,7 @@ main.flex-1 {
 .trust-metric-strip {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 0 auto;
 }
 
@@ -3367,7 +3371,7 @@ main.flex-1 {
   background: var(--shot-red);
   color: #fff;
   padding: 0 24px;
-  content: "GET A QUOTE  ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢";
+  content: "GET A QUOTE  ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢";
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 800;
@@ -3407,7 +3411,6 @@ main.flex-1 {
   width: 100% !important;
   margin: 0 !important;
   border: 0 !important;
-  background: #070b0d !important;
   padding: 34px clamp(22px, 4.6vw, 64px) 0 !important;
 }
 
@@ -3415,7 +3418,7 @@ main.flex-1 {
   display: grid !important;
   grid-template-columns: 1.35fr repeat(5, minmax(120px, 1fr)) !important;
   gap: 36px !important;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 0 auto;
 }
 
@@ -3433,9 +3436,9 @@ main.flex-1 {
 }
 
 .industrial-footer__bar {
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 30px auto 0 !important;
-  border-top: 1px solid var(--shot-line-soft) !important;
+  border-top: none !important;
   color: var(--shot-dim) !important;
 }
 
@@ -3560,11 +3563,11 @@ main.flex-1 {
 }
 
 
-/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
-   HOMEPAGE IMPROVEMENTS Ã¢â‚¬â€ targeted overrides
-   Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
+/* ÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚Â
+   HOMEPAGE IMPROVEMENTS ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â targeted overrides
+   ÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚Â */
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬ Hero industry tag line Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Hero industry tag line ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
 .hero-industry-tag {
   margin-top: 10px;
   color: rgba(40, 22, 8, 0.56);
@@ -3575,7 +3578,7 @@ main.flex-1 {
   line-height: 1.6;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬ CTA trust micro-strip Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ CTA trust micro-strip ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
 .cta-trust-strip {
   display: flex;
   flex-wrap: wrap;
@@ -3621,7 +3624,7 @@ main.flex-1 {
   text-transform: uppercase;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬ Client logo bigger size Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Client logo bigger size ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
 .shot-client-strip__viewport strong img {
   width: 180px !important;
   height: 64px !important;
@@ -3629,9 +3632,9 @@ main.flex-1 {
 }
 
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   TRUSTED-BY STRIP â€” Polished definition
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+   TRUSTED-BY STRIP Ã¢â‚¬â€ Polished definition
+   Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
 
 .trusted-by-strip {
   position: relative !important;
@@ -3693,9 +3696,9 @@ main.flex-1 {
   filter: grayscale(0) brightness(1) !important;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   PROCESS TIMELINE â€” Reduce top padding, pull section up
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+   PROCESS TIMELINE Ã¢â‚¬â€ Reduce top padding, pull section up
+   Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
 
 .process-timeline-v2 {
   padding-top: 56px !important;
@@ -3703,9 +3706,9 @@ main.flex-1 {
   margin-top: 0 !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   UNIFIED HERO HEIGHT — All hero sections same height
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   UNIFIED HERO HEIGHT â€” All hero sections same height
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .premium-hero,
 .premium-page-hero,
@@ -3743,9 +3746,9 @@ main.flex-1 {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   HERO ACTION BUTTONS — Dual-CTA layout for subhero & page-hero
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   HERO ACTION BUTTONS â€” Dual-CTA layout for subhero & page-hero
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 /* shot-subhero dual CTA row */
 .shot-subhero__actions {
@@ -3840,18 +3843,18 @@ main.flex-1 {
   margin-bottom: 16px;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   HOMEPAGE SCROLL FATIGUE REDUCTION — Tighter section rhythm
-   Applied per user restructure: Hero→Stats→Clients→About→Services
-   →Projects→WhyDockside→ProcessTimeline→CTA
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   HOMEPAGE SCROLL FATIGUE REDUCTION â€” Tighter section rhythm
+   Applied per user restructure: Heroâ†’Statsâ†’Clientsâ†’Aboutâ†’Services
+   â†’Projectsâ†’WhyDocksideâ†’ProcessTimelineâ†’CTA
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 /* Reduce top/bottom padding on all major homepage sections */
 .trust-systems {
   margin-top: 12px !important;
 }
 
-/* Trusted-by strip — tighter top */
+/* Trusted-by strip â€” tighter top */
 .trusted-by-strip,
 .enterprise-proof-strip {
   padding-top: 28px !important;
@@ -3887,11 +3890,11 @@ main.flex-1 {
   padding-bottom: 56px !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ABOUT PAGE — 9-point improvement CSS
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   ABOUT PAGE â€” 9-point improvement CSS
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-/* 1. HERO — reduce overlay opacity so image shows more */
+/* 1. HERO â€” reduce overlay opacity so image shows more */
 .about-premium-hero__media::after {
   content: "";
   position: absolute;
@@ -3904,7 +3907,7 @@ main.flex-1 {
   pointer-events: none;
 }
 
-/* 2. STAT CARDS — hover lift + glow */
+/* 2. STAT CARDS â€” hover lift + glow */
 .about-premium-stat-card {
   transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 240ms ease !important;
@@ -3917,13 +3920,13 @@ main.flex-1 {
     0 0 0 1px rgba(122, 28, 36, 0.18) !important;
 }
 
-/* 3. WHO WE ARE — image height 650px */
+/* 3. WHO WE ARE â€” image height 650px */
 .about-premium-who__image {
   height: 650px !important;
   min-height: 650px !important;
 }
 
-/* 4. APPROACH CARDS — more breathing room between cards, thinner connector */
+/* 4. APPROACH CARDS â€” more breathing room between cards, thinner connector */
 .about-premium-approach__timeline {
   gap: 0 28px !important;
 }
@@ -3943,7 +3946,7 @@ main.flex-1 {
   stroke-width: 1.25 !important;
 }
 
-/* 5. ISO CERT CARD — wrapper for click interaction */
+/* 5. ISO CERT CARD â€” wrapper for click interaction */
 .about-premium-certificate-card__image-wrapper {
   display: block;
   width: 100%;
@@ -4020,7 +4023,7 @@ main.flex-1 {
   margin: 0;
 }
 
-/* 5b. CERT LIGHTBOX — native <dialog> */
+/* 5b. CERT LIGHTBOX â€” native <dialog> */
 .cert-lightbox {
   position: fixed;
   inset: 0;
@@ -4172,22 +4175,22 @@ main.flex-1 {
   flex-shrink: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ABOUT HERO — Shift bg image 10% lower, crop bottom
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   ABOUT HERO â€” Shift bg image 10% lower, crop bottom
    object-position moves from center(50%) to 40% so the image
    sits lower in the frame; overflow:hidden crops the bottom.
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .about-premium-hero__media img,
 .about-premium-hero__media video {
   object-position: center 40% !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SERVICES PAGE — Improvements CSS
-   ═══════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SERVICES PAGE â€” Improvements CSS
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-/* ── 2. FILTER PILLS — sticky ─────────────────────────────────── */
+/* â”€â”€ 2. FILTER PILLS â€” sticky â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .services-filter--sticky {
   position: sticky !important;
   top: 84px !important;
@@ -4202,7 +4205,7 @@ main.flex-1 {
   box-shadow: 0 4px 20px rgba(69, 39, 34, 0.08) !important;
 }
 
-/* ── 3. SERVICE CARDS — simplified, uniform height ─────────────── */
+/* â”€â”€ 3. SERVICE CARDS â€” simplified, uniform height â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .services-card {
   min-height: 720px !important;
   display: grid !important;
@@ -4277,7 +4280,7 @@ main.flex-1 {
   color: #7a1c24;
 }
 
-/* Single CTA — stronger style */
+/* Single CTA â€” stronger style */
 .services-card__actions a:first-child {
   display: flex;
   align-items: center;
@@ -4303,7 +4306,7 @@ main.flex-1 {
   display: none !important;
 }
 
-/* ── 5. PROCESS TIMELINE — scroll-activated + hover lift ────────── */
+/* â”€â”€ 5. PROCESS TIMELINE â€” scroll-activated + hover lift â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .services-process-card {
   transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1),
     box-shadow 240ms ease,
@@ -4330,7 +4333,7 @@ main.flex-1 {
   position: relative;
 }
 
-/* ── 6. WHY DOCKSIDE — new section ──────────────────────────────── */
+/* â”€â”€ 6. WHY DOCKSIDE â€” new section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .services-why {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -4436,7 +4439,7 @@ main.flex-1 {
   }
 }
 
-/* ── 7. FOOTER CTA — trust chips ────────────────────────────────── */
+/* â”€â”€ 7. FOOTER CTA â€” trust chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .services-lead__trust-chips {
   list-style: none;
   padding: 0;
@@ -4464,7 +4467,7 @@ main.flex-1 {
   flex-shrink: 0;
 }
 
-/* ── 1. HERO — white overlay on left for text legibility ────────── */
+/* â”€â”€ 1. HERO â€” white overlay on left for text legibility â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 /* Override the screenshot-home.css ::before with a stronger left-panel overlay.
    The image is absolutely positioned (z-index 0) behind both pseudo-elements.
    This ::before sits at z-index 1 and now uses a fully-opaque left panel. */
@@ -4568,7 +4571,7 @@ body:has(.services-conversion-page) .services-hero::before,
   transform: translateY(-2px);
 }
 
-/* ── 3. SERVICE CARD — capability bullets ───────────────────────── */
+/* â”€â”€ 3. SERVICE CARD â€” capability bullets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 /* Override min-height in screenshot-home to 720px (task 3) */
 .services-card {
   min-height: 720px !important;
@@ -4587,7 +4590,7 @@ body:has(.services-conversion-page) .services-hero::before,
   margin-bottom: 10px !important;
 }
 
-/* ── CTA — single button full-width ─────────────────────────────── */
+/* â”€â”€ CTA â€” single button full-width â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 /* Ensure the capability override replaces old stats/trust inline styles */
 .services-card__actions {
   padding-top: 8px !important;
@@ -4598,7 +4601,7 @@ body:has(.services-conversion-page) .services-hero::before,
   justify-content: center;
 }
 
-/* ── RESPONSIVE — services page ─────────────────────────────────── */
+/* â”€â”€ RESPONSIVE â€” services page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (max-width: 1100px) {
   .services-card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -4684,9 +4687,9 @@ body:has(.services-conversion-page) .services-hero::before,
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PROJECTS PAGE UI/UX PREMIUM UPGRADE
-   ═══════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 /* 1. HERO OVERLAY + ZOOM ANIMATION */
 .shot-subhero--projects {
@@ -4886,7 +4889,7 @@ body:has(.services-conversion-page) .services-hero::before,
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 40px auto 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: 24px;
@@ -4925,7 +4928,7 @@ body:has(.services-conversion-page) .services-hero::before,
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 32px auto 0;
   padding: 0 clamp(24px, 4.4vw, 70px);
 }
@@ -4977,7 +4980,7 @@ body:has(.services-conversion-page) .services-hero::before,
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 40px auto 0;
   padding: 0 clamp(24px, 4.4vw, 70px);
 }
@@ -5040,7 +5043,7 @@ body:has(.services-conversion-page) .services-hero::before,
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 32px auto 0;
   padding: 0 clamp(24px, 4.4vw, 70px);
 }
@@ -5087,7 +5090,7 @@ body:has(.services-conversion-page) .services-hero::before,
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 0 auto 32px;
   padding: 0 clamp(24px, 4.4vw, 70px);
 }
@@ -5133,7 +5136,7 @@ body:has(.services-conversion-page) .services-hero::before,
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 0 auto;
   padding: 0 clamp(24px, 4.4vw, 70px);
 }
@@ -5288,7 +5291,7 @@ body:has(.services-conversion-page) .services-hero::before,
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 48px;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 0 auto;
   padding: 0 clamp(24px, 4.4vw, 70px);
   align-items: center;
@@ -5391,7 +5394,7 @@ body:has(.services-conversion-page) .services-hero::before,
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 32px auto 0;
   padding: 0 clamp(24px, 4.4vw, 70px);
 }
@@ -5460,7 +5463,7 @@ body:has(.services-conversion-page) .services-hero::before,
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 24px;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 40px auto 0;
   padding: 0 clamp(24px, 4.4vw, 70px);
 }
@@ -5533,7 +5536,7 @@ body:has(.services-conversion-page) .services-hero::before,
 
 /* Final CTA Section */
 .careers-final-cta-section {
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 60px auto 80px;
   padding: 0 clamp(24px, 4.4vw, 70px);
 }
@@ -5843,19 +5846,19 @@ body:has(.services-conversion-page) .services-hero::before,
 }
 
 
-/* ═══════════════════════════════════════════════════
-   CAREERS PAGE V2  —  Light theme matching About/Services
-   ═══════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   CAREERS PAGE V2  â€”  Light theme matching About/Services
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-/* Page wrapper — white/cream background */
+/* Page wrapper â€” white/cream background */
 .careers-page-v2 {
   background: #fff;
   color: #1a0a0c;
 }
 
-/* ── Generic section wrapper ── */
+/* â”€â”€ Generic section wrapper â”€â”€ */
 .cv2-section {
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 0 auto;
   padding: 80px clamp(24px, 4.4vw, 70px);
 }
@@ -5864,7 +5867,7 @@ body:has(.services-conversion-page) .services-hero::before,
   padding-bottom: 100px;
 }
 
-/* ── Section header ── */
+/* â”€â”€ Section header â”€â”€ */
 .cv2-section__head {
   margin-bottom: 48px;
 }
@@ -5919,7 +5922,7 @@ body:has(.services-conversion-page) .services-hero::before,
   font-size: clamp(40px, 6vw, 80px);
 }
 
-/* ── Value / Why Dockside cards ── */
+/* â”€â”€ Value / Why Dockside cards â”€â”€ */
 .cv2-values-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -5973,7 +5976,7 @@ body:has(.services-conversion-page) .services-hero::before,
   margin: 0;
 }
 
-/* ── Internship dark banner ── */
+/* â”€â”€ Internship dark banner â”€â”€ */
 .cv2-internship {
   background: #6b1a26;
   background: linear-gradient(135deg, #4e1019 0%, #7a2030 100%);
@@ -5984,7 +5987,7 @@ body:has(.services-conversion-page) .services-hero::before,
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 60px;
-  width: min(1320px, 100%);
+  width: 100%; padding-inline: 4vw !important; max-width: none !important;
   margin: 0 auto;
   align-items: center;
   padding: 72px 0;
@@ -6052,7 +6055,7 @@ body:has(.services-conversion-page) .services-hero::before,
 }
 
 .cv2-internship__bullets li::before {
-  content: "→";
+  content: "â†’";
   position: absolute;
   left: 0;
   color: rgba(255, 255, 255, 0.5);
@@ -6074,7 +6077,7 @@ body:has(.services-conversion-page) .services-hero::before,
   object-fit: cover;
 }
 
-/* ── Process / How We Select ── */
+/* â”€â”€ Process / How We Select â”€â”€ */
 .cv2-process {
   position: relative;
   display: grid;
@@ -6137,7 +6140,7 @@ body:has(.services-conversion-page) .services-hero::before,
   margin-bottom: 6px;
 }
 
-/* ── Job Cards & Filter Section ── */
+/* â”€â”€ Job Cards & Filter Section â”€â”€ */
 .cv2-filter-grid {
   width: 100%;
 }
@@ -6195,7 +6198,7 @@ body:has(.services-conversion-page) .services-hero::before,
   padding-left: 4px;
 }
 
-/* ── Jobs Grid ── */
+/* â”€â”€ Jobs Grid â”€â”€ */
 .cv2-jobs-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -6215,7 +6218,7 @@ body:has(.services-conversion-page) .services-hero::before,
   }
 }
 
-/* ── Job Card ── */
+/* â”€â”€ Job Card â”€â”€ */
 .cv2-job-card {
   background: #fff;
   border: 1.5px solid rgba(146, 62, 77, 0.14);
@@ -6234,7 +6237,7 @@ body:has(.services-conversion-page) .services-hero::before,
   transform: translateY(-4px);
 }
 
-/* ── Card Header ── */
+/* â”€â”€ Card Header â”€â”€ */
 .cv2-job-card__header {
   display: flex;
   justify-content: space-between;
@@ -6267,7 +6270,7 @@ body:has(.services-conversion-page) .services-hero::before,
   flex-shrink: 0;
 }
 
-/* ── Card Meta ── */
+/* â”€â”€ Card Meta â”€â”€ */
 .cv2-job-card__meta {
   display: flex;
   flex-direction: column;
@@ -6293,7 +6296,7 @@ body:has(.services-conversion-page) .services-hero::before,
   flex-shrink: 0;
 }
 
-/* ── Skills Section ── */
+/* â”€â”€ Skills Section â”€â”€ */
 .cv2-job-card__skills {
   display: flex;
   flex-wrap: wrap;
@@ -6324,13 +6327,13 @@ body:has(.services-conversion-page) .services-hero::before,
   color: #923e4d;
 }
 
-/* ── Card Footer ── */
+/* â”€â”€ Card Footer â”€â”€ */
 .cv2-job-card__footer {
   margin-top: auto;
   padding-top: 8px;
 }
 
-/* ── Buttons ── */
+/* â”€â”€ Buttons â”€â”€ */
 .cv2-btn {
   display: inline-flex;
   align-items: center;
@@ -6384,7 +6387,7 @@ body:has(.services-conversion-page) .services-hero::before,
   height: 14px;
 }
 
-/* ── Empty & No Results States ── */
+/* â”€â”€ Empty & No Results States â”€â”€ */
 .cv2-empty-state,
 .cv2-no-results {
   text-align: center;
@@ -6430,7 +6433,7 @@ body:has(.services-conversion-page) .services-hero::before,
   margin: 0 0 20px;
 }
 
-/* ── Responsive Adjustments ── */
+/* â”€â”€ Responsive Adjustments â”€â”€ */
 @media (max-width: 767px) {
   .cv2-filter-group {
     min-width: 100%;
@@ -6465,7 +6468,7 @@ body:has(.services-conversion-page) .services-hero::before,
   margin: 0;
 }
 
-/* ── Final CTA ── */
+/* â”€â”€ Final CTA â”€â”€ */
 .cv2-cta {
   background: #1a0a0c;
   padding: 0 clamp(24px, 4.4vw, 70px);
@@ -6515,7 +6518,7 @@ body:has(.services-conversion-page) .services-hero::before,
   justify-content: center;
 }
 
-/* ── Shared button styles ── */
+/* â”€â”€ Shared button styles â”€â”€ */
 .cv2-btn {
   display: inline-flex;
   align-items: center;
@@ -6560,7 +6563,7 @@ body:has(.services-conversion-page) .services-hero::before,
   color: #ffffff;
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 1024px) {
   .cv2-values-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -6606,7 +6609,7 @@ body:has(.services-conversion-page) .services-hero::before,
 }
 
 
-/* ── Light-theme overrides for job cards inside careers-page-v2 ── */
+/* â”€â”€ Light-theme overrides for job cards inside careers-page-v2 â”€â”€ */
 .careers-page-v2 .careers-filter-toolbar {
   margin-bottom: 40px;
 }
@@ -6695,13 +6698,13 @@ body:has(.services-conversion-page) .services-hero::before,
   color: rgba(26, 10, 12, 0.65);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   GLASSMORPHISM SYSTEM — Dockside Constructions
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   GLASSMORPHISM SYSTEM â€” Dockside Constructions
    Applied site-wide to every suitable component.
    Only applies to public site pages (not admin).
-   ═══════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-/* ─── 1. NAVIGATION BAR — Glass blur when scrolled ─── */
+/* â”€â”€â”€ 1. NAVIGATION BAR â€” Glass blur when scrolled â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-nav.is-scrolled .industrial-nav__bar {
   background: rgba(255, 255, 255, 0.84) !important;
   backdrop-filter: blur(18px) saturate(1.6) !important;
@@ -6710,7 +6713,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
   border-bottom: 1px solid rgba(139, 63, 74, 0.10) !important;
 }
 
-/* Mobile nav overlay — dark glass */
+/* Mobile nav overlay â€” dark glass */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-overlay {
   background: rgba(20, 5, 8, 0.88) !important;
   backdrop-filter: blur(28px) !important;
@@ -6718,7 +6721,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
   border-left: 1px solid rgba(139, 63, 74, 0.28) !important;
 }
 
-/* ─── 2. HERO METRICS — Glass pills at bottom of Home hero ─── */
+/* â”€â”€â”€ 2. HERO METRICS â€” Glass pills at bottom of Home hero â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .hero-large-metric {
   background: rgba(255, 255, 255, 0.68) !important;
   backdrop-filter: blur(22px) !important;
@@ -6728,7 +6731,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .hero
   box-shadow: 0 8px 32px rgba(139, 63, 74, 0.10), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* ─── 3. WHY DOCKSIDE CARDS ─── */
+/* â”€â”€â”€ 3. WHY DOCKSIDE CARDS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .home-why-card {
   background: rgba(255, 255, 255, 0.72) !important;
   backdrop-filter: blur(24px) saturate(1.4) !important;
@@ -6744,7 +6747,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .home
   transform: translateY(-4px) !important;
 }
 
-/* ─── 4. CTA SECTION — Glass content box over background image ─── */
+/* â”€â”€â”€ 4. CTA SECTION â€” Glass content box over background image â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .premium-cta>div {
   background: rgba(255, 255, 255, 0.12) !important;
   backdrop-filter: blur(22px) !important;
@@ -6754,7 +6757,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .prem
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
 }
 
-/* ─── 5. CONTACT FORM ─── */
+/* â”€â”€â”€ 5. CONTACT FORM â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot-page--contact .shot-contact-form {
   background: rgba(255, 255, 255, 0.75) !important;
   backdrop-filter: blur(24px) saturate(1.5) !important;
@@ -6789,7 +6792,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot
   transform: translateY(-3px) !important;
 }
 
-/* ─── 6. SERVICE / INDUSTRY CARDS ─── */
+/* â”€â”€â”€ 6. SERVICE / INDUSTRY CARDS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industry-card,
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .service-index-card,
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .premium-service-card {
@@ -6810,7 +6813,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .prem
   transform: translateY(-4px) !important;
 }
 
-/* ─── 7. PROJECT CARDS ─── */
+/* â”€â”€â”€ 7. PROJECT CARDS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot-project-card,
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .premium-project-card {
   background: rgba(255, 255, 255, 0.68) !important;
@@ -6829,7 +6832,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .prem
   transform: translateY(-5px) !important;
 }
 
-/* ─── 8. STAT CARDS ─── */
+/* â”€â”€â”€ 8. STAT CARDS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot-stat-panel article {
   background: rgba(255, 255, 255, 0.65) !important;
   backdrop-filter: blur(18px) !important;
@@ -6838,7 +6841,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot
   box-shadow: 0 6px 22px rgba(109, 44, 54, 0.08) !important;
 }
 
-/* ─── 9. CAREER JOB CARDS ─── */
+/* â”€â”€â”€ 9. CAREER JOB CARDS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot-openings__list article {
   background: rgba(255, 255, 255, 0.68) !important;
   backdrop-filter: blur(18px) !important;
@@ -6863,7 +6866,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .shot
   box-shadow: 0 6px 24px rgba(109, 44, 54, 0.08) !important;
 }
 
-/* ─── 10. PROCESS TIMELINE STEPS ─── */
+/* â”€â”€â”€ 10. PROCESS TIMELINE STEPS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .luxury-timeline__step {
   background: rgba(255, 255, 255, 0.70) !important;
   backdrop-filter: blur(18px) !important;
@@ -6878,7 +6881,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .luxu
   box-shadow: 0 16px 42px rgba(109, 44, 54, 0.14) !important;
 }
 
-/* ─── 11. ABOUT PAGE CARDS ─── */
+/* â”€â”€â”€ 11. ABOUT PAGE CARDS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .about-leadership-card,
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .about-certification-grid article,
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .about-project-exposure article {
@@ -6899,7 +6902,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .abou
   transform: translateY(-3px) !important;
 }
 
-/* ─── 12. ABOUT FINAL CTA + PROFILE DOWNLOAD ─── */
+/* â”€â”€â”€ 12. ABOUT FINAL CTA + PROFILE DOWNLOAD â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .about-final-cta>div,
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .about-profile-download {
   background: rgba(255, 255, 255, 0.72) !important;
@@ -6909,7 +6912,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .abou
   box-shadow: 0 12px 40px rgba(109, 44, 54, 0.10) !important;
 }
 
-/* ─── 13. FAQ DETAILS ─── */
+/* â”€â”€â”€ 13. FAQ DETAILS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .cms-faq-list details {
   background: rgba(255, 255, 255, 0.70) !important;
   backdrop-filter: blur(16px) !important;
@@ -6918,7 +6921,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .cms-
   box-shadow: 0 4px 16px rgba(109, 44, 54, 0.06) !important;
 }
 
-/* ─── 14. CLIENT LOGO TILES ─── */
+/* â”€â”€â”€ 14. CLIENT LOGO TILES â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .trusted-client-logo {
   background: rgba(255, 255, 255, 0.65) !important;
   backdrop-filter: blur(14px) !important;
@@ -6934,7 +6937,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .trus
   box-shadow: 0 10px 32px rgba(109, 44, 54, 0.12) !important;
 }
 
-/* ─── 15. GENERIC GLASS PANELS ─── */
+/* â”€â”€â”€ 15. GENERIC GLASS PANELS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .glass-panel {
   background: rgba(255, 255, 255, 0.68) !important;
   backdrop-filter: blur(22px) !important;
@@ -6951,7 +6954,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .glas
   box-shadow: 0 4px 16px rgba(109, 44, 54, 0.06) !important;
 }
 
-/* ─── 16. CAREERS FILTER GRID CARDS ─── */
+/* â”€â”€â”€ 16. CAREERS FILTER GRID CARDS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .careers-page-v2 .career-job-card {
   background: rgba(255, 255, 255, 0.72) !important;
   backdrop-filter: blur(20px) !important;
@@ -6968,7 +6971,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .care
   transform: translateY(-4px) !important;
 }
 
-/* ─── 17. ABOUT-PREMIUM STATS ITEMS ─── */
+/* â”€â”€â”€ 17. ABOUT-PREMIUM STATS ITEMS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .about-premium-snapshot__item,
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .about-premium-approach__card {
   background: rgba(255, 255, 255, 0.68) !important;
@@ -6986,7 +6989,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .abou
   transform: translateY(-3px) !important;
 }
 
-/* ─── 18. CMS SECTION CARDS ─── */
+/* â”€â”€â”€ 18. CMS SECTION CARDS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .cms-section-card {
   background: rgba(255, 255, 255, 0.68) !important;
   backdrop-filter: blur(18px) !important;
@@ -6995,7 +6998,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .cms-
   box-shadow: 0 6px 22px rgba(109, 44, 54, 0.08) !important;
 }
 
-/* ─── 19. ENTERPRISE METRICS ITEMS ─── */
+/* â”€â”€â”€ 19. ENTERPRISE METRICS ITEMS â”€â”€â”€ */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .enterprise-metrics article {
   background: rgba(255, 255, 255, 0.68) !important;
   backdrop-filter: blur(18px) !important;
@@ -7011,12 +7014,12 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
   transform: translateY(-3px) !important;
 }
 
-/* ─── END GLASSMORPHISM SYSTEM ─── */
+/* â”€â”€â”€ END GLASSMORPHISM SYSTEM â”€â”€â”€ */
 
 
 
 /* ---------------------------------------------------------------
-   NEW SECTIONS � Phase 10 CSS
+   NEW SECTIONS ï¿½ Phase 10 CSS
    Equipment Fleet / Quality & Safety / Downloads / Contact
    Project Detail / Admin Form Polish
 --------------------------------------------------------------- */
@@ -8563,9 +8566,9 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .ente
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PREMIUM MOBILE HAMBURGER & FULL-SCREEN OVERLAY MENU
-   ═══════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 /* 1. Hamburger Toggle Button */
 body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .industrial-menu {
@@ -8846,9 +8849,9 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SHARED: cta-btn (used across dedicated pages and ContactCTA)
-   ═══════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .cta-btn {
   display: inline-flex;
@@ -8887,9 +8890,9 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   color: #8b3f4a;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CONTACT CTA SECTION (homepage bottom)
-   ═══════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .contact-cta-section {
   background: linear-gradient(135deg, #101211 0%, #1c2119 100%);
@@ -8985,9 +8988,9 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SHARED: Page Hero pattern (fleet, quality, downloads)
-   ═══════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .fleet-hero,
 .qs-hero,
@@ -9038,9 +9041,9 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   margin: 0 auto;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    EQUIPMENT FLEET PAGE
-   ═══════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .fleet-hero__stats {
   display: flex;
@@ -9106,9 +9109,9 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   line-height: 1.6;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    QUALITY & SAFETY PAGE
-   ═══════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .qs-hero__badges {
   display: flex;
@@ -9310,9 +9313,9 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    DOWNLOADS PAGE
-   ═══════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .downloads-page {
   min-height: 60vh;
@@ -9406,9 +9409,9 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   letter-spacing: 0.08em;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    ADMIN: Shared page layout helpers
-   ═══════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .admin-page {
   padding: 32px;
@@ -9576,7 +9579,7 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
 }
 
 
-/* ─── Admin Form ────────────────────────────────────────────────────────── */
+/* â”€â”€â”€ Admin Form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 .admin-form {
   display: flex;
@@ -9610,12 +9613,12 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   flex-wrap: wrap;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   LIGHT THEME OVERRIDES — Equipment cards, cert cards, quality/download boxes
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   LIGHT THEME OVERRIDES â€” Equipment cards, cert cards, quality/download boxes
    These override the dark-theme defaults from the legacy section CSS
-   ═══════════════════════════════════════════════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-/* Equipment cards → white cards */
+/* Equipment cards â†’ white cards */
 .equipment-card {
   background: #ffffff !important;
   border: 1px solid rgba(16, 18, 17, 0.1) !important;
@@ -9631,7 +9634,7 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   background: #f5f0eb !important;
 }
 
-/* Keep qty pill readable over photo images — semi-dark is intentional */
+/* Keep qty pill readable over photo images â€” semi-dark is intentional */
 .equipment-card__qty {
   background: rgba(16, 18, 17, 0.72) !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -9654,7 +9657,7 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   color: #101211 !important;
 }
 
-/* Status badges → light theme versions */
+/* Status badges â†’ light theme versions */
 .equipment-card__status--active {
   background: #dcfce7 !important;
   border: 1px solid #86efac !important;
@@ -9673,7 +9676,7 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   color: #475569 !important;
 }
 
-/* Cert cards → white cards */
+/* Cert cards â†’ white cards */
 .cert-card {
   background: #ffffff !important;
   border: 1px solid rgba(16, 18, 17, 0.1) !important;
@@ -9701,7 +9704,7 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   color: rgba(16, 18, 17, 0.6) !important;
 }
 
-/* Quality procedures / compliance boxes → warm off-white */
+/* Quality procedures / compliance boxes â†’ warm off-white */
 .quality-procedures,
 .quality-compliance {
   background: #f5f0eb !important;
@@ -9746,7 +9749,7 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   color: rgba(16, 18, 17, 0.6) !important;
 }
 
-/* Downloads group → white cards */
+/* Downloads group â†’ white cards */
 .downloads-group {
   background: #ffffff !important;
   border: 1px solid rgba(16, 18, 17, 0.1) !important;
@@ -9808,10 +9811,10 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   background: #ffffff !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   WHAT DOCKSIDE DELIVERS — vector-card section
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   WHAT DOCKSIDE DELIVERS â€” vector-card section
    Overrides all dark-theme rules with high-specificity selectors.
-═══════════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 /* ---------- Section shell ---------- */
 .delivers-section {
@@ -9894,7 +9897,7 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   opacity: 0.28;
 }
 
-/* ---------- 4 × 2 grid ---------- */
+/* ---------- 4 Ã— 2 grid ---------- */
 .delivers-grid {
   display: grid !important;
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -10031,9 +10034,9 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   HERO SLIDESHOW — Ken Burns + Crossfade
-   ═══════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   HERO SLIDESHOW â€” Ken Burns + Crossfade
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .hero-slideshow {
   position: absolute;
@@ -10590,5 +10593,153 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
   .qs-reference-hero__feature,
   .qs-reference-hero__cert {
     padding-inline: 22px;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE PROCESS TIMELINE REDESIGN
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .project-delivery__steps {
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: relative !important;
+  }
+
+  .delivery-step {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+    margin: 0 0 54px 0 !important;
+    padding: 0 0 0 54px !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .delivery-step:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .delivery-step__track-h,
+  .delivery-step__track-h-fill,
+  .connector-premium-flow,
+  .delivery-step__number {
+    display: none !important;
+  }
+
+  .delivery-step__track-v {
+    position: absolute !important;
+    top: 43px !important;
+    /* Starts right below the first dot */
+    bottom: -97px !important;
+    height: auto !important;
+    left: 24px !important;
+    /* Centers exactly */
+    width: 2px !important;
+    background: rgba(139, 58, 74, 0.15) !important;
+    display: block !important;
+    z-index: 1 !important;
+  }
+
+  .delivery-step:last-child .delivery-step__track-v {
+    display: none !important;
+  }
+
+  .delivery-step__track-v-fill {
+    position: absolute !important;
+    top: 43px !important;
+    bottom: -97px !important;
+    height: auto !important;
+    left: 24px !important;
+    width: 2px !important;
+    background: #8A3841 !important;
+    display: block !important;
+    z-index: 2 !important;
+    transform-origin: top !important;
+  }
+
+  .delivery-step:last-child .delivery-step__track-v-fill {
+    display: none !important;
+  }
+
+  .delivery-step__dot {
+    position: absolute !important;
+    top: 32px !important;
+    left: 14px !important;
+    z-index: 20 !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  .delivery-step__circle {
+    position: relative !important;
+    flex: 0 0 auto !important;
+    width: 76px !important;
+    height: 76px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 5 !important;
+    margin: 0 !important;
+  }
+
+  .delivery-step__icon {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .delivery-step__content {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    padding: 0 !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    transform: none !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .delivery-step__number--mobile {
+    display: block !important;
+    font-family: var(--font-mono) !important;
+    color: rgba(139, 58, 74, 0.4) !important;
+    font-size: clamp(2rem, 6vw, 3rem) !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    margin: 0 0 4px 0 !important;
+    text-align: left !important;
+  }
+
+  .delivery-step__title {
+    color: var(--ref-text) !important;
+    font-size: clamp(1.4rem, 5vw, 2rem) !important;
+    line-height: 1.2 !important;
+    margin: 0 0 12px 0 !important;
+    text-align: left !important;
+  }
+
+  .delivery-step__divider {
+    display: block !important;
+    width: 40px !important;
+    height: 2px !important;
+    background: #8A3841 !important;
+    margin: 0 0 12px 0 !important;
+  }
+
+  .delivery-step__desc {
+    color: rgba(32, 33, 38, 0.75) !important;
+    font-size: clamp(0.95rem, 3.8vw, 1.05rem) !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    text-align: left !important;
   }
 }
