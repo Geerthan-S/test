@@ -24,6 +24,10 @@ export function EquipmentFleetHero() {
             alt: "Dockside equipment fleet and heavy machinery at construction site",
           },
         ]}
+        primaryLabel="VIEW PROJECTS"
+        primaryHref="/projects"
+        secondaryLabel="CONTACT US"
+        secondaryHref="/contact"
       >
         <div className="pt-2">
           <h4 className="font-mono text-[10.5px] font-bold uppercase tracking-[0.2em] text-[#8B3A4A] mb-4">
@@ -49,7 +53,7 @@ export function EquipmentFleetHero() {
           </div>
         </div>
       </Hero>
-      <div className="absolute bottom-[80px] left-0 right-0 z-50">
+      <div className="absolute bottom-[90px] left-0 right-0 z-50 home-metrics-card pointer-events-none">
         <HeroMetrics metrics={fleetMetrics} />
       </div>
     </div>

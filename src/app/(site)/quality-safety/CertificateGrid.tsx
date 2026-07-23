@@ -82,7 +82,7 @@ export function CertificateGrid() {
           <article
             key={cert.code}
             onClick={() => openPreview(cert)}
-            className="group flex flex-col bg-white border border-gray-250 hover:border-[#8A3841]/40 hover:shadow-[0_16px_48px_rgba(138,56,65,0.12)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-pointer rounded-none"
+            className="group flex flex-col bg-white border border-gray-250 hover:border-[#783138]/40 hover:shadow-[0_16px_48px_rgba(138,56,65,0.12)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden cursor-pointer rounded-none"
           >
             {/* Image Wrapper */}
             <div className="relative aspect-[16/10] flex-shrink-0 overflow-hidden bg-gray-100 border-b border-gray-100">
@@ -94,7 +94,7 @@ export function CertificateGrid() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               {/* Unit Badge (like Equipment fleet cards) */}
-              <span className="absolute top-0 left-0 bg-[#8A3841] !text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 z-10">
+              <span className="absolute top-0 left-0 bg-[#783138] !text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 z-10">
                 {cert.code}
               </span>
               {/* Hover Preview Overlay */}
@@ -121,7 +121,7 @@ export function CertificateGrid() {
                 <button
                   type="button"
                   onClick={() => openPreview(cert)}
-                  className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-gray-400 hover:text-[#8A3841] uppercase transition-colors duration-200"
+                  className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-gray-400 hover:text-[#783138] uppercase transition-colors duration-200"
                 >
                   <ZoomIn className="w-3.5 h-3.5" />
                   <span>Preview</span>
@@ -129,7 +129,7 @@ export function CertificateGrid() {
                 <a
                   href={cert.fileUrl}
                   download
-                  className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#8A3841] hover:text-[#6D2B32] uppercase tracking-wider transition-colors duration-200"
+                  className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#783138] hover:text-[#5A2229] uppercase tracking-wider transition-colors duration-200"
                 >
                   <span>Download JPG</span>
                   <Download className="w-3.5 h-3.5" />

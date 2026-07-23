@@ -34,9 +34,9 @@ const containerVariants: Variants = {
 
 export function HeroMetrics({ metrics }: HeroMetricsProps) {
   return (
-    <div className="relative w-full px-[4.05vw] flex justify-end z-[100]">
+    <div className="relative w-full px-[4.05vw] flex justify-end z-[100] pointer-events-none">
       <motion.div
-        className="w-full max-w-fit"
+        className="w-full max-w-fit pointer-events-auto"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.4 }}
@@ -49,20 +49,20 @@ export function HeroMetrics({ metrics }: HeroMetricsProps) {
               <motion.div
                 key={metric.label}
                 variants={metricVariants}
-                className="flex flex-1 items-center gap-4 py-5 px-6"
+                className="flex flex-1 items-center gap-3 py-4 px-4"
               >
                 <div className="flex w-[48px] h-[48px] shrink-0 items-center justify-center rounded-[12px] bg-[#f4ecea] border-white/60 border-[1.5px] shadow-sm text-[#8B3A4A]">
                   <Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
                 </div>
                 <div>
-                  <div className={`font-display font-black uppercase leading-tight text-[#8B3A4A] ${typeof metric.value === "number" ? "text-[20px]" : "text-[14px] lg:text-[15px]"}`}>
+                  <div className={`font-display font-black uppercase leading-tight text-[#8B3A4A] ${typeof metric.value === "number" ? "text-[20px] whitespace-nowrap" : "text-[14px] lg:text-[15px] max-w-[125px]"}`}>
                     {typeof metric.value === "number" ? (
                       <CountUp end={metric.value} suffix={metric.suffix || ""} />
                     ) : (
                       <>{metric.value}</>
                     )}
                   </div>
-                  <div className="mt-0.5 text-[12px] font-medium leading-snug text-[#666971] whitespace-nowrap">
+                  <div className="mt-0.5 text-[12px] font-medium leading-snug text-[#666971] max-w-[125px]">
                     {metric.label}
                   </div>
                 </div>

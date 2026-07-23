@@ -50,7 +50,7 @@ export function ProjectsHero() {
         </div>
       </Hero>
 
-      <div className="absolute bottom-[80px] left-0 right-0 z-50">
+      <div className="absolute bottom-[90px] left-0 right-0 z-50 home-metrics-card pointer-events-none">
         <HeroMetrics metrics={projectMetrics} />
       </div>
     </div>

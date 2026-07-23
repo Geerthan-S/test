@@ -77,12 +77,12 @@ export async function POST(request: NextRequest) {
     await db.jobApplication.create({
       data: {
         jobOpeningId,
-        name,
+        fullName: name,
         email,
         phone,
         resumeUrl: uploadResult.secure_url,
         coverLetter: coverLetter || null,
-        status: "NEW",
+        status: "New",
       },
     });
 
@@ -118,7 +118,7 @@ export async function GET() {
           },
         },
       },
-      orderBy: { createdAt: "desc" },
+      orderBy: { submittedAt: "desc" },
     });
 
     return NextResponse.json({ applications }, { status: 200 });

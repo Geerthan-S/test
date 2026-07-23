@@ -4,8 +4,8 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { Briefcase, MapPin, Clock, Users } from "lucide-react";
 import type { JobOpening } from "@/lib/repositories";
-import { JobApplicationModal } from "@/components/job-application-modal";
 import { ApplicationSuccessNotification } from "@/components/application-success-notification";
+import { JobApplicationModal } from "./job-application-modal";
 
 interface CareersFilterGridProps {
   jobOpenings: JobOpening[];
@@ -43,11 +43,6 @@ export function CareersFilterGrid({ jobOpenings }: CareersFilterGridProps) {
   const handleApplyClick = (job: JobOpening) => {
     setSelectedJob(job);
     setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedJob(null);
   };
 
   const handleSuccess = () => {
@@ -169,7 +164,7 @@ export function CareersFilterGrid({ jobOpenings }: CareersFilterGridProps) {
               <div className="cv2-job-card__footer">
                 <button
                   onClick={() => handleApplyClick(job)}
-                  className="cv2-btn cv2-btn--outline cv2-btn--sm"
+                  className="cv2-btn cv2-btn--fill cv2-btn--sm"
                   type="button"
                 >
                   Apply Now
@@ -194,21 +189,21 @@ export function CareersFilterGrid({ jobOpenings }: CareersFilterGridProps) {
         </div>
       )}
 
-      {/* Application Modal */}
-      {selectedJob && (
-        <JobApplicationModal
-          jobOpening={selectedJob}
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          onSuccess={handleSuccess}
-        />
-      )}
-
       {/* Success Notification */}
       <ApplicationSuccessNotification
         isVisible={showSuccessNotification}
         onDismiss={handleDismissNotification}
       />
+
+      {/* Application Modal */}
+      {selectedJob && (
+        <JobApplicationModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          jobOpening={selectedJob}
+          onSuccess={handleSuccess}
+        />
+      )}
     </div>
   );
 }

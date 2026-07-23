@@ -17,6 +17,7 @@ import { getJobOpenings, getCareerSetting } from "@/lib/repositories";
 import { InternshipButton } from "@/components/internship-button";
 import { ContactCTA } from "@/components/sections/ContactCTA";
 import CareersHero from "./careers-hero";
+import { CareersStatisticsStrip } from "./careers-statistics-strip";
 
 export const dynamic = "force-dynamic";
 
@@ -61,11 +62,12 @@ export default async function CareersPage() {
   };
 
   return (
-    <div className="careers-page-v2">
+    <div className="careers-page-v2 overflow-hidden relative z-0">
       <CareersHero />
+      <CareersStatisticsStrip />
 
       {/* ── 2. WHY DOCKSIDE? ── */}
-      <section className="cv2-section" id="why-dockside">
+      <section className="cv2-section relative z-10 pt-24 mt-12" id="why-dockside">
         <Reveal className="cv2-section__head">
           <span className="cv2-eyebrow">WHY BUILD YOUR FUTURE WITH</span>
           <h2 className="cv2-section__title">DOCKSIDE?</h2>

@@ -11,6 +11,7 @@ type HeroProps = {
   badgeIcon?: React.ElementType;
   title?: string;
   description?: string;
+
   primaryLabel?: string;
   primaryHref?: string;
   secondaryLabel?: string;
@@ -42,10 +43,11 @@ export function Hero({
   badgeIcon: BadgeIcon = ShieldCheck,
   title = "From Land|Development|to Large-Scale|Infrastructure|Execution.",
   description = "Dockside Constructions delivers earthworks, industrial infrastructure, road construction, site development and project management services across India with engineering precision, safety compliance and reliable execution.",
-  primaryLabel = "VIEW PROJECTS",
-  primaryHref = "/projects",
-  secondaryLabel = "CONTACT US",
-  secondaryHref = "/contact",
+
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
   slides = defaultHeroSlides,
   children,
 }: HeroProps) {
@@ -94,18 +96,14 @@ export function Hero({
           content: "";
           position: absolute;
           inset: 0;
-          z-index: 1;
+          z-index: 15;
           pointer-events: none;
-          background:
-            linear-gradient(
-              90deg,
-              rgba(255, 255, 255, 0.98) 0%,
-              rgba(255, 255, 255, 0.96) 22%,
-              rgba(255, 255, 255, 0.82) 38%,
-              rgba(255, 255, 255, 0.45) 50%,
-              rgba(255, 255, 255, 0.12) 60%,
-              transparent 70%
-            );
+          display: block !important;
+          background: radial-gradient(
+            circle at bottom left,
+            rgba(255, 255, 255, 1) 0%,
+            transparent 65%
+          );
         }
 
         .home-hero-reference .home-hero-bg {
@@ -135,25 +133,7 @@ export function Hero({
         }
 
         .home-hero-reference .home-hero-white-wash {
-          position: absolute !important;
-          inset: 0 !important;
-          z-index: 3 !important;
-          pointer-events: none !important;
-          background:
-            linear-gradient(
-                90deg,
-                rgba(255,255,255,.98) 0%,
-                rgba(255,255,255,.96) 22%,
-                rgba(255,255,255,.82) 38%,
-                rgba(255,255,255,.45) 50%,
-                rgba(255,255,255,.12) 60%,
-                transparent 70%
-            ),
-            radial-gradient(
-                ellipse at 20% 45%,
-                rgba(255,255,255,.42),
-                transparent 70%
-            ) !important;
+          display: none !important;
         }
 
         .home-hero-reference .qs-reference-hero__glass-wrapper {
@@ -206,7 +186,7 @@ export function Hero({
 
         .home-hero-reference .glass-panel-1 {
           top: -21% !important;
-          left: 10% !important;
+          left: 15% !important;
           width: 30vw !important;
           transform: rotate(30deg) !important;
           backdrop-filter: blur(5px) !important;
@@ -215,7 +195,7 @@ export function Hero({
 
         .home-hero-reference .glass-panel-2 {
           top: 7% !important;
-          left: 5% !important;
+          left: calc(10% + 76px) !important;
           width: 30vw !important;
           transform: rotate(-30deg) !important;
           backdrop-filter: blur(4px) !important;
@@ -224,7 +204,7 @@ export function Hero({
 
         .home-hero-reference .glass-panel-3 {
           top: -22% !important;
-          left: 8% !important;
+          left: 13% !important;
           width: 30vw !important;
           transform: rotate(30deg) !important;
           backdrop-filter: blur(3px) !important;
@@ -233,7 +213,7 @@ export function Hero({
           
         .home-hero-reference .glass-panel-6 {
           top: -19% !important;
-          left: -8% !important;
+          left: calc(-3% + 76px) !important;
           width: 30vw !important;
           transform: rotate(-30deg) !important;
           backdrop-filter: blur(10px) !important;
@@ -241,7 +221,7 @@ export function Hero({
         }
         .home-hero-reference .glass-panel-7 {
           top: -18% !important;
-          left: 4% !important;
+          left: 9% !important;
           width: 30vw !important;
           transform: rotate(30deg) !important;
           backdrop-filter: blur(5px) !important;
@@ -250,7 +230,7 @@ export function Hero({
 
         .home-hero-reference .glass-panel-5 {
           top: -19% !important;
-          left: 2% !important;
+          left: 7% !important;
           width: 30vw !important;
           transform: rotate(30deg) !important;
           backdrop-filter: blur(10px) !important;
@@ -262,7 +242,7 @@ export function Hero({
 
         .home-hero-reference .glass-panel-4 {
           top: -19% !important;
-          left: -10% !important;
+          left: calc(-5% + 76px) !important;
           width: 30vw !important;
           transform: rotate(-30deg) !important;
           backdrop-filter: none !important;
@@ -298,8 +278,8 @@ export function Hero({
         }
 
         .qs-reference-hero {
-          height: clamp(790px, 100vh, 910px) !important;
-          min-height: 790px !important;
+          height: clamp(775px, 90vh, 820px) !important;
+          min-height: 775px !important;
           color: #202126 !important;
           background: #ffffff !important;
           overflow: visible !important;
@@ -322,16 +302,7 @@ export function Hero({
           object-fit: cover !important;
         }
         .qs-reference-hero__glass-fade {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background:
-            linear-gradient(90deg, #ffffff 0%, #ffffff 32%, rgba(255, 255, 255, 0.96) 43%, rgba(255, 255, 255, 0.74) 54%, rgba(255, 255, 255, 0.24) 66%, transparent 78%),
-            radial-gradient(circle at 25% 54%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.76) 31%, transparent 62%);
-          z-index: 1;
-          pointer-events: none;
+          display: none !important;
         }
         
         .qs-reference-hero__glass-wrapper {

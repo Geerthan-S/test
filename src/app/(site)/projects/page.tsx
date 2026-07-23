@@ -12,7 +12,6 @@ import { ContactCTA } from "@/components/sections/ContactCTA";
 import { CorePromise } from "@/components/sections/CorePromise";
 import { projectCategoryFromParam } from "@/lib/project-categories";
 import { ProjectsHero } from "./projects-hero";
-import { ProjectJourneyTimeline } from "@/components/projects/ProjectJourneyTimeline";
 
 export const dynamic = "force-dynamic";
 
@@ -43,8 +42,6 @@ export default async function ProjectsPage({
       <section className="shot-section shot-projects-main premium-projects" id="featured-projects">
         <ProjectsFilterGrid projects={projects} initialFilter={initialFilter} />
       </section>
-
-      <ProjectJourneyTimeline projects={projects} />
 
       <CorePromise />
 

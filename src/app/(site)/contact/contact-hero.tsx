@@ -49,7 +49,7 @@ export default function ContactHero() {
           </div>
         </div>
       </Hero>
-      <div className="absolute bottom-[80px] left-0 right-0 z-50">
+      <div className="absolute bottom-[90px] left-0 right-0 z-50 home-metrics-card pointer-events-none">
         <HeroMetrics metrics={contactMetrics} />
       </div>
     </div>

@@ -71,20 +71,6 @@ export function EquipmentFormFields({
         />
       </div>
 
-      {/* Slug */}
-      <div className="admin-form__field">
-        <label htmlFor="eq-slug">Slug *</label>
-        <input
-          id="eq-slug"
-          name="slug"
-          type="text"
-          required
-          defaultValue={defaults?.slug ?? ""}
-          placeholder="e.g. hydraulic-excavator"
-        />
-        <small>Auto-generated from name if left blank</small>
-      </div>
-
       {/* Status */}
       <div className="admin-form__field">
         <label htmlFor="eq-status">Status</label>
@@ -146,32 +132,6 @@ export function EquipmentFormFields({
           placeholder="Brief public-facing description for this equipment category"
         />
         <small>Shown on the public Equipment Fleet card. Leave blank to use the default fallback copy.</small>
-      </div>
-
-      {/* Manufacturer */}
-      <div className="admin-form__field">
-        <label htmlFor="eq-manufacturer">Manufacturer</label>
-        <input
-          id="eq-manufacturer"
-          name="manufacturer"
-          type="text"
-          defaultValue={defaults?.manufacturer ?? ""}
-          placeholder="e.g. CAT / JCB / Tata"
-        />
-      </div>
-
-      {/* Year */}
-      <div className="admin-form__field">
-        <label htmlFor="eq-year">Year</label>
-        <input
-          id="eq-year"
-          name="year"
-          type="number"
-          min="1990"
-          max={new Date().getFullYear() + 1}
-          defaultValue={defaults?.year ?? ""}
-          placeholder={String(new Date().getFullYear())}
-        />
       </div>
 
       {/* Sort order */}

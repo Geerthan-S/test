@@ -203,6 +203,21 @@
 
 html {
   scroll-behavior: smooth !important;
+  overflow-x: hidden;
+}
+
+@media (min-width: 1024px) {
+  .home-hero-reference {
+    zoom: 0.9;
+  }
+
+  .home-hero-reference .qs-reference-hero__copy {
+    zoom: 0.9;
+  }
+
+  .home-metrics-card {
+    zoom: 0.85;
+  }
 }
 
 body {
@@ -250,16 +265,12 @@ body::after {
   letter-spacing: 0.18em !important;
 }
 
-.industrial-nav__links {
-  gap: clamp(10px, 1.25vw, 22px) !important;
-}
+.industrial-nav__links {}
 
 .industrial-nav__links a {
   position: relative;
   color: #2d3748 !important;
-  font-size: clamp(10px, 0.9vw, 11px) !important;
   font-weight: 700 !important;
-  letter-spacing: 0.05em !important;
   text-transform: uppercase;
 }
 
@@ -420,10 +431,23 @@ body::after {
 
 .trust-systems,
 .premium-projects,
-.premium-cta,
-.industrial-footer {
+.premium-cta {
   width: min(1320px, calc(100% - 64px)) !important;
   margin-inline: auto !important;
+}
+
+.industrial-footer {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-inline: 0 !important;
+  overflow: hidden !important;
+}
+
+.industrial-footer__main {
+  width: min(1440px, calc(100% - 40px)) !important;
+  margin-inline: auto !important;
+  position: relative;
+  z-index: 1;
 }
 
 .trust-systems {
@@ -1412,7 +1436,6 @@ body::after {
 .premium-projects,
 .premium-services,
 .premium-cta,
-.industrial-footer,
 .cms-section {
   width: min(1440px, calc(100% - 40px)) !important;
   margin-inline: auto !important;
@@ -3013,7 +3036,7 @@ main.flex-1 {
 #company-introduction .cms-split-media {
   grid-column: 1;
   grid-row: 1 / span 2;
-  min-height: 500px !important;
+  min-height: 360px !important;
   border: 1px solid var(--shot-line-soft) !important;
   background: #0b0f11 !important;
   box-shadow: none !important;
@@ -3837,7 +3860,7 @@ main.flex-1 {
 
 /* About / company-introduction CMS section */
 .cms-section {
-  padding-block: 56px !important;
+  padding-block: 24px !important;
 }
 
 /* Services grid section */
@@ -3848,8 +3871,8 @@ main.flex-1 {
 
 /* Projects section */
 .premium-projects {
-  padding-top: 16px !important;
-  padding-bottom: 16px !important;
+  padding-top: 10px !important;
+  padding-bottom: 24px !important;
 }
 
 /* Why Dockside */
@@ -9794,9 +9817,8 @@ html body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) 
 .delivers-section {
   position: relative;
   background: #ffffff !important;
-  border-top: 1px solid #ede8e4;
   border-bottom: 1px solid #ede8e4;
-  padding: 46px clamp(20px, 4vw, 64px) 35px !important;
+  padding: 0 clamp(20px, 4vw, 64px) 35px !important;
   overflow: hidden;
 }
 

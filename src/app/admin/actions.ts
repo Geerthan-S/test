@@ -82,10 +82,11 @@ const projectSchema = z.object({
   title: z.string().trim().min(3, "Enter at least 3 characters"),
   slug: z.string().trim().min(3, "Enter at least 3 characters"),
   clientName: z.string().trim().min(2, "Enter at least 2 characters"),
-  clientType: z.enum(editableProjectCategories, { message: "Choose Government or Private Sector" }),
+  // Removed from form: clientType, clientLogo, gallery, keyAchievements, seoTitle, seoDescription, published, featured
+  clientType: z.string().optional(),
   clientLogo: optionalAssetPathSchema,
   featuredImage: assetPathSchema,
-  gallery: z.array(assetPathSchema).min(1, "Add at least one image"),
+  gallery: z.array(assetPathSchema).optional().default([]),
   location: z.string().trim().min(2, "Enter at least 2 characters"),
   scopeOfWork: z.string().trim().min(10, "Enter at least 10 characters"),
   timeline: z.string().trim().min(2, "Enter at least 2 characters"),
@@ -98,8 +99,8 @@ const projectSchema = z.object({
   keyAchievements: z.array(z.string().trim()).optional(),
   seoTitle: z.string().trim().optional(),
   seoDescription: z.string().trim().optional(),
-  published: z.boolean(),
-  featured: z.boolean(),
+  published: z.boolean().default(true),
+  featured: z.boolean().default(false),
 });
 
 function projectDataFromForm(formData: FormData, failurePath: string) {
@@ -109,10 +110,10 @@ function projectDataFromForm(formData: FormData, failurePath: string) {
     title,
     slug: String(formData.get("slug") || slugify(title)),
     clientName: String(formData.get("clientName") ?? ""),
-    clientType: normalizeProjectCategory(String(formData.get("clientType") ?? "")),
+    clientType: String(formData.get("clientType") ?? "") || undefined,
     clientLogo: String(formData.get("clientLogo") ?? "") || undefined,
     featuredImage: String(formData.get("featuredImage") ?? ""),
-    gallery: listFromField(formData.get("gallery")),
+    gallery: formData.has("gallery") ? listFromField(formData.get("gallery")) : [],
     location: String(formData.get("location") ?? ""),
     scopeOfWork: String(formData.get("scopeOfWork") ?? ""),
     timeline: String(formData.get("timeline") ?? ""),
@@ -122,11 +123,11 @@ function projectDataFromForm(formData: FormData, failurePath: string) {
     servicesUsed: listFromField(formData.get("servicesUsed")),
     industry: String(formData.get("industry") ?? ""),
     summary: String(formData.get("summary") ?? ""),
-    keyAchievements: listFromField(formData.get("keyAchievements")),
+    keyAchievements: formData.has("keyAchievements") ? listFromField(formData.get("keyAchievements")) : [],
     seoTitle: String(formData.get("seoTitle") ?? "") || undefined,
     seoDescription: String(formData.get("seoDescription") ?? "") || undefined,
-    published: formData.get("published") === "on",
-    featured: formData.get("featured") === "on",
+    published: formData.has("published") ? formData.get("published") === "on" : true,
+    featured: formData.has("featured") ? formData.get("featured") === "on" : false,
   }, failurePath);
 }
 
@@ -435,7 +436,7 @@ export async function updateApplicationStatus(formData: FormData) {
   const applicationId = String(formData.get("applicationId") ?? "");
   const status = String(formData.get("status") ?? "");
 
-  const validStatuses = ["NEW", "REVIEWED", "SHORTLISTED", "REJECTED"];
+  const validStatuses = ["New", "Under Review", "Shortlisted", "Interview Scheduled", "Rejected", "Offered", "Hired"];
   if (!validStatuses.includes(status)) {
     redirect("/admin/job-applications?error=Invalid+status");
   }
@@ -451,4 +452,89 @@ export async function updateApplicationStatus(formData: FormData) {
   }
 
   revalidatePath("/admin/job-applications");
+}
+
+export async function createJobOpening(formData: FormData) {
+  await requireAdmin();
+  const db = getPrisma();
+
+  const title = String(formData.get("title") || "");
+  const department = String(formData.get("department") || "");
+  const location = String(formData.get("location") || "");
+  const type = String(formData.get("type") || "");
+  const experience = String(formData.get("experience") || "");
+  const vacancies = Number(formData.get("vacancies")) || 1;
+  const description = String(formData.get("description") || "");
+  const requirements = String(formData.get("requirements") || "");
+  const status = String(formData.get("status") || "Active");
+  const published = formData.get("published") === "on";
+
+  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
+  await db.jobOpening.create({
+    data: {
+      title,
+      slug,
+      department,
+      location,
+      type,
+      experience,
+      vacancies,
+      description,
+      requirements,
+      status,
+      published,
+    },
+  });
+
+  revalidatePath("/careers");
+  revalidatePath("/admin/job-openings");
+  redirect("/admin/job-openings");
+}
+
+export async function updateJobOpening(id: string, formData: FormData) {
+  await requireAdmin();
+  const db = getPrisma();
+
+  const title = String(formData.get("title") || "");
+  const department = String(formData.get("department") || "");
+  const location = String(formData.get("location") || "");
+  const type = String(formData.get("type") || "");
+  const experience = String(formData.get("experience") || "");
+  const vacancies = Number(formData.get("vacancies")) || 1;
+  const description = String(formData.get("description") || "");
+  const requirements = String(formData.get("requirements") || "");
+  const status = String(formData.get("status") || "Active");
+  const published = formData.get("published") === "on";
+
+  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+
+  await db.jobOpening.update({
+    where: { id },
+    data: {
+      title,
+      slug,
+      department,
+      location,
+      type,
+      experience,
+      vacancies,
+      description,
+      requirements,
+      status,
+      published,
+    },
+  });
+
+  revalidatePath("/careers");
+  revalidatePath("/admin/job-openings");
+  redirect("/admin/job-openings");
+}
+
+export async function deleteJobOpening(id: string) {
+  await requireAdmin();
+  const db = getPrisma();
+  await db.jobOpening.delete({ where: { id } });
+  revalidatePath("/careers");
+  revalidatePath("/admin/job-openings");
 }

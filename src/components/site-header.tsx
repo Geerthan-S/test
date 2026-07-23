@@ -118,9 +118,9 @@ export function SiteHeader() {
         </Link>
       </div>
 
-      <div className="industrial-nav__bar">
+      <div className="industrial-nav__bar flex items-center justify-between w-full overflow-hidden">
         <Logo />
-        <nav className="industrial-nav__links" aria-label="Main navigation">
+        <nav className="industrial-nav__links flex items-center justify-end gap-x-2 lg:gap-x-3 xl:gap-x-5 w-full ml-auto" aria-label="Main navigation">
           {navItems.map(([label, href]) => {
             const active = isActive(href);
 
@@ -128,7 +128,7 @@ export function SiteHeader() {
               <Link
                 key={href}
                 href={href}
-                className={active ? "is-active" : ""}
+                className={`${active ? "is-active" : ""} whitespace-nowrap text-[9px] lg:text-[10px] 2xl:text-[11px] font-bold tracking-wider`}
                 onClick={(e) => handleScroll(e, href)}
               >
                 {label}

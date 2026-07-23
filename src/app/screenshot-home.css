@@ -269,7 +269,6 @@ body::after {
 .cms-section,
 .premium-services,
 .premium-projects,
-.luxury-timeline,
 .industrial-footer {
   width: 100% !important;
   max-width: none !important;
@@ -435,8 +434,7 @@ body::after {
 
 #company-introduction .cms-section__header span,
 .premium-projects__header span,
-.cms-section--why-trust .cms-section__header span,
-.luxury-timeline__sticky>span {
+.cms-section--why-trust .cms-section__header span {
   color: var(--shot-red) !important;
   font-family: var(--font-mono);
   font-size: 11px !important;
@@ -1126,281 +1124,6 @@ body::after {
   font-size: 13px !important;
 }
 
-.luxury-timeline {
-  position: relative;
-  display: block !important;
-  min-height: 2200px !important;
-  min-height: 238vh !important;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 18% 50%, rgba(178, 12, 45, 0.16), transparent 34%),
-    linear-gradient(135deg, rgba(8, 18, 26, 0.96), rgba(3, 5, 6, 0.99) 62%),
-    #050708 !important;
-  border-top: 1px solid var(--shot-line-soft) !important;
-  border-bottom: 1px solid var(--shot-line-soft) !important;
-  padding: 0 !important;
-  scroll-margin-top: 104px;
-}
-
-.luxury-timeline [data-text-reveal],
-.luxury-timeline__sticky {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
-}
-
-.luxury-timeline__pin {
-  position: sticky;
-  top: 88px;
-  display: grid;
-  box-sizing: border-box;
-  height: calc(100vh - 88px);
-  min-height: 720px;
-  grid-template-columns: minmax(300px, 0.68fr) minmax(0, 1.82fr);
-  gap: clamp(32px, 5vw, 72px);
-  align-items: center;
-  overflow: hidden;
-  padding: clamp(42px, 5.2vw, 72px) clamp(22px, 4.6vw, 64px) !important;
-}
-
-.luxury-timeline__sticky {
-  position: relative;
-  width: auto !important;
-  max-width: 470px;
-  margin: 0 !important;
-}
-
-.luxury-timeline__sticky::before {
-  position: absolute;
-  left: -28px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  content: "";
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.luxury-timeline__sticky::after {
-  position: absolute;
-  left: -28px;
-  top: 0;
-  width: 2px;
-  height: 100%;
-  content: "";
-  background: linear-gradient(180deg, var(--shot-red), #d6a85b);
-  transform: scaleY(var(--timeline-progress, 0));
-  transform-origin: top;
-}
-
-.luxury-timeline h2 {
-  color: var(--shot-text) !important;
-  font-family: var(--font-display);
-  font-size: clamp(42px, 4.7vw, 70px) !important;
-  font-weight: 500 !important;
-  letter-spacing: 0;
-  line-height: 0.96 !important;
-  text-transform: uppercase;
-}
-
-.luxury-timeline__sticky p {
-  max-width: 500px;
-  margin: 20px 0 0;
-  color: var(--shot-muted);
-  font-size: 14px;
-  line-height: 1.75;
-}
-
-.luxury-timeline__meter {
-  display: grid;
-  grid-template-columns: auto minmax(120px, 1fr) auto;
-  gap: 12px;
-  align-items: center;
-  max-width: 330px;
-  margin-top: 28px;
-  color: rgba(247, 247, 244, 0.74);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-}
-
-.luxury-timeline__meter i {
-  position: relative;
-  display: block;
-  height: 2px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.14);
-}
-
-.luxury-timeline__meter i::after {
-  position: absolute;
-  inset: 0;
-  content: "";
-  background: linear-gradient(90deg, var(--shot-red), #d6a85b);
-  transform: scaleX(var(--timeline-progress, 0));
-  transform-origin: left;
-}
-
-.luxury-timeline__track {
-  position: relative;
-  min-width: 0;
-  overflow: hidden;
-  padding: 34px 0 32px;
-  mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
-}
-
-.luxury-timeline__rail {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 112px;
-  height: 2px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.12);
-}
-
-.luxury-timeline__rail span {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, var(--shot-red), rgba(214, 168, 91, 0.85));
-  transform: scaleX(var(--timeline-progress, 0));
-  transform-origin: left;
-}
-
-.luxury-timeline__steps {
-  position: relative;
-  z-index: 1;
-  display: flex !important;
-  width: max-content;
-  align-items: stretch;
-  gap: clamp(18px, 2.2vw, 26px) !important;
-  padding: 70px 4px 14px;
-  transform: translate3d(var(--timeline-shift, 0px), 0, 0);
-  will-change: transform;
-}
-
-.luxury-timeline__steps article {
-  position: relative;
-  display: grid;
-  flex: 0 0 clamp(310px, 31vw, 370px);
-  width: clamp(310px, 31vw, 370px);
-  min-height: 430px;
-  align-content: start;
-  gap: 16px;
-  border: 1px solid transparent !important;
-  border-radius: 0;
-  background:
-    linear-gradient(145deg, rgba(10, 14, 16, 0.96), rgba(4, 7, 8, 0.98)) padding-box,
-    linear-gradient(145deg, rgba(255, 255, 255, 0.16), rgba(178, 12, 45, 0.3)) border-box !important;
-  opacity: 0.58;
-  padding: 92px 28px 30px !important;
-  transform: translateY(calc((1 - var(--step-progress, 0)) * 18px));
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.luxury-timeline__steps article::before {
-  position: absolute;
-  top: 40px;
-  left: 30px;
-  z-index: 2;
-  display: block !important;
-  width: 24px;
-  height: 24px;
-  border: 2px solid var(--shot-red);
-  border-radius: 999px;
-  content: "";
-  background: #050708;
-  box-shadow: 0 0 0 10px rgba(178, 12, 45, 0.08);
-}
-
-.luxury-timeline__steps article[data-state="active"],
-.luxury-timeline__steps article:hover {
-  border-color: rgba(178, 12, 45, 0.58) !important;
-  opacity: 1;
-  transform: translateY(-10px);
-  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.34);
-}
-
-.luxury-timeline__steps article[data-state="complete"] {
-  opacity: 0.82;
-}
-
-.luxury-timeline__steps article[data-state="complete"]::before,
-.luxury-timeline__steps article[data-state="active"]::before {
-  background: var(--shot-red);
-  box-shadow:
-    0 0 0 10px rgba(178, 12, 45, 0.1),
-    0 0 26px rgba(178, 12, 45, 0.34);
-}
-
-.luxury-timeline__steps article:not(:last-child)::after {
-  display: none;
-}
-
-.process-step-number,
-.luxury-timeline__steps article>span.process-step-number {
-  margin: 0 !important;
-  color: var(--shot-red) !important;
-  font-family: var(--font-display);
-  font-size: clamp(70px, 6.4vw, 104px) !important;
-  font-weight: 400 !important;
-  line-height: 0.76 !important;
-}
-
-.process-step-icon {
-  position: absolute;
-  top: 28px;
-  right: 28px;
-  display: grid;
-  width: 58px;
-  height: 58px;
-  place-items: center;
-  border: 1px solid rgba(178, 12, 45, 0.42);
-  background: rgba(178, 12, 45, 0.08);
-  color: var(--shot-red);
-}
-
-.process-step-icon svg {
-  width: 28px;
-  height: 28px;
-  stroke-width: 1.55;
-}
-
-.luxury-timeline__steps h3 {
-  color: var(--shot-text) !important;
-  font-size: 17px !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.08em !important;
-  line-height: 1.25;
-  text-transform: uppercase;
-}
-
-.luxury-timeline__steps p {
-  color: var(--shot-muted) !important;
-  font-size: 14px !important;
-  line-height: 1.72;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .luxury-timeline {
-    min-height: auto !important;
-  }
-
-  .luxury-timeline__pin {
-    position: relative;
-    top: auto;
-  }
-
-  .luxury-timeline__steps {
-    transform: none !important;
-  }
-}
 
 .premium-cta {
   position: relative;
@@ -12845,8 +12568,8 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: clamp(22px, 3vw, 56px) !important;
-  padding: 0 clamp(28px, 4.6vw, 72px) !important;
+  gap: clamp(14px, 2vw, 32px) !important;
+  padding: 0 clamp(16px, 2.5vw, 42px) !important;
   transition:
     height 260ms ease,
     min-height 260ms ease,
@@ -12926,7 +12649,7 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
-  gap: clamp(18px, 2vw, 34px) !important;
+  gap: clamp(10px, 1.2vw, 24px) !important;
   margin-left: auto !important;
   border: 0 !important;
   background: transparent !important;
@@ -12957,10 +12680,10 @@ body:has(main.flex-1):not(:has(.admin-shell)):not(:has(.admin-login-page)) .indu
   background: transparent !important;
   color: var(--nav-ink) !important;
   font-family: var(--font-body), Inter, Arial, sans-serif !important;
-  font-size: 15px !important;
+  font-size: clamp(10px, 0.9vw, 13px) !important;
   font-weight: 800 !important;
   line-height: 1 !important;
-  letter-spacing: 0.06em !important;
+  letter-spacing: 0.04em !important;
   text-decoration: none !important;
   text-transform: uppercase !important;
   white-space: nowrap !important;

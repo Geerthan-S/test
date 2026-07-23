@@ -211,10 +211,10 @@ const staggerContainer: Variants = {
 };
 
 const qualityMetrics: HeroMetric[] = [
-  { icon: ShieldCheck, value: "Zero Harm", label: "Zero-incident commitment" },
-  { icon: Award, value: "Certified Quality", label: "International standards" },
-  { icon: Clock3, value: "On-Time Delivery", label: "Reliable. Every time." },
-  { icon: Building2, value: "Built To Last", label: "Engineering for the future" },
+  { icon: ShieldCheck, value: "Zero Harm", label: "No incidents." },
+  { icon: Award, value: "Certified Quality", label: "ISO Standards" },
+  { icon: Clock3, value: "On-Time Delivery", label: "Always on schedule" },
+  { icon: Building2, value: "Built To Last", label: "Engineered to endure" },
 ];
 
 function QualitySafetyHero() {
@@ -231,32 +231,36 @@ function QualitySafetyHero() {
             alt: "Dockside engineers reviewing quality and safety work at a construction site",
           },
         ]}
+        primaryLabel="VIEW PROJECTS"
+        primaryHref="/projects"
+        secondaryLabel="CONTACT US"
+        secondaryHref="/contact"
       >
         <div className="pt-2">
-          <h4 className="font-mono text-[10.5px] font-bold uppercase tracking-[0.2em] text-[#8B3A4A] mb-4">
-            Our Standards
+          <h4 className="font-mono text-[10.5px] font-bold uppercase tracking-[0.2em] text-[#7A3340] mb-4">
+            Safety &amp; Compliance Highlights
           </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-            <div className="flex items-center gap-3">
-              <Award className="w-4 h-4 text-[#8B3A4A]" strokeWidth={2} />
-              <span className="text-[14px] font-medium text-[#4a4b52]">ISO-Compliant Processes</span>
+          <div className="flex flex-wrap gap-4 text-gray-500 font-mono text-[11px]">
+            <div className="flex items-center gap-1">
+              <Award className="w-4 h-4 text-[#7A3340]" strokeWidth={2} />
+              <span>ISO 9001:2015</span>
             </div>
-            <div className="flex items-center gap-3">
-              <ShieldCheck className="w-4 h-4 text-[#8B3A4A]" strokeWidth={2} />
-              <span className="text-[14px] font-medium text-[#4a4b52]">Zero-Incident Safety Culture</span>
+            <div className="flex items-center gap-1">
+              <ShieldCheck className="w-4 h-4 text-[#7A3340]" strokeWidth={2} />
+              <span>ISO 45001:2018</span>
             </div>
-            <div className="flex items-center gap-3">
-              <ClipboardCheck className="w-4 h-4 text-[#8B3A4A]" strokeWidth={2} />
-              <span className="text-[14px] font-medium text-[#4a4b52]">Multi-Stage Quality Inspections</span>
+            <div className="flex items-center gap-1">
+              <ClipboardCheck className="w-4 h-4 text-[#7A3340]" strokeWidth={2} />
+              <span>Safety Plan Certified</span>
             </div>
-            <div className="flex items-center gap-3">
-              <FlaskConical className="w-4 h-4 text-[#8B3A4A]" strokeWidth={2} />
-              <span className="text-[14px] font-medium text-[#4a4b52]">Certified Material Testing</span>
+            <div className="flex items-center gap-1">
+              <FlaskConical className="w-4 h-4 text-[#7A3340]" strokeWidth={2} />
+              <span>On-Site Laboratory</span>
             </div>
           </div>
         </div>
       </Hero>
-      <div className="absolute bottom-[30px] left-0 right-0 z-50">
+      <div className="absolute bottom-[90px] left-0 right-0 z-50 home-metrics-card pointer-events-none">
         <HeroMetrics metrics={qualityMetrics} />
       </div>
     </div>
@@ -275,11 +279,11 @@ export default function QualityAndSafetyPage() {
         <div className="max-w-[1320px] mx-auto">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-4 mb-3">
-              <div className="w-8 h-[1px] bg-[#8A3841]/40" />
-              <span data-text-reveal className="font-mono text-[11px] tracking-[0.2em] text-[#8A3841] uppercase font-bold">
-                Certifications &amp; Systems
+              <div className="w-8 h-[1px] bg-[#783138]/40" />
+              <span data-text-reveal className="font-mono text-[11px] tracking-[0.2em] text-[#783138] uppercase font-bold">
+                Standards &amp; Culture
               </span>
-              <div className="w-8 h-[1px] bg-[#8A3841]/40" />
+              <div className="w-8 h-[1px] bg-[#783138]/40" />
             </div>
             <h2 data-text-reveal className="font-display text-3xl md:text-4xl font-bold uppercase tracking-wide text-gray-900 mb-4">
               International Standards We Follow
@@ -314,15 +318,15 @@ export default function QualityAndSafetyPage() {
               {/* Bottom gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
               {/* Floating label */}
-              <div className="absolute bottom-4 left-4 bg-[#8A3841] text-white font-mono text-[10px] font-bold tracking-widest uppercase px-3 py-1.5">
-                Daily Site Start
+              <div className="absolute bottom-4 left-4 bg-[#783138] text-white font-mono text-[10px] font-bold tracking-widest uppercase px-3 py-1.5">
+                Zero Harm
               </div>
             </div>
           </div>
 
           {/* Right: Content */}
           <div>
-            <span data-text-reveal className="font-mono text-[11px] tracking-[0.2em] text-[#8A3841] uppercase block mb-3 font-bold">
+            <span data-text-reveal className="font-mono text-[11px] tracking-[0.2em] text-[#783138] uppercase block mb-3 font-bold">
               Mandatory Site Start
             </span>
             <h2 data-text-reveal className="font-display text-3xl md:text-4xl font-bold uppercase tracking-wide text-gray-900 mb-6">
@@ -374,11 +378,11 @@ export default function QualityAndSafetyPage() {
             variants={headerVariants}
           >
             <div className="flex items-center justify-center gap-4 mb-3">
-              <div className="w-8 h-[1px] bg-[#8A3841]/40" />
-              <span data-text-reveal className="font-mono text-[11px] tracking-[0.2em] text-[#8A3841] uppercase font-bold">
+              <div className="w-8 h-[1px] bg-[#783138]/40" />
+              <span data-text-reveal className="font-mono text-[11px] tracking-[0.2em] text-[#783138] uppercase font-bold">
                 Execution Control
               </span>
-              <div className="w-8 h-[1px] bg-[#8A3841]/40" />
+              <div className="w-8 h-[1px] bg-[#783138]/40" />
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-bold uppercase tracking-wide text-gray-900 mb-4">
               Quality Inspection Process
@@ -426,10 +430,10 @@ export default function QualityAndSafetyPage() {
         <div className="max-w-[1320px] mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 mb-16">
             <div className="lg:max-w-[500px]">
-              <span data-text-reveal className="font-mono text-[11px] tracking-[0.2em] text-[#8A3841] uppercase block mb-3 font-bold">
+              <span data-text-reveal className="font-mono text-[11px] tracking-[0.2em] text-[#783138] uppercase block mb-3 font-bold">
                 Lab &amp; Site Tests
               </span>
-              <h2 data-text-reveal className="font-display text-3xl md:text-4xl font-bold uppercase tracking-wide text-[#8A3841]">
+              <h2 data-text-reveal className="font-display text-3xl md:text-4xl font-bold uppercase tracking-wide text-[#783138]">
                 Material Testing &amp; Verification
               </h2>
             </div>
@@ -447,7 +451,7 @@ export default function QualityAndSafetyPage() {
                   className="group relative flex gap-4"
                 >
                   <div className="flex-shrink-0">
-                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-full border-2 border-[#8A3841] text-[#8A3841] group-hover:bg-[#8A3841] group-hover:text-white transition-all duration-300">
+                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-full border-2 border-[#783138] text-[#783138] group-hover:bg-[#783138] group-hover:text-white transition-all duration-300">
                       <Icon className="w-6 h-6" strokeWidth={1.5} />
                     </div>
                   </div>

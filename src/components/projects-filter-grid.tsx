@@ -102,7 +102,7 @@ export function ProjectsFilterGrid({
             <div
               className="relative w-full min-h-[380px] lg:w-[calc(65%-46px)] lg:min-h-[580px] overflow-hidden cursor-pointer"
               onClick={() => {
-                const projectIndex = filteredProjects.findIndex((p) => p.id === featuredHero.project.id);
+                const projectIndex = projects.findIndex((p) => p.id === featuredHero.project.id);
                 setSelectedProjectIndex(projectIndex);
               }}
             >
@@ -223,7 +223,7 @@ export function ProjectsFilterGrid({
 
               <button
                 onClick={() => {
-                  const projectIndex = filteredProjects.findIndex((p) => p.id === featuredHero.project.id);
+                  const projectIndex = projects.findIndex((p) => p.id === featuredHero.project.id);
                   setSelectedProjectIndex(projectIndex);
                 }}
                 className="mt-auto group/btn flex items-center text-[11px] font-bold uppercase tracking-widest text-[#8B3A4A] transition-colors hover:text-[#6b1f2e]"
@@ -249,7 +249,7 @@ export function ProjectsFilterGrid({
               <motion.div key={project.id} variants={projectCardVariants} className="h-full">
                 <div
                   onClick={() => {
-                    const projectIndex = filteredProjects.findIndex((p) => p.id === project.id);
+                    const projectIndex = projects.findIndex((p) => p.id === project.id);
                     setSelectedProjectIndex(projectIndex);
                   }}
                   className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-[12px] border border-[#8B3A4A]/10 bg-[#FDFDFD] shadow-[0_12px_32px_rgba(139,58,74,0.03)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_48px_rgba(139,58,74,0.08)]"
@@ -301,12 +301,11 @@ export function ProjectsFilterGrid({
       </div>
 
       <ProjectModal
-        project={selectedProjectIndex !== null ? filteredProjects[selectedProjectIndex] : null!}
-        allProjects={filteredProjects}
-        currentIndex={selectedProjectIndex ?? 0}
+        projects={projects}
+        initialIndex={selectedProjectIndex}
         isOpen={selectedProjectIndex !== null}
         onClose={() => setSelectedProjectIndex(null)}
-        onNavigate={(newIndex) => setSelectedProjectIndex(newIndex)}
+        disableScrollLock={true}
       />
     </>
   );

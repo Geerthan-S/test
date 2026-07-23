@@ -31,6 +31,7 @@ export default async function HomePage() {
           { title: "Experienced site teams" },
           { title: "Transparent reporting" },
         ],
+        cta: undefined,
       }
       : section,
   );
@@ -43,21 +44,20 @@ export default async function HomePage() {
         <Hero
           eyebrow="INDUSTRIAL • COMMERCIAL • INFRASTRUCTURE"
           title="From Land|Development|to Large-Scale|Infrastructure|Execution."
-          description="Dockside Constructions delivers earthworks, industrial infrastructure, road construction, site development and project management services across India with engineering precision, safety compliance and reliable execution.                                                                                                                                                      "
+          description="Dockside Constructions delivers earthworks, industrial infrastructure, road construction, site development and project management services across India with engineering precision, safety compliance and reliable execution."
+
           primaryLabel="VIEW PROJECTS"
           primaryHref="/projects"
           secondaryLabel="CONTACT US"
           secondaryHref="/contact"
         />
-      </div>
-
-      {/* 2 — Key Stats */}
-      <div className="relative" style={{ zIndex: 100 }}>
-        <TrustSystems />
+        <div className="absolute bottom-[90px] left-0 right-0 z-50 home-metrics-card pointer-events-none">
+          <TrustSystems />
+        </div>
       </div>
 
       {/* 3 — About Dockside */}
-      <div className="relative">
+      <div className="relative -mt-8 z-40">
         <div id="about" className="absolute top-[40px]" />
         <SiteContentSections sections={pick("company-introduction")} />
       </div>
@@ -68,7 +68,7 @@ export default async function HomePage() {
       </div>
 
       {/* 5 — Featured Projects */}
-      <div id="clients">
+      <div id="clients" className="hidden">
         <TrustedByStrip />
       </div>
 

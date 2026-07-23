@@ -97,11 +97,16 @@ model Equipment {
 model JobOpening {
   id           String           @id @default(cuid())
   title        String
+  slug         String?          @unique
   department   String
   experience   String
   location     String
   type         String           @default("Full-Time")
   skills       String[]         @default([])
+  vacancies    Int              @default(1)
+  description  String?
+  requirements String?
+  status       String           @default("Active")
   published    Boolean          @default(true)
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
@@ -111,21 +116,39 @@ model JobOpening {
 }
 
 model JobApplication {
-  id           String     @id @default(cuid())
-  jobOpeningId String
-  jobOpening   JobOpening @relation(fields: [jobOpeningId], references: [id], onDelete: Cascade)
-  name         String
-  email        String
-  phone        String
-  resumeUrl    String
-  coverLetter  String?
-  status       String     @default("NEW")
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  id              String     @id @default(cuid())
+  applicationId   String     @unique @default(cuid())
+  jobOpeningId    String
+  jobOpening      JobOpening @relation(fields: [jobOpeningId], references: [id], onDelete: Cascade)
+  
+  fullName        String
+  email           String
+  phone           String
+  city            String?
+  experience      String?
+  
+  currentEmployer String?
+  currentCTC      String?
+  expectedCTC     String?
+  noticePeriod    String?
+  
+  linkedin        String?
+  portfolio       String?
+  coverLetter     String?
+  
+  resumeUrl       String
+  resumeFilename  String?
+  
+  status          String     @default("New")
+  source          String     @default("Website")
+  
+  submittedAt     DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
 
   @@index([jobOpeningId])
-  @@index([status, createdAt])
+  @@index([status, submittedAt])
   @@index([email])
+  @@index([applicationId])
 }
 
 model MediaAsset {

@@ -21,21 +21,8 @@ export function ProjectForm({
         <Field label="Title" name="title" defaultValue={project?.title} minLength={3} required />
         <Field label="SEO slug" name="slug" defaultValue={project?.slug} />
         <Field label="Client name" name="clientName" defaultValue={project?.clientName} required />
-        <div className="grid gap-2">
-          <Label>Project category</Label>
-          <Select name="clientType" defaultValue={normalizeProjectCategory(project?.clientType)}>
-            <SelectTrigger><SelectValue /></SelectTrigger>
-            <SelectContent>
-              {editableProjectCategories.map((type) => (
-                <SelectItem key={type} value={type}>{type}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
         <Field label="Project value" name="contractValue" defaultValue={project?.contractValue ?? project?.projectValue} placeholder="INR 400+ Lakhs" required />
-        <Field label="Client logo URL" name="clientLogo" defaultValue={project?.clientLogo ?? ""} placeholder="https://... or /client-logos/logo.svg" />
         <Field label="Featured image URL" name="featuredImage" defaultValue={project?.featuredImage} placeholder="https://... or /home-reference/project.jpg" required />
-        <Field label="Gallery URLs, comma separated" name="gallery" defaultValue={project?.gallery.join(", ")} placeholder="/image-1.jpg, /image-2.jpg" required />
         <Field label="Location" name="location" defaultValue={project?.location} required />
         <Field label="Timeline" name="timeline" defaultValue={project?.timeline} required />
         <input name="projectValue" type="hidden" defaultValue={project?.projectValue ?? project?.contractValue ?? ""} />
@@ -61,22 +48,7 @@ export function ProjectForm({
       />
       <TextField label="Scope of work" name="scopeOfWork" defaultValue={project?.scopeOfWork} minLength={10} required />
       <TextField label="Summary" name="summary" defaultValue={project?.summary} minLength={10} required />
-      <TextField
-        label="Key Achievements"
-        name="keyAchievements"
-        defaultValue={project?.keyAchievements?.join(", ") ?? ""}
-        placeholder={"Completed 15+ projects,\nINR 400+ Lakhs worth of contracts,\nDelivered projects within schedule"}
-        rows={5}
-      />
-      <div className="grid gap-5 md:grid-cols-2">
-        <Field label="SEO title" name="seoTitle" defaultValue={project?.seoTitle ?? ""} />
-        <Field label="SEO description" name="seoDescription" defaultValue={project?.seoDescription ?? ""} />
-      </div>
-      <div className="flex flex-wrap gap-6 text-sm">
-        <label className="flex items-center gap-2"><input name="published" type="checkbox" defaultChecked={project?.featured !== false} /> Published</label>
-        <label className="flex items-center gap-2"><input name="featured" type="checkbox" defaultChecked={project?.featured} /> Featured</label>
-      </div>
-      <Button type="submit" className="w-fit"><Save className="size-4" /> Save Project</Button>
+      <Button type="submit" className="w-fit mt-2"><Save className="size-4" /> Save Project</Button>
     </form>
   );
 }

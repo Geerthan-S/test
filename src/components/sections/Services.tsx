@@ -75,7 +75,7 @@ const deliverCards = [
 
 export function Services() {
   return (
-    <section className="delivers-section !mt-2 lg:!-mt-10" id="services" aria-labelledby="delivers-title">
+    <section className="delivers-section !mt-0 !pt-16" id="services" aria-labelledby="delivers-title">
       <div className="delivers-section__inner">
         <div className="delivers-section__head">
           <div className="delivers-section__headcopy">
